@@ -194,3 +194,61 @@ hola@loschinitos.de
 - No real backend: franchise form submission (`handleSubmit`) currently simulates success after a timeout
 - All picsum.photos placeholder images (Campechano, Carne Asada background, Aguas Frescas, Trompo story, München card) should be replaced with real photography
 - `© 2025 Los Chinitos GmbH` — year should be updated when going live
+
+> **NOTE:** The items above are superseded by **Redesign v2** below. All hotlinked images are removed; the copyright is now © 2026.
+
+---
+
+## Redesign v2 — Street-Editorial Rebuild
+
+Full visual-shell rebuild to fix a brand/design mismatch: the v1 site was a polite cream Tailwind template (rounded-3xl cards, pill buttons, glassmorphism nav, fade-up on everything, fake-scale stats) while the brand voice is loud and raw. v2 commits to a confident **street-poster / mercado editorial** art direction. Content, i18n, and all functions preserved; no build step added.
+
+### New Design System
+
+| Token | v1 | v2 |
+|---|---|---|
+| Display font | Barlow Condensed | **Anton** (ultra-condensed poster type, uppercase) |
+| Body font | Outfit | **Archivo** (grotesque, weights 400–900) |
+| Accent/mono | JetBrains Mono | **Space Mono** (tickets, prices, kickers, meta) |
+| Cards | rounded-3xl, soft shadows | **2px carbon borders, square corners, hard offset shadows** |
+| Buttons | pill / rounded-full | **poster hard-shadow blocks** (`5px 5px 0` offset that collapses on press) |
+| Nav | glassmorphism blur | **solid masa masthead, 2px carbon bottom border** |
+| Eyebrows | pill "tag" chips | **mono `.kicker`** with a red leading rule |
+| Red usage | underused accent | **load-bearing** — full red ticker bar, red cards, red numerals, red price tags |
+
+Colors: brand base kept (chili `#C8202C`, masa `#F5EFE6`, carbon `#1A1A1A`). Added `ink #2B2622` (body on light) and `sand #DAD3C8` (body on dark) to raise body contrast to WCAG AA; `adobe` darkened to `#5A524A`. Body type bumped from text-sm/xs to text-base/lg.
+
+### Structural changes per section
+1. **Nav** — glass → solid masa masthead, bold uppercase Archivo links, poster CTA. Logo keeps `mix-blend:multiply` (red on cream). CTA relabeled honest ("Besuch uns" → #locations). Lang switcher: bordered, `aria-haspopup`/`aria-expanded`, dropdown rows now show visible language **codes** (DE/EN/…) alongside flags; mobile switcher shows flag+code with `aria-label`.
+2. **Hero** — heavy triple-gradient vignette removed; video is now full-bleed with a light bottom-only scrim + thin masa foot-fade. Copy cut to headline ("Tacos. / Sin filtro."), one brand statement, one CTA, plus an honest rotated "Gegründet 2025" sticker. **Hero stats strip deleted.**
+3. **Ticker** — restyled into a bold full-width **chili-red bar** with Anton uppercase items (design feature, `aria-hidden`, pauses on reduced-motion).
+4. **Werte / Valores** — *new composition:* oversized outline word "VALORES" bleeding across the top boundary + a numbered `01/02/03` editorial list. iStock CDMX photo **removed** (no replacement image needed — typographic).
+5. **Menu** — *new composition:* **sticky heading column** (desktop) beside a unified card grid. One coherent card family (`.dish`) with paper + dark (Suadero) + red (Aguas Frescas, now photo-free typographic) variants. Filter tabs **removed** (too few items/category). Dead "Bestellen" buttons **removed** → honest rotated **price tags** + a location note ("Bestellt wird vor Ort — Königsallee 52"). Aguas Frescas picsum image **removed**.
+6. **Story** — editorial split; real `img_9907.jpg` kept with a rotated red caption stamp; the Trompo picsum image **replaced with an inline SVG trompo graphic**. Big pull-quote in Anton. Fixed "zwei Chinitos" → **"drei Chinitos"** (three founders) in all 6 languages.
+7. **Stats section (1 / 1 / 4,9 / 93%)** — **deleted entirely** (fake scale).
+8. **Locations** — honest: one large real Düsseldorf card (with working `tel:` + Google Maps directions link) + a candid red "next city" teaser. Removed inflated "München, Köln, Amsterdam +14 weitere" claim and its picsum image.
+9. **Franchise** — layout restyled to numbered rules; fixed "Onboarding in **Berlin**" → **Düsseldorf** and wall-text attribution "Filiale **Berlin Mitte**" → **Königsallee 52** (all languages). Form now has translated Name/E-Mail labels; neutral placeholder examples.
+10. **FAQ** — sticky heading + bordered accordion; `aria-expanded` wired.
+11. **Footer** — bordered social tiles, © **2026**.
+
+### Removed
+- All 4 hotlinked images (iStock Angel + 3 picsum) — **zero external image requests** (verified).
+- DOM smoke-cursor gimmick, spotlight mouse-tracking, stats counter animation, menu filter JS.
+- Fake-credibility stats (hero strip + stats section).
+
+### Motion / a11y
+- Scroll-entrance reduced to a single `.reveal` on headings/key blocks (not every element); IO unobserves after firing.
+- `@media (prefers-reduced-motion: reduce)` disables reveals, marquee, and smooth scroll.
+- Global `:focus-visible` outlines (chili, with cream `.on-dark-focus` variant on dark surfaces); real `<button>`/`<a>` semantics; flag switchers carry text/`aria-label`.
+- Body-text contrast raised to AA (ink on masa, sand on carbon).
+
+### QA performed (all passed)
+- **Assets:** every `src` → local file that exists (logo.png, suadero_taco_website.mp4, taco_*.png, img_9907.jpg). Only external URLs are Google Fonts, Tailwind CDN, SVG namespace, and one Google Maps directions link — no external images.
+- **i18n:** 88 unique `data-i18n` keys in markup; all present in **all 6** language objects. No orphan keys referencing deleted sections; no duplicate keys within a language.
+- **HTML:** tag balance verified (section/article/header/nav/footer/form/ul/li/blockquote/div all open==close).
+- **Logic (traced):** language switch + persistence, mobile menu, FAQ accordion, form submit simulation all intact.
+
+### v2 Tech notes
+- Fonts loaded: `Anton`, `Archivo` (ital + wght 400–900), `Space Mono` (400/700).
+- Card language: `.dish` (border + hard-shadow hover), `.pricetag` (rotated), `.kicker`, `.sticker`, `.btn-red`/`.btn-red.on-dark`/`.btn-dark`/`.btn-outline`.
+- Trompo graphic is a hand-built inline `<svg>` (radial-gradient meat cone, spit, pineapple/onion, layer lines) — no external asset.
