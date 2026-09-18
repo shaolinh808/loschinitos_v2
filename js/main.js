@@ -88,12 +88,12 @@
         e.preventDefault();
         var href = link.getAttribute('href') || 'index.html';
         wall.classList.add('is-active');
-        var panelDelay = reduceMotion ? 0 : 500;
+        var panelDelay = 500;
         setTimeout(function () { wall.classList.add('show-logo'); }, panelDelay);
         setTimeout(function () {
           try { sessionStorage.setItem('lc-nav-home', '1'); } catch (err) { /* noop */ }
           window.location.href = href;
-        }, panelDelay + (reduceMotion ? 150 : 350));
+        }, panelDelay + 350);
       });
     });
   }

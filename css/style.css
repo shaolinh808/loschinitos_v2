@@ -85,7 +85,15 @@ section { position: relative; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+  /* the page-transition wall is a brief, deliberate brand moment — keep it animating */
+  *:not(.loading-wall):not(.loading-wall *),
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* ---------- 4. Divider (checkerboard strip) ---------- */
@@ -131,9 +139,6 @@ section { position: relative; }
 .btn-red { background: var(--red); color: #fff; }
 .btn-red:hover { color: #fff; }
 
-.btn-outline-ink { background: transparent; color: var(--ink); border-color: var(--ink); }
-.btn-outline-ink:hover { background: var(--ink); color: #fff; }
-
 .btn-white { background: #fff; color: var(--red); }
 
 .btn[disabled] { opacity: .7; cursor: default; transform: none; box-shadow: none; }
@@ -166,6 +171,8 @@ section { position: relative; }
   justify-content: space-between;
   gap: 24px;
 }
+.nav-links { margin: 0 24px; }
+.nav-cta { margin-right: 8px; }
 
 .nav-brand {
   display: flex;
@@ -174,7 +181,7 @@ section { position: relative; }
   flex-shrink: 0;
 }
 .nav-brand .logo-icon { height: 34px; width: 34px; }
-.nav-brand .logo-wordmark { height: 20px; width: auto; }
+.nav-brand .logo-wordmark { height: 20px; width: auto; aspect-ratio: 845 / 71; }
 
 /* logo art is red-on-transparent by default; invert to white on solid nav */
 .nav--solid .logo-icon,
@@ -359,37 +366,39 @@ section { position: relative; }
 .hero-card {
   position: relative;
   z-index: 2;
-  background: #fff;
   max-width: 620px;
   width: calc(100% - 48px);
-  margin: 0 0 48px 24px;
-  padding: 40px 40px 44px;
-  box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+  margin: 0 0 56px 48px;
 }
 .hero-card h1 {
   font-size: clamp(56px, 11vw, 118px);
   color: var(--red);
   line-height: 0.86;
   letter-spacing: 0.02em;
+  filter: drop-shadow(0 4px 18px rgba(0,0,0,0.45));
 }
 .hero-card .hero-wordmark {
   height: 42px;
   width: auto;
+  aspect-ratio: 845 / 71;
   margin-top: 10px;
+  filter: drop-shadow(0 2px 10px rgba(0,0,0,0.5));
 }
 .hero-card .hero-tagline {
   font-family: var(--font-script);
-  color: var(--ink);
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
   font-size: 26px;
   margin-top: 8px;
   display: block;
 }
 .hero-card p {
-  color: var(--grey);
+  color: rgba(255,255,255,0.92);
   font-size: 15px;
   line-height: 1.65;
   margin-top: 18px;
   max-width: 46ch;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.6);
 }
 .hero-card .hero-actions {
   display: flex;
@@ -397,9 +406,11 @@ section { position: relative; }
   gap: 14px;
   margin-top: 26px;
 }
+.btn-outline-white { background: transparent; color: #fff; border-color: #fff; }
+.btn-outline-white:hover { background: #fff; color: var(--ink); }
 
 @media (max-width: 640px) {
-  .hero-card { margin: 0 12px 28px; padding: 28px 24px 30px; width: calc(100% - 24px); }
+  .hero-card { margin: 0 20px 32px; width: calc(100% - 40px); }
 }
 
 /* ============================================================
@@ -554,8 +565,8 @@ section { position: relative; }
 .brand-band .emblem { justify-content: center; }
 .brand-band .tagline-item { justify-content: flex-end; }
 .brand-band img { filter: brightness(0) invert(1); }
-.brand-band .wordmark img { height: 30px; width: auto; }
-.brand-band .emblem img { height: 150px; width: auto; }
+.brand-band .wordmark img { height: 30px; width: auto; aspect-ratio: 845 / 71; }
+.brand-band .emblem img { height: 150px; width: auto; aspect-ratio: 1216 / 1294; }
 .brand-band .tagline-item span {
   font-family: var(--font-script);
   color: #fff;
@@ -584,8 +595,12 @@ section { position: relative; }
   grid-template-columns: repeat(3, 1fr);
   gap: 32px 28px;
 }
+.product-card { perspective: 1000px; }
 .product-card-inner {
   aspect-ratio: 1/1;
+  transform: rotateX(0deg) rotateY(0deg);
+  transition: transform .25s ease;
+  will-change: transform;
 }
 .product-card figcaption {
   margin-top: 14px;
@@ -730,14 +745,19 @@ section { position: relative; }
   min-height: 560px;
   padding: 64px 0;
 }
+.social-wall-tiles {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
 .social-wall-inner {
   position: relative;
+  z-index: 2;
   height: 100%;
   min-height: 430px;
+  pointer-events: none;
 }
 .social-wall-text {
-  position: relative;
-  z-index: 2;
   max-width: 360px;
 }
 .social-wall-text h2 { color: #fff; font-size: clamp(30px, 4.4vw, 46px); }
@@ -748,6 +768,7 @@ section { position: relative; }
   background: var(--ink);
   border-radius: 18px;
   box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+  animation: tile-drift 7s ease-in-out infinite;
 }
 .social-tile-label {
   position: absolute;
@@ -760,21 +781,28 @@ section { position: relative; }
   text-transform: uppercase;
   color: var(--grey-mute);
 }
-.social-tile-1 { width: 46%; aspect-ratio: 16/10; top: 4%; left: 26%; transform: rotate(-4deg); }
-.social-tile-2 { width: 34%; aspect-ratio: 4/5; top: 8%; right: 2%; transform: rotate(3deg); }
-.social-tile-3 { width: 40%; aspect-ratio: 5/4; bottom: 2%; left: 30%; transform: rotate(5deg); }
-.social-tile-4 { width: 26%; aspect-ratio: 4/5; bottom: 0; right: 12%; transform: rotate(-6deg); }
+.social-tile-1 { width: 26%; aspect-ratio: 16/10; top: 6%; left: 32%; transform: rotate(-4deg); animation-delay: 0s; }
+.social-tile-2 { width: 17%; aspect-ratio: 4/5; top: 10%; left: 62%; transform: rotate(3deg); animation-delay: -1.6s; }
+.social-tile-3 { width: 21%; aspect-ratio: 5/4; bottom: 8%; left: 36%; transform: rotate(5deg); animation-delay: -3.2s; }
+.social-tile-4 { width: 15%; aspect-ratio: 4/5; bottom: 4%; left: 80%; transform: rotate(-6deg); animation-delay: -4.8s; }
+.social-tile-5 { width: 16%; aspect-ratio: 4/5; top: 34%; left: 82%; transform: rotate(4deg); animation-delay: -2.4s; }
+
+@keyframes tile-drift {
+  0%, 100% { margin-top: 0; }
+  50% { margin-top: -14px; }
+}
 
 @media (max-width: 900px) {
   .social-wall-inner { min-height: 520px; }
-  .social-tile-1 { width: 60%; left: 34%; }
-  .social-tile-2 { width: 42%; }
+  .social-tile-1 { width: 40%; left: 40%; }
+  .social-tile-2 { width: 26%; left: 68%; }
+  .social-tile-5 { display: none; }
 }
 @media (max-width: 640px) {
   .social-wall-text { max-width: 100%; }
   .social-tile-2, .social-tile-4 { display: none; }
-  .social-tile-1 { width: 90%; left: 5%; top: 44%; }
-  .social-tile-3 { width: 80%; left: 10%; bottom: 2%; }
+  .social-tile-1 { width: 70%; left: 22%; top: 44%; }
+  .social-tile-3 { width: 60%; left: 30%; bottom: 4%; }
 }
 
 /* ============================================================
@@ -790,7 +818,7 @@ section { position: relative; }
 .footer-brand { display: flex; flex-direction: column; gap: 12px; max-width: 340px; }
 .footer-brand-row { display: flex; align-items: center; gap: 10px; }
 .footer-brand .logo-icon { height: 30px; width: 30px; }
-.footer-brand .logo-wordmark { height: 18px; width: auto; }
+.footer-brand .logo-wordmark { height: 18px; width: auto; aspect-ratio: 845 / 71; }
 .footer-brand .script-tag { color: var(--red); font-size: 16px; }
 
 .footer-cols { display: flex; gap: 64px; flex-wrap: wrap; }
