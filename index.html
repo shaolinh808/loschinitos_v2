@@ -48,15 +48,17 @@
       <img class="logo-wordmark" src="logo-wordmark.svg" alt="Los Chinitos" />
     </a>
 
-    <ul class="nav-links">
-      <li><a href="#story">Unsere Story</a></li>
-      <li><a href="#produkte">Produkte</a></li>
-      <li><a href="#events">Events</a></li>
-      <li><a href="https://www.instagram.com/tacosloschinitos/" target="_blank" rel="noopener">Instagram</a></li>
-    </ul>
+    <div class="nav-center">
+      <ul class="nav-links">
+        <li><a href="#story">Unsere Story</a></li>
+        <li><a href="#produkte">Produkte</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="https://www.instagram.com/tacosloschinitos/" target="_blank" rel="noopener">Instagram</a></li>
+      </ul>
 
-    <div class="nav-cta">
-      <a href="#anfragen" class="btn btn-anfragen">Anfragen</a>
+      <div class="nav-cta">
+        <a href="#anfragen" class="btn btn-anfragen">Anfragen</a>
+      </div>
     </div>
 
     <span class="nav-tagline script-tag quoted">tacos sin filtros</span>
@@ -381,9 +383,17 @@
 
 <script src="js/main.js"></script>
 <script>
-// ===== GRÜNDERSTORY scroll-pin math (verbatim from handoff-story-and-socialwall.html) =====
-// Runs on every scroll event. On screens <=768px it does nothing (CSS above
-// switches #story-sticky to a normal static stacked block instead).
+// ===== GRÜNDERSTORY scroll-pin math =====
+// Sequential choreography: image arrives, THEN (only once it has fully
+// arrived) the left text arrives and holds, THEN (only once left has fully
+// arrived) the right text arrives and holds — nothing moves at the same time
+// as anything else. At the very end both texts cross-fade into the closing
+// badges (opacity only, no translation) so the section resolves smoothly.
+// The scroll handler is rAF-throttled so it does at most one DOM read/write
+// pass per animation frame no matter how many native scroll events fire —
+// this is what removes the stutter on fast/trackpad scrolling.
+// On screens <=768px it does nothing (CSS above switches #story-sticky to a
+// normal static stacked block instead).
 (function () {
   var container = document.getElementById('story-container');
   var img = document.querySelector('[data-story="img"]');
@@ -396,39 +406,56 @@
   function ease(t) { return t * t * (3 - 2 * t); } // smoothstep
 
   function resetMobile() {
-    [img, left, right].forEach(function (el) { if (el) el.style.transform = 'none'; });
+    [img, left, right].forEach(function (el) {
+      if (!el) return;
+      el.style.transform = 'none';
+      el.style.opacity = '';
+    });
   }
 
   function applyProgress(progress) {
-    // image slides up first
-    var pImg = clamp01(progress / 0.25);
-    // left text slides up, then slides back out
-    var pLeftEnter = clamp01((progress - 0.25) / 0.2);
-    var pLeftExit = clamp01((progress - 0.55) / 0.2);
-    // right text follows, slightly offset
-    var pRightEnter = clamp01((progress - 0.45) / 0.2);
-    var pRightExit = clamp01((progress - 0.7) / 0.25);
-    // badges fade in right at the end
-    var badgeIn = clamp01((progress - 0.82) / 0.16);
+    // 1) image arrives
+    var pImg = clamp01(progress / 0.18);
+    // 2) only then does the left text arrive — it then holds in place
+    var pLeft = clamp01((progress - 0.20) / 0.20);
+    // 3) only once left has arrived does the right text start moving
+    var pRight = clamp01((progress - 0.55) / 0.20);
+    // 4) closing beat: both texts fade out as the badges fade in (opacity
+    // only — no motion competing with anything else at this point)
+    var closeOut = clamp01((progress - 0.85) / 0.15);
+    var textOpacity = 1 - ease(closeOut);
+    var badgeIn = ease(closeOut);
 
     if (img) img.style.transform = 'translateY(' + ((1 - ease(pImg)) * 100) + 'vh)';
-    if (left) left.style.transform = 'translateY(' + (((1 - ease(pLeftEnter)) * 100) - (ease(pLeftExit) * 100)) + 'vh)';
-    if (right) right.style.transform = 'translateY(' + (((1 - ease(pRightEnter)) * 100) - (ease(pRightExit) * 100)) + 'vh)';
-    if (leftBadge) leftBadge.style.opacity = ease(badgeIn);
-    if (rightBadge) rightBadge.style.opacity = ease(badgeIn);
+    if (left) {
+      left.style.transform = 'translateY(' + ((1 - ease(pLeft)) * 100) + 'vh)';
+      left.style.opacity = textOpacity;
+    }
+    if (right) {
+      right.style.transform = 'translateY(' + ((1 - ease(pRight)) * 100) + 'vh)';
+      right.style.opacity = textOpacity;
+    }
+    if (leftBadge) leftBadge.style.opacity = badgeIn;
+    if (rightBadge) rightBadge.style.opacity = badgeIn;
   }
 
+  var ticking = false;
   function onScroll() {
-    if (window.innerWidth <= 768) {
-      resetMobile();
-      return;
-    }
-    if (!container) return;
-    var rect = container.getBoundingClientRect();
-    var vh = window.innerHeight;
-    var total = rect.height;
-    var progress = total > 0 ? clamp01((vh - rect.top) / total) : 0;
-    applyProgress(progress);
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      ticking = false;
+      if (window.innerWidth <= 768) {
+        resetMobile();
+        return;
+      }
+      if (!container) return;
+      var rect = container.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var total = rect.height;
+      var progress = total > 0 ? clamp01((vh - rect.top) / total) : 0;
+      applyProgress(progress);
+    });
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });

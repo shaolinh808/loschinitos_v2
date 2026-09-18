@@ -172,15 +172,25 @@ section { position: relative; }
   max-width: var(--container);
   margin: 0 auto;
   padding: 0 var(--gutter);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  column-gap: 24px;
+}
+
+/* nav-links + nav-cta form one visual group, mathematically centered between
+   brand and tagline/toggle because the two flanking grid tracks are equal 1fr */
+.nav-center {
+  grid-column: 2;
+  justify-self: center;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  gap: 24px;
+  gap: 6px;
 }
-.nav-links { margin: 0 24px; }
-.nav-cta { margin-right: 8px; }
 
 .nav-brand {
+  grid-column: 1;
+  justify-self: start;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -227,6 +237,8 @@ section { position: relative; }
 .nav--solid .btn-anfragen { background: #fff; color: var(--red); }
 
 .nav-tagline {
+  grid-column: 3;
+  justify-self: end;
   font-family: var(--font-script);
   font-size: 18px;
   color: var(--red);
@@ -234,11 +246,12 @@ section { position: relative; }
   white-space: nowrap;
   transition: color .26s ease;
   flex-shrink: 0;
-  margin-left: auto;
 }
 .nav--solid .nav-tagline { color: #fff; }
 
 .nav-toggle {
+  grid-column: 3;
+  justify-self: end;
   display: none;
   flex-direction: column;
   justify-content: center;
@@ -248,7 +261,6 @@ section { position: relative; }
   background: none;
   border: none;
   flex-shrink: 0;
-  margin-left: auto;
 }
 .nav-toggle span {
   display: block;
