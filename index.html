@@ -81,14 +81,16 @@
 <section class="hero" id="hero">
   <video class="hero-media" src="suadero_taco_website.mp4" autoplay muted loop playsinline></video>
   <div class="hero-scrim"></div>
-  <div class="hero-card">
-    <h1>TACOS</h1>
-    <img class="hero-wordmark" src="logo-wordmark.svg" alt="Los Chinitos" />
-    <span class="hero-tagline script-tag quoted">tacos sin filtros</span>
-    <p>Platzhalter: ein bis zwei Sätze Positionierung — CDMX-Taquería, Trompo, kein Tex-Mex. Ton: knapp, direkt, ohne Folklore.</p>
-    <div class="hero-actions">
-      <a href="#anfragen" class="btn btn-yellow">Catering anfragen</a>
-      <a href="#events" class="btn btn-outline-white">Nächstes Event</a>
+  <div class="hero-inner">
+    <div class="hero-card">
+      <h1>TACOS</h1>
+      <img class="hero-wordmark" src="logo-wordmark.svg" alt="Los Chinitos" />
+      <span class="hero-tagline script-tag quoted">tacos sin filtros</span>
+      <p>Platzhalter: ein bis zwei Sätze Positionierung — CDMX-Taquería, Trompo, kein Tex-Mex. Ton: knapp, direkt, ohne Folklore.</p>
+      <div class="hero-actions">
+        <a href="#anfragen" class="btn btn-yellow">Catering anfragen</a>
+        <a href="#events" class="btn btn-outline-white">Nächstes Event</a>
+      </div>
     </div>
   </div>
 </section>
@@ -387,8 +389,9 @@
 // Sequential choreography: image arrives, THEN (only once it has fully
 // arrived) the left text arrives and holds, THEN (only once left has fully
 // arrived) the right text arrives and holds — nothing moves at the same time
-// as anything else. At the very end both texts cross-fade into the closing
-// badges (opacity only, no translation) so the section resolves smoothly.
+// as anything else. At the very end both texts fade fully to 0 first, and
+// only once they are completely invisible does the badge opacity start
+// rising — never simultaneously, so the badge can never show through text.
 // The scroll handler is rAF-throttled so it does at most one DOM read/write
 // pass per animation frame no matter how many native scroll events fire —
 // this is what removes the stutter on fast/trackpad scrolling.
@@ -420,11 +423,14 @@
     var pLeft = clamp01((progress - 0.20) / 0.20);
     // 3) only once left has arrived does the right text start moving
     var pRight = clamp01((progress - 0.55) / 0.20);
-    // 4) closing beat: both texts fade out as the badges fade in (opacity
-    // only — no motion competing with anything else at this point)
-    var closeOut = clamp01((progress - 0.85) / 0.15);
-    var textOpacity = 1 - ease(closeOut);
-    var badgeIn = ease(closeOut);
+    // 4) closing beat, strictly sequential — no simultaneous opacity so the
+    // badge can never show through the text: first both texts fade fully
+    // to 0, and only once they are completely gone does the badge opacity
+    // start rising from 0.
+    var pTextOut = clamp01((progress - 0.85) / 0.08);
+    var pBadgeIn = clamp01((progress - 0.93) / 0.07);
+    var textOpacity = 1 - ease(pTextOut);
+    var badgeIn = ease(pBadgeIn);
 
     if (img) img.style.transform = 'translateY(' + ((1 - ease(pImg)) * 100) + 'vh)';
     if (left) {
