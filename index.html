@@ -7,13 +7,21 @@
 <meta name="description" content="CDMX-Style Taquería in Düsseldorf. Trompo-gegarte Tacos, hausgemachte Salsas, kein Tex-Mex. Tacos sin filtros." />
 
 <link rel="icon" type="image/svg+xml" href="logo-icon.svg" />
-<link rel="canonical" href="https://shaolinh808.github.io/loschinitos_v2/" />
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+<meta name="theme-color" content="#E4000A" />
+<link rel="canonical" href="https://loschinitos.de/" />
 
 <meta property="og:type" content="website" />
+<meta property="og:locale" content="de_DE" />
+<meta property="og:site_name" content="Los Chinitos" />
 <meta property="og:title" content="Los Chinitos — Tacos sin filtros" />
 <meta property="og:description" content="CDMX-Style Taquería in Düsseldorf. Trompo-gegarte Tacos, hausgemachte Salsas, kein Tex-Mex." />
-<meta property="og:url" content="https://shaolinh808.github.io/loschinitos_v2/" />
-<meta property="og:image" content="https://shaolinh808.github.io/loschinitos_v2/logo-emblem.png" />
+<meta property="og:url" content="https://loschinitos.de/" />
+<meta property="og:image" content="https://loschinitos.de/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Los Chinitos — Emblem und Schriftzug auf Rot" />
 <meta name="twitter:card" content="summary_large_image" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -173,31 +181,56 @@
       <p>Fließtext-Platzhalter, ca. 40–60 Wörter. Hier steht später, wie gearbeitet wird: Trompo, Tortillas, Salsas, kurze Karte. Kein Marketing-Sprech, sondern konkret — Herkunft, Handwerk, warum es anders schmeckt als das, was man hier kennt.</p>
     </div>
 
-    <div class="product-grid">
-      <figure class="product-card">
-        <div class="product-card-inner placeholder-fill"></div>
-        <figcaption class="quoted">Pastor</figcaption>
-      </figure>
-      <figure class="product-card">
-        <div class="product-card-inner placeholder-fill"></div>
-        <figcaption class="quoted">Suadero</figcaption>
-      </figure>
-      <figure class="product-card">
-        <div class="product-card-inner placeholder-fill"></div>
-        <figcaption class="quoted">Ribeye Gaonera</figcaption>
-      </figure>
-      <figure class="product-card">
-        <div class="product-card-inner placeholder-fill"></div>
-        <figcaption class="quoted">Hongos al Ajilo</figcaption>
-      </figure>
-      <figure class="product-card">
-        <div class="product-card-inner placeholder-fill"></div>
-        <figcaption class="quoted">Quesadilla</figcaption>
-      </figure>
-      <figure class="product-card">
-        <div class="product-card-inner placeholder-fill"></div>
-        <figcaption class="quoted">Salsas</figcaption>
-      </figure>
+    <div class="accordion-gallery" role="list" aria-label="Unsere Karte"
+         data-default-index="0" data-expand-ratio="0.52" data-parallax="0.5" data-tilt="8" data-trigger="hover">
+      <div class="ag-panel" role="listitem" tabindex="0" aria-label="Pastor">
+        <span class="ag-panel__frame">
+          <span class="ag-panel__media"><img src="taco_pastor.webp" alt="Tacos al Pastor" loading="lazy" draggable="false" /></span>
+          <span class="ag-panel__overlay" aria-hidden="true"></span>
+          <span class="ag-panel__dim" aria-hidden="true"></span>
+        </span>
+        <span class="ag-panel__label" aria-hidden="true"><span class="ag-panel__bar"></span><span class="ag-panel__text quoted">Pastor</span></span>
+      </div>
+      <div class="ag-panel" role="listitem" tabindex="0" aria-label="Suadero">
+        <span class="ag-panel__frame">
+          <span class="ag-panel__media"><img src="taco_suadero.webp" alt="Tacos de Suadero" loading="lazy" draggable="false" /></span>
+          <span class="ag-panel__overlay" aria-hidden="true"></span>
+          <span class="ag-panel__dim" aria-hidden="true"></span>
+        </span>
+        <span class="ag-panel__label" aria-hidden="true"><span class="ag-panel__bar"></span><span class="ag-panel__text quoted">Suadero</span></span>
+      </div>
+      <div class="ag-panel ag-panel--placeholder" role="listitem" tabindex="0" aria-label="Ribeye Gaonera">
+        <span class="ag-panel__frame">
+          <span class="ag-panel__media placeholder-fill"></span>
+          <span class="ag-panel__overlay" aria-hidden="true"></span>
+          <span class="ag-panel__dim" aria-hidden="true"></span>
+        </span>
+        <span class="ag-panel__label" aria-hidden="true"><span class="ag-panel__bar"></span><span class="ag-panel__text quoted">Ribeye Gaonera</span></span>
+      </div>
+      <div class="ag-panel ag-panel--placeholder" role="listitem" tabindex="0" aria-label="Hongos al Ajilo">
+        <span class="ag-panel__frame">
+          <span class="ag-panel__media placeholder-fill"></span>
+          <span class="ag-panel__overlay" aria-hidden="true"></span>
+          <span class="ag-panel__dim" aria-hidden="true"></span>
+        </span>
+        <span class="ag-panel__label" aria-hidden="true"><span class="ag-panel__bar"></span><span class="ag-panel__text quoted">Hongos al Ajilo</span></span>
+      </div>
+      <div class="ag-panel ag-panel--placeholder" role="listitem" tabindex="0" aria-label="Quesadilla">
+        <span class="ag-panel__frame">
+          <span class="ag-panel__media placeholder-fill"></span>
+          <span class="ag-panel__overlay" aria-hidden="true"></span>
+          <span class="ag-panel__dim" aria-hidden="true"></span>
+        </span>
+        <span class="ag-panel__label" aria-hidden="true"><span class="ag-panel__bar"></span><span class="ag-panel__text quoted">Quesadilla</span></span>
+      </div>
+      <div class="ag-panel ag-panel--placeholder" role="listitem" tabindex="0" aria-label="Salsas">
+        <span class="ag-panel__frame">
+          <span class="ag-panel__media placeholder-fill"></span>
+          <span class="ag-panel__overlay" aria-hidden="true"></span>
+          <span class="ag-panel__dim" aria-hidden="true"></span>
+        </span>
+        <span class="ag-panel__label" aria-hidden="true"><span class="ag-panel__bar"></span><span class="ag-panel__text quoted">Salsas</span></span>
+      </div>
     </div>
   </div>
 </section>
@@ -254,7 +287,8 @@
       </div>
 
       <div class="form-card">
-        <form id="anfragen-form" novalidate>
+        <form id="anfragen-form" name="catering" method="POST" action="/danke.html" data-netlify="true" netlify-honeypot="_gotcha" novalidate>
+          <input type="hidden" name="form-name" value="catering" />
           <input type="text" name="_gotcha" style="position:absolute; left:-9999px" tabindex="-1" autocomplete="off" aria-hidden="true" />
           <div class="form-grid">
             <div class="form-field">

@@ -497,3 +497,42 @@ open-source Chromium build, which has no licensed H.264 decoder) — both
 verified as environment-only limitations, not code issues. Real
 browsers (Chrome/Firefox/Safari/Edge) support H.264 and will load
 Google Fonts normally.
+
+## Launch-Vorbereitung (Netlify)
+
+### Steht
+- **Produkte** zeigen jetzt eine Accordion-Galerie (Vanilla-Port von
+  reactbits.dev AccordionGallery; GSAP durch CSS-Transitions ersetzt,
+  gleiche Mathematik für flex-grow / Tilt / Parallax / Label-Stagger).
+  Konfiguration über `data-*` am `.accordion-gallery`-Element. Auf
+  ≤768px vertikal.
+- **Catering-Formular** läuft über Netlify Forms (`name="catering"`,
+  `data-netlify`, Honeypot `_gotcha`, `action="/danke.html"`). Mit JS:
+  url-encodierter POST auf `/`, dann Redirect auf `danke.html`; ohne JS
+  macht Netlify dasselbe über das `action`-Attribut.
+- **Meta**: Title/Description je Seite, SVG-Favicon + `favicon-32.png` +
+  `apple-touch-icon.png` (aus `logo-icon.svg` gerendert), `og-image.png`
+  1200×630 (aus Emblem + Wordmark), `theme-color`, `robots.txt`
+  (danke.html ausgeschlossen), `sitemap.xml`, `netlify.toml`
+  (publish = ".", Security- und Cache-Header).
+- Canonical/OG-URLs zeigen bereits auf `https://loschinitos.de/`
+  (Zielzustand nach dem Domain-Umzug). Domain und DNS wurden **nicht**
+  angefasst.
+- Fotos als WebP (`taco_*.webp`, je ~110 KB). Die PNG-Originale und die
+  Assets der alten Homepage wurden aus dem Repo entfernt — alle in der
+  Git-History (bis Commit `24fb68d`) weiterhin vorhanden.
+
+### Fehlt inhaltlich (kein Material im Projekt)
+- Produktfotos für Ribeye Gaonera, Hongos al Ajilo, Quesadilla, Salsas
+  (aktuell Platzhalter-Kacheln). `taco_asada.webp` / `taco_campechano.webp`
+  liegen bereit, stehen aber nicht auf der Karte im Mockup.
+- Alle "Platzhalter:"-Texte (Hero, Produkte-Intro, Events, Catering-Intro,
+  Social-Wall), Event-Termine, Social-Wall-Bilder.
+- Datenschutzerklärung (Footer-Link "Datenschutz" zeigt auf das Impressum).
+
+### Offen
+- Netlify-Site anlegen / Repo verbinden und Test-Einsendung prüfen
+  (aus der Entwicklungsumgebung nicht möglich: kein Token, Netlify-Hosts
+  durch die Netzwerk-Policy gesperrt).
+- Branch `claude/new-session-e6odmv` nach `master` mergen.
+- Domain-Umzug `loschinitos.de` — bewusst letzter, manueller Schritt.

@@ -535,32 +535,108 @@ section { position: relative; }
 .produkte-intro h2 { font-size: clamp(34px, 4.6vw, 60px); color: var(--red); }
 .produkte-intro p { font-size: 16px; line-height: 1.7; }
 
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px 28px;
+/* Accordion gallery — vanilla port of reactbits.dev AccordionGallery.
+   Layout/tilt/parallax are driven by js/main.js; CSS transitions replace GSAP. */
+.accordion-gallery {
+  --ag-accent: var(--yellow);
+  --ag-overlay: 17, 17, 17;
+  --ag-text: #ffffff;
+  --ag-gap: 10px;
+  --ag-radius: 16px;
+  --ag-media-size: 320px;
+  --ag-duration: .6s;
+  --ag-stagger: .06s;
+  --ag-ease: cubic-bezier(.215, .61, .355, 1);
+  display: flex;
+  flex-direction: row;
+  gap: var(--ag-gap);
+  width: 100%;
+  height: 460px;
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
 }
-.product-card { perspective: 1000px; }
-.product-card-inner {
-  aspect-ratio: 1/1;
-  transform: rotateX(0deg) rotateY(0deg);
-  transition: transform .25s ease;
-  will-change: transform;
+.accordion-gallery--vertical { flex-direction: column; height: 560px; }
+.accordion-gallery.ag-no-transition * { transition: none !important; }
+
+.ag-panel {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: var(--ag-radius);
+  cursor: pointer;
+  display: block;
+  outline: none;
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  background: var(--ink);
+  box-shadow: 0 10px 30px -18px rgba(0,0,0,0.8);
+  transition: flex-grow var(--ag-duration) var(--ag-ease), transform var(--ag-duration) var(--ag-ease);
+  will-change: flex-grow, transform;
+  -webkit-tap-highlight-color: transparent;
 }
-.product-card figcaption {
-  margin-top: 14px;
+.ag-panel:focus-visible { box-shadow: 0 0 0 2px var(--ag-accent), 0 10px 30px -18px rgba(0,0,0,0.8); }
+
+.ag-panel__frame { position: absolute; inset: 0; overflow: hidden; border-radius: inherit; }
+.ag-panel__media {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--ag-media-size);
+  height: 100%;
+  transform: translate(-50%, -50%);
+  filter: grayscale(1);
+  transition: transform var(--ag-duration) var(--ag-ease), filter var(--ag-duration) var(--ag-ease);
+  will-change: transform, filter;
+}
+.accordion-gallery--vertical .ag-panel__media { width: 100%; height: var(--ag-media-size); }
+.ag-panel__media img { width: 100%; height: 100%; object-fit: cover; display: block; user-select: none; -webkit-user-drag: none; }
+.ag-panel--placeholder .ag-panel__media { filter: none; }
+
+.ag-panel__overlay {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, transparent 45%, rgba(var(--ag-overlay), 0.78) 100%);
+}
+.ag-panel__dim {
+  position: absolute; inset: 0; pointer-events: none;
+  background: rgb(var(--ag-overlay));
+  opacity: .35;
+  transition: opacity var(--ag-duration) var(--ag-ease);
+}
+.ag-panel--active .ag-panel__media { filter: grayscale(0); }
+.ag-panel--active .ag-panel__dim { opacity: 0; }
+
+.ag-panel__label {
+  position: absolute; left: 20px; bottom: 20px; right: 20px;
+  display: flex; align-items: center; gap: 12px;
+  pointer-events: none; z-index: 2;
+}
+.ag-panel__bar {
+  flex: 0 0 auto; width: 3px; height: 26px; border-radius: 3px;
+  background: var(--ag-accent);
+  box-shadow: 0 0 12px rgba(255,212,0,0.6);
+}
+.ag-panel__text {
+  color: var(--ag-text);
   font-family: var(--font-display);
-  color: var(--red);
-  font-size: 26px;
   text-transform: uppercase;
+  font-size: clamp(18px, 1.6vw, 28px);
+  letter-spacing: .01em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  text-shadow: 0 2px 14px rgba(0,0,0,0.55);
 }
+.ag-panel__bar, .ag-panel__text {
+  opacity: 0;
+  transform: translateX(-14px);
+  transition: opacity calc(var(--ag-duration) * .6) var(--ag-ease), transform calc(var(--ag-duration) * .6) var(--ag-ease);
+}
+.ag-panel--active .ag-panel__bar,
+.ag-panel--active .ag-panel__text { opacity: 1; transform: translateX(0); transition-duration: var(--ag-duration); }
+.ag-panel--active .ag-panel__text { transition-delay: var(--ag-stagger); }
 
 @media (max-width: 900px) {
   .produkte-intro { grid-template-columns: 1fr; gap: 20px; }
-  .product-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 640px) {
-  .product-grid { grid-template-columns: 1fr; }
 }
 
 /* ============================================================

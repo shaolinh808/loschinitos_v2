@@ -99,37 +99,104 @@
   }
 
   /* ============================================================
-     PRODUCT CARDS — tilt on hover
+     PRODUKTE — accordion gallery
+     Vanilla port of reactbits.dev AccordionGallery (GSAP replaced by CSS
+     transitions). Same maths: the active panel gets flex-grow
+     r*(n-1)/(1-r), the others 1; inactive panels tilt away from the active
+     one and their media drifts sideways (parallax); labels stagger in.
      ============================================================ */
-  if (!reduceMotion && window.matchMedia('(pointer: fine)').matches) {
-    document.querySelectorAll('.product-card').forEach(function (card) {
-      var inner = card.querySelector('.product-card-inner');
-      if (!inner) return;
-      var maxDeg = 12;
-      card.addEventListener('mousemove', function (e) {
-        var rect = card.getBoundingClientRect();
-        var px = (e.clientX - rect.left) / rect.width - 0.5;
-        var py = (e.clientY - rect.top) / rect.height - 0.5;
-        var rotateY = px * maxDeg * 2;
-        var rotateX = -py * maxDeg * 2;
-        inner.style.transform = 'rotateX(' + rotateX.toFixed(2) + 'deg) rotateY(' + rotateY.toFixed(2) + 'deg)';
+  document.querySelectorAll('.accordion-gallery').forEach(function (root) {
+    var panels = Array.prototype.slice.call(root.querySelectorAll('.ag-panel'));
+    var count = panels.length;
+    if (!count) return;
+
+    var expandRatio = Math.min(Math.max(parseFloat(root.dataset.expandRatio) || 0.52, 0.2), 0.9);
+    var parallax = parseFloat(root.dataset.parallax);
+    if (isNaN(parallax)) parallax = 0.5;
+    var tilt = parseFloat(root.dataset.tilt);
+    if (isNaN(tilt)) tilt = 8;
+    var trigger = root.dataset.trigger || 'hover';
+    var gap = parseFloat(getComputedStyle(root).getPropertyValue('--ag-gap')) || 10;
+    var verticalQuery = window.matchMedia('(max-width: 768px)');
+    var grow = count > 1 ? (expandRatio * (count - 1)) / (1 - expandRatio) : 1;
+
+    var active = Math.min(Math.max(parseInt(root.dataset.defaultIndex || '0', 10) || 0, 0), count - 1);
+    var vertical = verticalQuery.matches;
+    var mediaSize = 320;
+
+    function applyLayout() {
+      root.classList.toggle('accordion-gallery--vertical', vertical);
+      panels.forEach(function (panel, i) {
+        var isActive = i === active;
+        var media = panel.querySelector('.ag-panel__media');
+        var rot = isActive ? 0 : (i < active ? tilt : -tilt);
+
+        panel.style.flexGrow = isActive ? grow : 1;
+        panel.style.transform = vertical ? 'rotateX(' + (-rot) + 'deg)' : 'rotateY(' + rot + 'deg)';
+        panel.classList.toggle('ag-panel--active', isActive);
+        if (isActive) panel.setAttribute('aria-current', 'true'); else panel.removeAttribute('aria-current');
+
+        if (media) {
+          var drift = Math.max(-1.5, Math.min(1.5, active - i));
+          var shift = isActive ? 0 : drift * parallax * mediaSize * 0.06;
+          media.style.transform = 'translate(-50%, -50%) ' +
+            (vertical ? 'translateY(' + shift.toFixed(1) + 'px)' : 'translateX(' + shift.toFixed(1) + 'px)');
+        }
       });
-      card.addEventListener('mouseleave', function () {
-        inner.style.transform = 'rotateX(0deg) rotateY(0deg)';
+    }
+
+    function measure() {
+      var rect = root.getBoundingClientRect();
+      var total = vertical ? rect.height : rect.width;
+      var usable = Math.max(total - gap * (count - 1), 120);
+      mediaSize = Math.max(140, usable * expandRatio * 1.22);
+      root.style.setProperty('--ag-media-size', mediaSize + 'px');
+      applyLayout();
+    }
+
+    function setActive(i) {
+      if (i === active) return;
+      active = i;
+      applyLayout();
+    }
+
+    panels.forEach(function (panel, i) {
+      panel.addEventListener('mouseenter', function () { if (trigger === 'hover') setActive(i); });
+      panel.addEventListener('click', function (e) {
+        if (i !== active) { e.preventDefault(); setActive(i); }
+      });
+      panel.addEventListener('focus', function () { setActive(i); });
+      panel.addEventListener('keydown', function (e) {
+        var next = -1;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = (i + 1) % count;
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = (i - 1 + count) % count;
+        if (next < 0) return;
+        e.preventDefault();
+        panels[next].focus();
       });
     });
-  }
+
+    var onMediaChange = function () { vertical = verticalQuery.matches; measure(); };
+    if (verticalQuery.addEventListener) verticalQuery.addEventListener('change', onMediaChange);
+    else verticalQuery.addListener(onMediaChange);
+    if ('ResizeObserver' in window) new ResizeObserver(measure).observe(root);
+    else window.addEventListener('resize', measure);
+
+    // first layout snaps into place without animating from the flex defaults
+    root.classList.add('ag-no-transition');
+    measure();
+    void root.offsetHeight;
+    root.classList.remove('ag-no-transition');
+  });
 
   /* ============================================================
      ANFRAGEN — contact form validation + submit
      ============================================================ */
   var form = document.getElementById('anfragen-form');
   if (form) {
-    // Replace with the real Formspree (or other) endpoint before launch.
-    // Create a free form at https://formspree.io, verify info@loschinitos.de,
-    // then paste the form id below. See PROGRESS.md for full setup notes.
-    var FORM_ENDPOINT = 'https://formspree.io/f/REPLACE_WITH_REAL_FORM_ID';
-
+    // Netlify Forms: the form is registered at deploy time via data-netlify
+    // in the markup; submissions are POSTed url-encoded to the site root.
+    // Without JS the native POST to action="/danke.html" does the same.
     var summary = form.querySelector('.form-summary');
     var status = form.querySelector('.form-status');
     var submitBtn = form.querySelector('button[type="submit"]');
@@ -195,18 +262,10 @@
       submitBtn.disabled = true;
       submitBtn.textContent = 'Wird gesendet…';
 
-      var data = {
-        name: form.elements['name'].value,
-        anlass: form.elements['anlass'].value,
-        datum: form.elements['datum'].value,
-        personen: form.elements['personen'].value,
-        nachricht: form.elements['nachricht'].value
-      };
-
-      fetch(FORM_ENDPOINT, {
+      fetch('/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(data)
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(form)).toString()
       })
         .then(function (res) {
           if (!res.ok) throw new Error('Form endpoint responded with ' + res.status);
