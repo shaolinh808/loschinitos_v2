@@ -68,8 +68,7 @@
       'form.sent': 'Abgesendet',
       'form.errorHtml': 'Ups, das hat nicht geklappt. Schreib uns direkt an <a href="mailto:info@loschinitos.de">info@loschinitos.de</a>.',
 
-      'faq.h': 'Fragen &amp;<br />Antworten',
-      'faq.p': 'Das Wichtigste rund ums Catering — kurz beantwortet.',
+      'faq.h': 'Fragen? Antworten.',
       'faq.q1': 'Für welche Anlässe könnt ihr gebucht werden?',
       'faq.a1': 'Firmenfeiern, Hochzeiten, Geburtstage, Festivals und private Feiern — von klein bis groß. Erzähl uns einfach, was du planst.',
       'faq.q2': 'Ab wie vielen Personen ist Catering möglich?',
@@ -157,8 +156,7 @@
       'form.sent': 'Sent',
       'form.errorHtml': 'Oops, that didn’t work. Email us directly at <a href="mailto:info@loschinitos.de">info@loschinitos.de</a>.',
 
-      'faq.h': 'Questions &amp;<br />answers',
-      'faq.p': 'The essentials about our catering — answered briefly.',
+      'faq.h': 'Questions? Answers.',
       'faq.q1': 'What kinds of events can you cater?',
       'faq.a1': 'Company parties, weddings, birthdays, festivals and private celebrations — small or large. Just tell us what you’re planning.',
       'faq.q2': 'What’s the minimum number of guests?',
@@ -246,8 +244,7 @@
       'form.sent': 'Enviado',
       'form.errorHtml': 'Ups, algo salió mal. Escríbenos directamente a <a href="mailto:info@loschinitos.de">info@loschinitos.de</a>.',
 
-      'faq.h': 'Preguntas<br />frecuentes',
-      'faq.p': 'Lo más importante sobre nuestro catering, en corto.',
+      'faq.h': '¿Preguntas? Respuestas.',
       'faq.q1': '¿Para qué tipo de eventos se pueden contratar?',
       'faq.a1': 'Eventos de empresa, bodas, cumpleaños, festivales y fiestas privadas, chicos o grandes. Solo cuéntanos qué tienes en mente.',
       'faq.q2': '¿A partir de cuántas personas hacen catering?',

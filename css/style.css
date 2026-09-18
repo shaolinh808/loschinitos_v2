@@ -809,20 +809,22 @@ section { position: relative; }
 /* ============================================================
    FOOTER
    ============================================================ */
-.site-footer { background: #fff; padding: 56px 0 0; }
-/* brand at the left edge, links at the right edge, emblem exactly centered */
+.site-footer { background: #fff; }
+/* brand at the left edge, links at the right edge, emblem exactly centered —
+   and vertically centered in the band between the checkerboard divider above
+   and the hairline below, so the big badge reads as the middle of the footer */
 .footer-top {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   gap: 56px;
-  align-items: start;
-  padding-bottom: 32px;
+  align-items: center;
+  padding: 36px 0;
 }
 .footer-brand { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
 .footer-brand .logo-wordmark { height: 22px; width: auto; aspect-ratio: 845 / 71; }
 .footer-brand .script-tag { color: var(--red); font-size: 16px; }
-.footer-emblem { display: flex; justify-content: center; align-self: center; }
-.footer-emblem .logo-icon { height: 72px; width: 72px; }
+.footer-emblem { display: flex; justify-content: center; }
+.footer-emblem .logo-icon { height: clamp(160px, 16vw, 240px); width: clamp(160px, 16vw, 240px); }
 
 .footer-cols { display: flex; gap: 48px; justify-content: flex-end; }
 .footer-col { display: flex; flex-direction: column; gap: 12px; font-size: 13px; font-weight: 600; }
@@ -839,45 +841,49 @@ section { position: relative; }
 .footer-bottom { font-size: 12px; color: var(--grey-mute); padding-bottom: 24px; }
 
 @media (max-width: 640px) {
-  .footer-top { grid-template-columns: 1fr; gap: 32px; }
-  .footer-emblem { justify-content: flex-start; }
+  .footer-top { grid-template-columns: 1fr; gap: 32px; padding: 32px 0; }
+  .footer-emblem .logo-icon { height: 160px; width: 160px; }
   .footer-cols { gap: 32px; justify-content: flex-start; }
 }
 
 /* ============================================================
    FAQ
    ============================================================ */
+/* Heading left, quiet list right: thin +/- in front of the question,
+   answer indented to the question text, no dividers, roomy rows. */
 .faq-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 56px; align-items: start; }
-.faq-intro h2 { color: var(--red); font-size: clamp(32px, 4.4vw, 50px); margin-bottom: 16px; }
-.faq-intro p { font-size: 16px; line-height: 1.7; }
-.faq-list { border-top: 1px solid var(--ink); }
-.faq-item { border-bottom: 1px solid var(--divider-line); }
+.faq-intro h2 { color: var(--red); font-size: clamp(32px, 4.4vw, 50px); }
+.faq-item + .faq-item { margin-top: 26px; }
 .faq-item summary {
   list-style: none;
   cursor: pointer;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  column-gap: 26px;
   align-items: center;
-  gap: 24px;
-  padding: 20px 0;
+  padding: 6px 0;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 18px;
+  line-height: 1.3;
   color: var(--ink);
   transition: color .18s ease;
 }
 .faq-item summary::-webkit-details-marker { display: none; }
-.faq-item summary::after {
-  content: '+';
-  flex: 0 0 auto;
-  font-family: var(--font-display);
-  font-size: 28px;
-  line-height: 1;
-  color: var(--red);
+.faq-item summary::before {
+  content: '';
+  width: 16px;
+  height: 16px;
+  justify-self: center;
+  background:
+    linear-gradient(var(--red), var(--red)) center / 100% 1.5px no-repeat,
+    linear-gradient(var(--red), var(--red)) center / 1.5px 100% no-repeat;
   transition: transform .25s ease;
 }
-.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-item[open] summary::before {
+  background: linear-gradient(var(--red), var(--red)) center / 100% 1.5px no-repeat;
+}
 .faq-item summary:hover { color: var(--red); }
-.faq-a { padding: 0 48px 22px 0; max-width: 62ch; }
+.faq-a { padding: 14px 0 6px 48px; max-width: 60ch; }
 .faq-a p { font-size: 15px; line-height: 1.7; color: var(--grey); }
 @media (max-width: 900px) {
   .faq-grid { grid-template-columns: 1fr; gap: 28px; }
