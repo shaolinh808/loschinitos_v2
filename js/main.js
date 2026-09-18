@@ -99,66 +99,6 @@
   }
 
   /* ============================================================
-     STORY — scroll-pinned reveal (desktop only)
-     ============================================================ */
-  var storyScroll = document.querySelector('.story-scroll');
-  if (storyScroll && !reduceMotion && window.matchMedia('(min-width: 769px)').matches) {
-    var center = storyScroll.querySelector('.story-center');
-    var left = storyScroll.querySelector('.story-col-left');
-    var right = storyScroll.querySelector('.story-col-right');
-    var badgeLeft = storyScroll.querySelector('.story-badge-left');
-    var badgeRight = storyScroll.querySelector('.story-badge-right');
-
-    var lerp = function (from, to, t) { return from + (to - from) * t; };
-    var progressFor = function (p, start, end) {
-      if (p <= start) return 0;
-      if (p >= end) return 1;
-      return (p - start) / (end - start);
-    };
-
-    var ticking = false;
-    var render = function () {
-      ticking = false;
-      var rect = storyScroll.getBoundingClientRect();
-      var total = storyScroll.offsetHeight - window.innerHeight;
-      if (total <= 0) return;
-      var scrolled = -rect.top;
-      var p = Math.min(1, Math.max(0, scrolled / total));
-
-      var pCenter = progressFor(p, 0, 0.16);
-      center.style.opacity = pCenter;
-      center.style.transform = 'translateY(' + lerp(40, 0, pCenter) + 'px)';
-
-      var pLeft = progressFor(p, 0.1, 0.4);
-      left.style.opacity = pLeft;
-      left.style.transform = 'translateY(' + lerp(70, 0, pLeft) + 'px)';
-
-      var pRight = progressFor(p, 0.4, 0.7);
-      right.style.opacity = pRight;
-      right.style.transform = 'translateY(' + lerp(70, 0, pRight) + 'px)';
-
-      var pBadge = progressFor(p, 0.05, 0.2);
-      if (badgeLeft) badgeLeft.style.opacity = pBadge;
-      if (badgeRight) badgeRight.style.opacity = pBadge;
-    };
-
-    var onScroll = function () {
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(render);
-      }
-    };
-
-    center.style.opacity = 0;
-    left.style.opacity = 0;
-    right.style.opacity = 0;
-
-    render();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', render);
-  }
-
-  /* ============================================================
      PRODUCT CARDS — tilt on hover
      ============================================================ */
   if (!reduceMotion && window.matchMedia('(pointer: fine)').matches) {
