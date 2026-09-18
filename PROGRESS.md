@@ -252,3 +252,111 @@ Colors: brand base kept (chili `#C8202C`, masa `#F5EFE6`, carbon `#1A1A1A`). Add
 - Fonts loaded: `Anton`, `Archivo` (ital + wght 400–900), `Space Mono` (400/700).
 - Card language: `.dish` (border + hard-shadow hover), `.pricetag` (rotated), `.kicker`, `.sticker`, `.btn-red`/`.btn-red.on-dark`/`.btn-dark`/`.btn-outline`.
 - Trompo graphic is a hand-built inline `<svg>` (radial-gradient meat cone, spit, pineapple/onion, layer lines) — no external asset.
+
+---
+
+## Redesign v3 — Checkerboard / editorial rebuild (3-page site)
+
+Full replacement of the site with a new design commissioned separately from
+a component prototype (red `#E4000A` / yellow `#FFD400` / near-black,
+checkerboard divider strips, a scroll-pinned founder story, a catering
+request form, a social wall). Rebuilt from scratch as plain static
+HTML/CSS/JS (no framework, no build step) so GitHub Pages serves it
+directly. The v2 single-file `index.html` above is fully replaced; its
+copy/brand facts (founders, address, contact) were reused where the new
+brief didn't override them.
+
+### File structure
+```
+index.html        — main one-page site
+danke.html         — "thank you" page after form submit
+impressum.html     — Impressum + Datenschutzerklärung
+css/style.css       — shared stylesheet (all 3 pages)
+js/main.js          — shared behaviour (nav, story pin, tilt cards, form, page-transition overlay)
+```
+
+### Fonts
+- **Junegull** (self-hosted `junegull.otf`, already in this repo) for all
+  display headlines — used in place of the prototype's "Anton" spec,
+  since Junegull is this brand's actual established display font
+  (see the `los-chinitos-pptx` design system: same red/dark/yellow
+  palette, same checkerboard motif, same Junegull headlines).
+- **UnifrakturMaguntia** (Google Fonts) for the "tacos sin filtros"
+  script tagline, exactly as the brief specified.
+- **Archivo** (Google Fonts) for body copy/UI, matching what the repo
+  already used.
+
+### Asset mapping (real files used, no placeholders left in production markup)
+- Nav / hero / footer / red divider band: `logo.png` (the circular
+  Trompo-badge lockup) as the icon, paired with a plain Junegull
+  "Los Chinitos" text wordmark (no separate wordmark SVG exists yet —
+  swap in a dedicated wordmark file later if the client wants one).
+- Hero background video: `suadero_taco_website.mp4` (already in repo).
+- Founder story photo: `img_9907.jpg`; founder names set to Toni / Linh /
+  Mato per the brief.
+- Story-section rotating badges: `mascot_lantern.png` (left) and
+  `mascot_trompo.png` (right) — a Chinese-lantern / trompo pairing that
+  matches the "Chinitos" nickname story being told next to them.
+- Product grid (6 cards): real photos for **Pastor**, **Suadero**,
+  **Campechano**, **Ribeye Gaonera** (`taco_*.png`), plus two
+  illustrated cards — **Salsas** (`mascot_chili.png`) and **Aguas
+  Frescas** (`mascot_pina.png`) — used instead of inventing dishes with
+  no photography. Swap in real photos for those two whenever they exist.
+- Social wall placeholder tiles: reuses the same taco/founder photos
+  (tinted red, tilted, auto-scrolling) instead of grey boxes, until a
+  real Instagram/TikTok embed is available.
+- `angel_independencia.png` and `founders_flag.png` are unused by this
+  design (kept in the repo, not referenced).
+
+### Interactions implemented
+- Navbar: transparent-over-hero → solid red on scroll (>40px), ~260ms
+  crossfade; red↔white icon/text/logo swap; "Anfragen" pill flips
+  filled↔outlined; mouse-proximity "dock" magnify on nav links (desktop,
+  `pointer:fine` only); hamburger + slide-down panel below 640px.
+- Founder story: real scroll-driven pin (`position:sticky` + a
+  scroll-progress JS loop, not a canned animation library) — photo,
+  then left text, then right text, then the two rotating badges, each
+  fading/sliding in over a scroll range. Disabled below 768px in favour
+  of a plain stacked layout (badges hidden), per spec.
+- Product cards: JS-computed 3D tilt toward the cursor (~12° max),
+  resets on mouse-leave.
+- Social wall: pure-CSS duplicated-track marquee, 3 columns at
+  different speeds/directions, tilted -6° as a background layer behind
+  a solid (non-translucent) red heading card.
+- Catering form: full client-side validation (inline red errors +
+  summary line), loading → success button states, then redirects to
+  `danke.html`. Honeypot field for basic spam filtering.
+- Page-transition "loading wall": clicking the logo/wordmark on
+  danke/impressum (or the "Zurück zur Startseite" button) slides two red
+  panels together, fades in the white logo, then navigates. `index.html`
+  detects that navigation via a `sessionStorage` flag and paints the
+  overlay already-closed before first render (no blank-page flash), then
+  fades it away once the page has settled. Not wired on index.html's own
+  nav (clicking the logo there just anchors to the top of the page).
+
+### ⚠️ Still needs a real owner action before launch
+1. **Contact form backend.** `js/main.js` posts the Anfragen form as
+   JSON to a `FORM_ENDPOINT` constant that is currently a placeholder
+   (`https://formspree.io/f/REPLACE_WITH_REAL_FORM_ID`). GitHub Pages
+   can't run a server, so this needs a hosted form processor:
+   1. Create a free account at formspree.io with `info@loschinitos.de`.
+   2. Create a form, verify the email, copy the form id.
+   3. Paste it into `FORM_ENDPOINT` in `js/main.js`.
+   Until this is done, submissions will correctly show an error state
+   with a `mailto:info@loschinitos.de` fallback rather than silently
+   pretending to succeed.
+2. **USt-IdNr.** on `impressum.html` is a placeholder ("wird ergänzt") —
+   fill in the real number.
+3. **Datenschutzerklärung** on `impressum.html` is a good-faith draft
+   (flagged as such on the page) — have it checked by someone
+   legally qualified before this goes live, especially the description
+   of the form-processor (Formspree) once that's actually wired up.
+4. **Event rows** on `#events` are still literal placeholders ("Ort —
+   Platzhalter") — swap in real dates/locations when known.
+5. **Image weight.** Product/founder/logo photos are un-optimized
+   originals (1–2.5MB each, ~15MB+ total page weight). Worth running
+   them through compression / WebP before the domain goes fully live,
+   especially for mobile.
+6. Two product-grid photos (Ribeye Gaonera is a stand-in for
+   "Gaonera"-style asada) plus real photography for the two illustrated
+   slots (Salsas, Aguas Frescas) would let all 6 cards use real photos.

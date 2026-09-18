@@ -1,1543 +1,377 @@
 <!DOCTYPE html>
-<html lang="de" class="scroll-smooth">
-
+<html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Los Chinitos — Tacos. Sin filtro.</title>
-  <meta name="description"
-    content="CDMX-Streetfood. Schnell. Ehrlich. Sin filtro. Los Chinitos bringt echte Taquería-Kultur von Mexiko-Stadt nach Düsseldorf." />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Los Chinitos — Tacos sin filtros</title>
+<meta name="description" content="CDMX-Style Taquería in Düsseldorf. Trompo-gegarte Tacos, hausgemachte Salsas, kein Tex-Mex. Tacos sin filtros." />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,600&family=Space+Mono:wght@400;700&display=swap"
-    rel="stylesheet" />
+<link rel="icon" type="image/png" href="logo.png" />
+<link rel="canonical" href="https://shaolinh808.github.io/loschinitos_v2/" />
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            display: ['Junegull', 'Anton', 'sans-serif'],
-            sans: ['Archivo', 'sans-serif'],
-            mono: ['Space Mono', 'monospace'],
-          },
-          colors: {
-            chili: '#C8202C',
-            chiliDk: '#9E1620',
-            masa: '#F5EFE6',
-            carbon: '#1A1A1A',
-            ink: '#2B2622',
-            sand: '#DAD3C8',
-            adobe: '#5A524A',
-            hueso: '#E4DDD2',
-            sol: '#FDFF42',
-          },
-        },
-      },
-    }
-  </script>
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Los Chinitos — Tacos sin filtros" />
+<meta property="og:description" content="CDMX-Style Taquería in Düsseldorf. Trompo-gegarte Tacos, hausgemachte Salsas, kein Tex-Mex." />
+<meta property="og:url" content="https://shaolinh808.github.io/loschinitos_v2/" />
+<meta property="og:image" content="https://shaolinh808.github.io/loschinitos_v2/logo.png" />
+<meta name="twitter:card" content="summary_large_image" />
 
-  <style>
-    *, *::before, *::after { box-sizing: border-box; }
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;1,600&family=UnifrakturMaguntia&display=swap" rel="stylesheet" />
 
-    /* ── Junegull (headings) ── */
-    @font-face {
-      font-family: 'Junegull';
-      src: url('junegull.otf') format('opentype'),
-           url('junegull.ttf') format('truetype');
-      font-weight: 400;
-      font-style: normal;
-      font-display: swap;
-    }
-
-    html { background: #F5EFE6; }
-
-    body {
-      font-family: 'Archivo', sans-serif;
-      background: #F5EFE6;
-      color: #2B2622;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    section[id], #hero { scroll-margin-top: 84px; }
-
-    /* ── Subtle paper grain ── */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      z-index: 998;
-      pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      opacity: 0.22;
-      mix-blend-mode: multiply;
-    }
-
-    /* ── Scroll progress ── */
-    #progress-bar {
-      position: fixed;
-      top: 0; left: 0;
-      height: 3px;
-      background: #C8202C;
-      z-index: 1000;
-      width: 0;
-      transition: width 0.1s linear;
-    }
-
-    /* ── Type helpers ── */
-    .h-display {
-      font-family: 'Junegull', 'Anton', sans-serif;
-      font-weight: 400;
-      line-height: 0.9;
-      letter-spacing: -0.005em;
-      text-transform: uppercase;
-    }
-
-    /* ── Rótulo (sign-painter) headings — thin two-tone offset ── */
-    .h-rotulo {
-      font-family: 'Anton', sans-serif;
-      font-weight: 400;
-      line-height: 1.0;
-      letter-spacing: 0.01em;
-      text-transform: uppercase;
-      color: #C8202C;
-      /* red face → yellow side (profile) → dark back edge = subtle dimension */
-      text-shadow:
-        2px 2px 0 #FDFF42,
-        4px 4px 0 #FDFF42,
-        5px 5px 0 #1A1A1A;
-      hyphens: none;
-      -webkit-hyphens: none;
-      word-break: normal;
-      overflow-wrap: normal;
-    }
-    .h-rotulo.on-red {   /* on chili-red background — yellow face, dark-red side */
-      color: #FDFF42;
-      text-shadow:
-        2px 2px 0 #7C1119,
-        4px 4px 0 #7C1119,
-        5px 5px 0 #1A1A1A;
-    }
-    .h-rotulo.on-dark {  /* on carbon background — cream face, red side */
-      color: #F5EFE6;
-      text-shadow:
-        2px 2px 0 #C8202C,
-        4px 4px 0 #C8202C,
-        5px 5px 0 #1A1A1A;
-    }
-    .h-rotulo.on-sol {   /* on yellow background — red face, dark-red side */
-      color: #C8202C;
-      text-shadow:
-        2px 2px 0 #7C1119,
-        4px 4px 0 #7C1119,
-        5px 5px 0 #1A1A1A;
-    }
-    @media (max-width: 640px) {
-      .h-rotulo { text-shadow: 1.5px 1.5px 0 #FDFF42, 3px 3px 0 #FDFF42, 4px 4px 0 #1A1A1A; }
-      .h-rotulo.on-red { text-shadow: 1.5px 1.5px 0 #7C1119, 3px 3px 0 #7C1119, 4px 4px 0 #1A1A1A; }
-      .h-rotulo.on-dark { text-shadow: 1.5px 1.5px 0 #C8202C, 3px 3px 0 #C8202C, 4px 4px 0 #1A1A1A; }
-      .h-rotulo.on-sol { text-shadow: 1.5px 1.5px 0 #7C1119, 3px 3px 0 #7C1119, 4px 4px 0 #1A1A1A; }
-    }
-
-    /* ── Red/white checkerboard divider (mercado tablecloth) ── */
-    .checker-strip {
-      height: 28px;
-      width: 100%;
-      /* centered so both ends have matching partial tiles → symmetric corners */
-      background-image:
-        repeating-conic-gradient(#C8202C 0% 25%, #F5EFE6 0% 50%);
-      background-size: 28px 28px;
-      background-position: center;
-    }
-    .checker-strip.sol {
-      background-image:
-        repeating-conic-gradient(#C8202C 0% 25%, #FDFF42 0% 50%);
-    }
-    .checker-strip.gold {   /* white + yellow */
-      background-image:
-        repeating-conic-gradient(#F5EFE6 0% 25%, #FDFF42 0% 50%);
-    }
-
-    /* ── Decorative mascot (subtle, non-interactive) ── */
-    .mascot {
-      position: absolute;
-      pointer-events: none;
-      user-select: none;
-      z-index: 1;
-    }
-
-    .kicker {
-      font-family: 'Space Mono', monospace;
-      font-weight: 700;
-      font-size: 0.72rem;
-      letter-spacing: 0.26em;
-      text-transform: uppercase;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.7rem;
-    }
-    .kicker::before {
-      content: '';
-      width: 26px;
-      height: 2px;
-      background: #C8202C;
-      display: inline-block;
-      flex-shrink: 0;
-    }
-
-    /* ── Buttons (modern rounded, soft lift) ── */
-    .btn-red, .btn-outline, .btn-dark {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.55rem;
-      font-family: 'Archivo', sans-serif;
-      font-weight: 700;
-      letter-spacing: 0.01em;
-      font-size: 0.92rem;
-      padding: 0.9rem 1.7rem;
-      border-radius: 9999px;
-      cursor: pointer;
-      border: none;
-      transition: transform .25s cubic-bezier(.16,1,.3,1), box-shadow .25s ease, background .25s ease, color .25s ease;
-    }
-    .btn-red svg, .btn-dark svg, .btn-outline svg { transition: transform .25s cubic-bezier(.16,1,.3,1); }
-    .btn-red:hover svg, .btn-dark:hover svg, .btn-outline:hover svg { transform: translateX(4px); }
-
-    .btn-red {
-      background: #C8202C; color: #fff;
-      box-shadow: 0 6px 18px rgba(200,32,44,0.28);
-    }
-    .btn-red:hover { background: #FDFF42; color: #1A1A1A; transform: translateY(-2px); box-shadow: 0 10px 26px rgba(253,255,66,0.35); }
-    .btn-red:active { transform: translateY(0); }
-    .btn-red.on-dark:hover { background: #FDFF42; color: #1A1A1A; box-shadow: 0 10px 26px rgba(253,255,66,0.3); }
-
-    .btn-dark {
-      background: #1A1A1A; color: #F5EFE6;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.22);
-    }
-    .btn-dark:hover { background: #C8202C; transform: translateY(-2px); box-shadow: 0 10px 26px rgba(200,32,44,0.3); }
-    .btn-dark:active { transform: translateY(0); }
-
-    .btn-outline {
-      background: transparent; color: #F5EFE6;
-      border: 2px solid rgba(245,239,230,0.6);
-    }
-    .btn-outline:hover { background: #F5EFE6; color: #1A1A1A; border-color: #F5EFE6; transform: translateY(-2px); }
-
-    /* ── Sticker / stamp ── */
-    .sticker {
-      font-family: 'Space Mono', monospace;
-      font-weight: 700;
-      font-size: 0.7rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #1A1A1A;
-      background: #F5EFE6;
-      border: 2px solid #1A1A1A;
-      padding: 0.35rem 0.75rem;
-      display: inline-block;
-      transform: rotate(-3deg);
-    }
-
-    /* ── Nav ── */
-    .nav-bar {
-      background: #F5EFE6;
-      border-bottom: 2px solid #1A1A1A;
-    }
-    .nav-link {
-      position: relative;
-      font-family: 'Archivo', sans-serif;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      font-size: 0.82rem;
-      color: #2B2622;
-      padding-bottom: 4px;
-      transition: color .2s ease;
-    }
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      width: 0; height: 3px;
-      background: #C8202C;
-      bottom: -1px; left: 0;
-      transition: width 0.3s cubic-bezier(.16,1,.3,1);
-    }
-    .nav-link:hover { color: #C8202C; }
-    .nav-link:hover::after { width: 100%; }
-
-    #mob-menu { transition: opacity .25s ease, transform .25s ease; }
-    #mob-menu.is-hidden { opacity: 0; transform: translateY(-6px); pointer-events: none; }
-
-    .lang-opt.active-lang { color: #C8202C; }
-    .lang-opt.active-lang[data-lang] { border-color: #C8202C; }
-
-    /* ── Hero ── */
-    #hero-video {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: center;
-      z-index: 0;
-    }
-    /* Light scrim: only enough for legibility at the bottom + blend into page */
-    #hero-scrim {
-      position: absolute; inset: 0; z-index: 1; pointer-events: none;
-      background:
-        linear-gradient(to top, rgba(15,10,6,0.82) 0%, rgba(15,10,6,0.38) 40%, rgba(15,10,6,0) 66%),
-        linear-gradient(to bottom, rgba(15,10,6,0.30) 0%, rgba(15,10,6,0) 24%);
-    }
-    /* thin fade into masa at the very bottom edge so the video seats into the page */
-    #hero-foot {
-      position: absolute; left: 0; right: 0; bottom: 0; height: 90px; z-index: 2;
-      pointer-events: none;
-      background: linear-gradient(to bottom, rgba(245,239,230,0) 0%, #F5EFE6 100%);
-    }
-    .hero-headline {
-      font-family: 'Anton', sans-serif;
-      font-weight: 400;
-      font-size: clamp(3.4rem, 11.5vw, 9.5rem);
-      line-height: 1.0;
-      letter-spacing: 0.01em;
-      text-transform: uppercase;
-    }
-    /* "Tacos." — cream face → red side → dark back edge + soft glow so it stays legible on the video */
-    .hero-headline .tacos {
-      color: #F5EFE6;
-      text-shadow:
-        2px 2px 0 #C8202C,
-        4px 4px 0 #C8202C,
-        5px 5px 0 #1A1A1A,
-        0 8px 40px rgba(0,0,0,0.6);
-    }
-    /* "Sin filtro." — red face → yellow side → dark back edge */
-    .hero-headline .red {
-      color: #C8202C;
-      text-shadow:
-        2px 2px 0 #FDFF42,
-        4px 4px 0 #FDFF42,
-        5px 5px 0 #1A1A1A,
-        0 8px 40px rgba(0,0,0,0.5);
-    }
-
-    /* ── Ticker ── */
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-    .marquee-wrap { overflow: hidden; }
-    .marquee-track {
-      display: flex;
-      width: max-content;
-      animation: marquee 48s linear infinite;
-    }
-    .marquee-group {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      padding-right: 1.5rem;
-      flex-shrink: 0;
-    }
-    .marquee-wrap:hover .marquee-track { animation-play-state: paused; }
-    .tick-item {
-      font-family: 'Anton', sans-serif;
-      text-transform: uppercase;
-      font-size: 1.35rem;
-      letter-spacing: 0.02em;
-      color: #F5EFE6;
-    }
-
-    /* ── Outline word (oversized editorial type) ── */
-    .outline-word {
-      font-family: 'Anton', sans-serif;
-      text-transform: uppercase;
-      color: transparent;
-      -webkit-text-stroke: 2px rgba(245,239,230,0.15);
-      line-height: 0.8;
-      pointer-events: none;
-      user-select: none;
-    }
-
-    /* ── Menu dish cards (one family) ── */
-    .dish {
-      background: #fff;
-      border: 2px solid #1A1A1A;
-      border-radius: 1rem;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 6px 6px 0 rgba(26,26,26,0.9);
-      transition: transform .25s ease, box-shadow .25s ease;
-    }
-    .dish:hover { transform: translate(-2px,-2px); box-shadow: 8px 8px 0 rgba(26,26,26,0.9); }
-    .dish.dark { background: #1A1A1A; color: #F5EFE6; }
-    .dish.dark:hover { box-shadow: 8px 8px 0 #C8202C; }
-    .dish .ph { overflow: hidden; }
-    .dish .ph img { transition: transform .5s cubic-bezier(.16,1,.3,1); width: 100%; height: 100%; object-fit: cover; }
-    .dish:hover .ph img { transform: scale(1.05); }
-
-    .idx { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.18em; color: #C8202C; }
-    .pricetag {
-      font-family: 'Space Mono', monospace;
-      font-weight: 700; font-size: 0.95rem;
-      color: #fff; background: #C8202C;
-      border: 2px solid #1A1A1A;
-      padding: 0.15rem 0.55rem;
-      display: inline-block;
-      transform: rotate(-2deg);
-      white-space: nowrap;
-    }
-    .pricetag.on-dark { border-color: #F5EFE6; }
-
-    /* ── Accordion ── */
-    .acc-body { max-height: 0; overflow: hidden; transition: max-height .4s cubic-bezier(.16,1,.3,1); }
-    .acc-body.open { max-height: 420px; }
-
-    /* ── Form fields ── */
-    .field {
-      width: 100%;
-      background: #F5EFE6;
-      border: 2px solid rgba(26,26,26,0.16);
-      border-radius: 10px;
-      padding: 0.8rem 1rem;
-      font-size: 0.95rem;
-      color: #2B2622;
-      transition: border-color .2s ease, box-shadow .2s ease;
-    }
-    .field::placeholder { color: #9a9186; }
-    .field:focus { outline: none; border-color: #C8202C; box-shadow: 0 0 0 3px rgba(200,32,44,0.12); }
-    .field-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #5A524A;
-    }
-
-    /* ── Reveal (used sparingly) ── */
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
-    .reveal.visible { opacity: 1; transform: none; }
-    .d1 { transition-delay: 90ms; }
-    .d2 { transition-delay: 180ms; }
-    .d3 { transition-delay: 270ms; }
-
-    /* ── Focus visibility ── */
-    a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, [tabindex]:focus-visible {
-      outline: 3px solid #C8202C;
-      outline-offset: 3px;
-    }
-    .on-dark-focus:focus-visible { outline-color: #F5EFE6; }
-
-    /* ── Reduced motion ── */
-    @media (prefers-reduced-motion: reduce) {
-      .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
-      .marquee-track { animation: none !important; }
-      html { scroll-behavior: auto !important; }
-      * { transition-duration: 0.001ms !important; }
-    }
-
-    @media (max-width: 767px) {
-      .story-grid { grid-template-columns: 1fr !important; }
-    }
-  </style>
+<link rel="stylesheet" href="css/style.css" />
 </head>
+<body id="top">
 
-<body>
-  <div id="progress-bar"></div>
+<div class="loading-wall" id="loading-wall" aria-hidden="true">
+  <div class="panel panel-left"></div>
+  <div class="panel panel-right"></div>
+  <img class="loading-logo" src="logo.png" alt="" />
+</div>
+<script>
+  (function () {
+    try {
+      if (sessionStorage.getItem('lc-nav-home') === '1') {
+        document.getElementById('loading-wall').classList.add('is-closed');
+        sessionStorage.removeItem('lc-nav-home');
+        window.__lcRevealWall = true;
+      }
+    } catch (e) { /* noop */ }
+  })();
+</script>
 
-  <!-- ═══════════ NAVBAR ═══════════ -->
-  <header class="fixed top-0 left-0 right-0 z-50">
-    <nav class="nav-bar w-full px-5 md:px-8 py-3 relative flex items-center">
+<header class="nav" id="site-nav">
+  <div class="nav-inner">
+    <a href="#top" class="nav-brand" aria-label="Los Chinitos — nach oben">
+      <img src="logo.png" alt="Los Chinitos" />
+      <span class="nav-wordmark">Los Chinitos</span>
+    </a>
 
-      <a href="#hero" class="flex items-center group shrink-0" aria-label="Los Chinitos — Startseite">
-        <img src="logo.png" alt="Los Chinitos"
-          class="h-12 md:h-14 w-auto group-hover:scale-105 transition-transform duration-300"
-          style="mix-blend-mode: multiply;" />
-      </a>
+    <ul class="nav-links">
+      <li><a href="#story">Unsere Story</a></li>
+      <li><a href="#produkte">Produkte</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="https://www.instagram.com/tacosloschinitos/" target="_blank" rel="noopener">Instagram</a></li>
+    </ul>
 
-      <ul class="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-9">
-        <li><a href="#menu" class="nav-link" data-i18n="nav_menu">Menu</a></li>
-        <li><a href="#story" class="nav-link" data-i18n="nav_story">Story</a></li>
-        <li><a href="#locations" class="nav-link" data-i18n="nav_locations">Standorte</a></li>
-        <li><a href="#franchise" class="nav-link" data-i18n="nav_franchise">Franchise</a></li>
-      </ul>
+    <div class="nav-cta">
+      <a href="#anfragen" class="btn btn-anfragen">Anfragen</a>
+    </div>
 
-      <div class="ml-auto flex items-center gap-3">
+    <span class="nav-tagline script-tag">tacos sin filtros</span>
 
-        <!-- Language Switcher -->
-        <div class="relative hidden md:block" id="lang-switcher">
-          <button id="lang-btn" onclick="toggleLangMenu()" aria-haspopup="true" aria-expanded="false"
-            aria-label="Sprache wählen / Choose language"
-            class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-carbon/5 hover:bg-chili hover:text-white transition-colors duration-200 text-carbon">
-            <span id="lang-flag" class="text-lg leading-none" aria-hidden="true">🇩🇪</span>
-            <span id="lang-code" class="text-xs font-bold tracking-wider font-mono">DE</span>
-            <svg id="lang-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.25s ease;" aria-hidden="true">
-              <polyline points="6 9 12 15 18 9"/>
-            </svg>
-          </button>
-          <div id="lang-dropdown" role="menu" class="absolute right-0 mt-3 bg-white rounded-2xl overflow-hidden z-50" style="min-width:190px; opacity:0; transform: translateY(-8px) scale(0.97); pointer-events:none; box-shadow: 0 18px 40px -8px rgba(26,26,26,0.35), 0 2px 6px rgba(26,26,26,0.12); transition: opacity 0.2s ease, transform 0.2s cubic-bezier(.16,1,.3,1);">
-            <button onclick="setLang('de')" role="menuitem" class="lang-opt w-full flex items-center gap-3 px-4 py-2.5 hover:bg-masa text-sm text-carbon font-medium transition-colors duration-150" data-lang="de">
-              <span class="text-base" aria-hidden="true">🇩🇪</span><span class="font-mono text-xs font-bold w-6">DE</span><span>Deutsch</span>
-            </button>
-            <button onclick="setLang('en')" role="menuitem" class="lang-opt w-full flex items-center gap-3 px-4 py-2.5 hover:bg-masa text-sm text-carbon font-medium transition-colors duration-150" data-lang="en">
-              <span class="text-base" aria-hidden="true">🇬🇧</span><span class="font-mono text-xs font-bold w-6">EN</span><span>English</span>
-            </button>
-            <button onclick="setLang('es')" role="menuitem" class="lang-opt w-full flex items-center gap-3 px-4 py-2.5 hover:bg-masa text-sm text-carbon font-medium transition-colors duration-150" data-lang="es">
-              <span class="text-base" aria-hidden="true">🇲🇽</span><span class="font-mono text-xs font-bold w-6">ES</span><span>Español (MX)</span>
-            </button>
-            <button onclick="setLang('nl')" role="menuitem" class="lang-opt w-full flex items-center gap-3 px-4 py-2.5 hover:bg-masa text-sm text-carbon font-medium transition-colors duration-150" data-lang="nl">
-              <span class="text-base" aria-hidden="true">🇳🇱</span><span class="font-mono text-xs font-bold w-6">NL</span><span>Nederlands</span>
-            </button>
-            <button onclick="setLang('it')" role="menuitem" class="lang-opt w-full flex items-center gap-3 px-4 py-2.5 hover:bg-masa text-sm text-carbon font-medium transition-colors duration-150" data-lang="it">
-              <span class="text-base" aria-hidden="true">🇮🇹</span><span class="font-mono text-xs font-bold w-6">IT</span><span>Italiano</span>
-            </button>
-            <button onclick="setLang('fr')" role="menuitem" class="lang-opt w-full flex items-center gap-3 px-4 py-2.5 hover:bg-masa text-sm text-carbon font-medium transition-colors duration-150" data-lang="fr">
-              <span class="text-base" aria-hidden="true">🇫🇷</span><span class="font-mono text-xs font-bold w-6">FR</span><span>Français</span>
-            </button>
+    <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <nav class="nav-mobile-panel" aria-label="Mobile Navigation">
+    <a href="#story">Unsere Story</a>
+    <a href="#produkte">Produkte</a>
+    <a href="#events">Events</a>
+    <a href="https://www.instagram.com/tacosloschinitos/" target="_blank" rel="noopener">Instagram</a>
+    <a href="#anfragen" class="btn btn-white">Anfragen</a>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+  <video class="hero-media" src="suadero_taco_website.mp4" autoplay muted loop playsinline></video>
+  <div class="hero-scrim"></div>
+  <div class="hero-card">
+    <h1>TACOS</h1>
+    <span class="hero-wordmark">Los Chinitos</span>
+    <span class="hero-tagline script-tag">tacos sin filtros</span>
+    <p>Kein Tex-Mex, keine Abkürzungen. Wir garen unseren Trompo wie auf der Straße in Mexiko-Stadt — langsam, laut und ehrlich. Frisch geschnitten, direkt auf den Teller.</p>
+    <div class="hero-actions">
+      <a href="#anfragen" class="btn btn-yellow">Catering anfragen</a>
+      <a href="#events" class="btn btn-outline-white">Nächstes Event</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider" role="presentation"></div>
+
+<!-- ============ STORY ============ -->
+<section class="story-scroll" id="story">
+  <div class="story-pin">
+    <div class="story-grid">
+
+      <div class="story-col-left">
+        <h2>Es fing nicht mit einem Businessplan an</h2>
+        <p>Alles begann in Mexiko-Stadt, mitten auf dem Mercado de la Merced — zwischen Dampf, Salsa-Ständen und dem Geruch von Trompo, der seit Stunden dreht. Kein Plan, kein Investor, nur drei Freunde und eine Frage: Warum schmeckt das zu Hause nie so wie hier?</p>
+        <p>Also haben wir gelernt, gefragt, wieder gelernt — bis der Pastor genauso schmeckte wie an dem Stand, an dem wir stehen geblieben sind.</p>
+      </div>
+
+      <div class="story-photo-wrap">
+        <img src="img_9907.jpg" alt="Toni, Linh und Mato, die Gründer von Los Chinitos" loading="lazy" />
+        <div class="story-names">
+          <span>Toni</span><span>Linh</span><span>Mato</span>
+        </div>
+      </div>
+
+      <div class="story-col-right">
+        <h2>In dieser Stadt nannten sie uns „Chinitos"</h2>
+        <p>Als wir anfingen, Streetfood-Fans in Düsseldorf zu erklären, warum unsere Tacos anders schmecken, fiel der Spitzname zum ersten Mal: „die Chinitos". Nicht weil wir aus China kommen — sondern weil man in Mexiko Menschen mit asiatischen Wurzeln liebevoll so nennt.</p>
+        <p>Wir haben den Namen behalten. Er steht für das, was wir sind: keine reinrassige Taquería, sondern drei Typen mit vietnamesischen und mexikanischen Wurzeln, die eine Kultur so ernst nehmen, dass sie sie mit Respekt weitererzählen.</p>
+      </div>
+
+    </div>
+
+    <div class="story-badge story-badge-left" aria-hidden="true">
+      <img src="mascot_lantern.png" alt="" loading="lazy" />
+    </div>
+    <div class="story-badge story-badge-right" aria-hidden="true">
+      <img src="mascot_trompo.png" alt="" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<!-- ============ BRAND BAND ============ -->
+<section class="brand-band">
+  <div class="container">
+    <div class="brand-band-item wordmark">
+      <span class="brand-wordmark">Los Chinitos</span>
+    </div>
+    <div class="brand-band-item emblem">
+      <img src="logo.png" alt="Los Chinitos Emblem" loading="lazy" />
+    </div>
+    <div class="brand-band-item tagline-item">
+      <span class="script-tag">tacos sin filtros</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRODUKTE ============ -->
+<section class="section-pad" id="produkte">
+  <div class="container">
+    <div class="produkte-intro">
+      <h2>Was wir kochen</h2>
+      <p>Unser Trompo dreht jeden Tag von früh bis spät — Fleisch, mariniert nach Familienrezept, Schicht für Schicht gegart, bis die Kanten karamellisieren. Tortillas frisch gepresst, Salsas jeden Morgen neu angesetzt. Kein Shortcut, kein Tex-Mex — so, wie man es in Mexiko-Stadt macht.</p>
+    </div>
+
+    <div class="product-grid">
+      <figure class="product-card">
+        <div class="product-card-inner"><img src="taco_pastor.png" alt="Taco al Pastor" loading="lazy" /></div>
+        <figcaption>Pastor</figcaption>
+      </figure>
+      <figure class="product-card">
+        <div class="product-card-inner"><img src="taco_suadero.png" alt="Taco Suadero" loading="lazy" /></div>
+        <figcaption>Suadero</figcaption>
+      </figure>
+      <figure class="product-card">
+        <div class="product-card-inner"><img src="taco_campechano.png" alt="Taco Campechano" loading="lazy" /></div>
+        <figcaption>Campechano</figcaption>
+      </figure>
+      <figure class="product-card">
+        <div class="product-card-inner"><img src="taco_asada.png" alt="Taco Ribeye Gaonera" loading="lazy" /></div>
+        <figcaption>Ribeye Gaonera</figcaption>
+      </figure>
+      <figure class="product-card product-card--illustrated">
+        <div class="product-card-inner"><img src="mascot_chili.png" alt="Hausgemachte Salsas" loading="lazy" /></div>
+        <figcaption>Salsas</figcaption>
+      </figure>
+      <figure class="product-card product-card--illustrated">
+        <div class="product-card-inner"><img src="mascot_pina.png" alt="Aguas Frescas" loading="lazy" /></div>
+        <figcaption>Aguas Frescas</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<div class="divider" role="presentation"></div>
+
+<!-- ============ EVENTS ============ -->
+<section class="events-section section-pad" id="events">
+  <div class="container">
+    <div class="events-grid">
+      <div class="events-left">
+        <h2>Wo wir als Nächstes stehen</h2>
+        <p>Termine kommen zuerst auf Instagram.</p>
+        <a href="https://www.instagram.com/tacosloschinitos/" target="_blank" rel="noopener" class="btn btn-yellow">@tacosloschinitos folgen</a>
+      </div>
+
+      <div class="events-right">
+        <div class="event-row">
+          <div>
+            <div class="event-loc">Ort — Platzhalter</div>
+            <div class="event-time">Datum · Uhrzeit — Platzhalter</div>
           </div>
+          <span class="event-details">Details</span>
         </div>
-
-        <a href="#locations" class="hidden md:inline-flex btn-red">
-          <span data-i18n="nav_cta">Besuch uns</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-        </a>
-
-        <button id="mob-btn" class="md:hidden p-2 border-2 border-carbon text-carbon" aria-label="Menü öffnen" aria-expanded="false">
-          <svg id="ico-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" />
-          </svg>
-          <svg id="ico-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="hidden" aria-hidden="true">
-            <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
-          </svg>
-        </button>
-      </div>
-    </nav>
-
-    <div id="mob-menu" class="is-hidden absolute top-full left-0 right-0 nav-bar py-4 px-6 flex-col gap-1">
-      <a href="#menu" class="block font-display text-2xl text-carbon py-1.5" data-i18n="nav_menu">Menu</a>
-      <a href="#story" class="block font-display text-2xl text-carbon py-1.5" data-i18n="nav_story">Story</a>
-      <a href="#locations" class="block font-display text-2xl text-carbon py-1.5" data-i18n="nav_locations">Standorte</a>
-      <a href="#franchise" class="block font-display text-2xl text-carbon py-1.5" data-i18n="nav_franchise">Franchise</a>
-      <a href="#locations" class="btn-red mt-3 justify-center" data-i18n="nav_cta">Besuch uns</a>
-      <div class="pt-4 mt-3 border-t-2 border-carbon/15">
-        <p class="kicker mb-3">Sprache</p>
-        <div class="flex flex-wrap gap-2">
-          <button onclick="setLang('de')" class="lang-opt flex items-center gap-1.5 px-2.5 py-1.5 border-2 border-carbon text-xs font-mono font-bold text-carbon" data-lang="de" aria-label="Deutsch"><span aria-hidden="true">🇩🇪</span>DE</button>
-          <button onclick="setLang('en')" class="lang-opt flex items-center gap-1.5 px-2.5 py-1.5 border-2 border-carbon text-xs font-mono font-bold text-carbon" data-lang="en" aria-label="English"><span aria-hidden="true">🇬🇧</span>EN</button>
-          <button onclick="setLang('es')" class="lang-opt flex items-center gap-1.5 px-2.5 py-1.5 border-2 border-carbon text-xs font-mono font-bold text-carbon" data-lang="es" aria-label="Español"><span aria-hidden="true">🇲🇽</span>ES</button>
-          <button onclick="setLang('nl')" class="lang-opt flex items-center gap-1.5 px-2.5 py-1.5 border-2 border-carbon text-xs font-mono font-bold text-carbon" data-lang="nl" aria-label="Nederlands"><span aria-hidden="true">🇳🇱</span>NL</button>
-          <button onclick="setLang('it')" class="lang-opt flex items-center gap-1.5 px-2.5 py-1.5 border-2 border-carbon text-xs font-mono font-bold text-carbon" data-lang="it" aria-label="Italiano"><span aria-hidden="true">🇮🇹</span>IT</button>
-          <button onclick="setLang('fr')" class="lang-opt flex items-center gap-1.5 px-2.5 py-1.5 border-2 border-carbon text-xs font-mono font-bold text-carbon" data-lang="fr" aria-label="Français"><span aria-hidden="true">🇫🇷</span>FR</button>
+        <div class="event-row">
+          <div>
+            <div class="event-loc">Ort — Platzhalter</div>
+            <div class="event-time">Datum · Uhrzeit — Platzhalter</div>
+          </div>
+          <span class="event-details">Details</span>
         </div>
+        <div class="event-row">
+          <div>
+            <div class="event-loc">Ort — Platzhalter</div>
+            <div class="event-time">Datum · Uhrzeit — Platzhalter</div>
+          </div>
+          <span class="event-details">Details</span>
+        </div>
+        <p class="events-caption">Event-Modul — 3 Einträge, danach Archiv.</p>
       </div>
     </div>
-  </header>
+  </div>
+</section>
 
+<div class="divider" role="presentation"></div>
 
-  <!-- ═══════════ HERO ═══════════ -->
-  <section id="hero" class="relative flex items-end overflow-hidden" style="min-height: 100dvh; background:#1A1A1A;">
-    <video id="hero-video" autoplay muted loop playsinline>
-      <source src="suadero_taco_website.mp4" type="video/mp4" />
-    </video>
-    <div id="hero-scrim"></div>
-    <div id="hero-foot"></div>
-
-    <div class="relative z-10 w-full max-w-[1500px] mx-auto px-5 md:px-8 pb-24 md:pb-28">
-      <div class="reveal mb-6 flex items-center gap-4 flex-wrap">
-        <span class="kicker text-masa" data-i18n="hero_eyebrow">CDMX-Style Taquería · Düsseldorf</span>
-        <span class="sticker" data-i18n="hero_est">Gegründet 2025 · Düsseldorf</span>
+<!-- ============ ANFRAGEN ============ -->
+<section class="section-pad" id="anfragen">
+  <div class="container">
+    <div class="anfragen-grid">
+      <div class="anfragen-left">
+        <h2>Catering anfragen</h2>
+        <p>Ab 20 Gästen kommen wir zu euch — Hochzeit, Firmenfeier oder Geburtstag. Trompo, Tortillas und Salsas, alles frisch vor Ort. Umkreis ca. 50&nbsp;km um Düsseldorf. Antwort in 48 Stunden.</p>
       </div>
 
-      <h1 class="hero-headline reveal d1">
-        <span class="tacos">Tacos.</span><br /><span class="red">Sin filtro.</span>
-      </h1>
+      <div class="form-card">
+        <form id="anfragen-form" novalidate>
+          <input type="text" name="_gotcha" style="position:absolute; left:-9999px" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="f-name">Name *</label>
+              <input type="text" id="f-name" name="name" required />
+              <span class="form-error">Bitte gib deinen Namen an.</span>
+            </div>
 
-      <p class="reveal d2 mt-7 text-masa font-semibold max-w-[36ch]"
-        style="font-size: clamp(1.15rem, 2.4vw, 1.6rem); line-height:1.25; text-shadow: 0 2px 18px rgba(0,0,0,.5);"
-        data-i18n="hero_sub">
-        Wir sind keine Mexikaner. Aber unser Trompo schon.
-      </p>
+            <div class="form-field">
+              <label for="f-anlass">Anlass</label>
+              <select id="f-anlass" name="anlass">
+                <option value="">Bitte wählen (optional)</option>
+                <option value="Firmenfeier">Firmenfeier</option>
+                <option value="Hochzeit">Hochzeit</option>
+                <option value="Geburtstag">Geburtstag</option>
+                <option value="Sonstiges">Sonstiges</option>
+              </select>
+            </div>
 
-      <div class="reveal d3 mt-9">
-        <a href="#menu" class="btn-red on-dark on-dark-focus">
-          <span data-i18n="hero_cta1">Menu entdecken</span>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-        </a>
+            <div class="form-field">
+              <label for="f-datum">Datum *</label>
+              <input type="date" id="f-datum" name="datum" required />
+              <span class="form-error">Bitte wähle ein Datum.</span>
+            </div>
+
+            <div class="form-field">
+              <label for="f-personen">Personenzahl *</label>
+              <input type="number" id="f-personen" name="personen" min="1" required />
+              <span class="form-error">Bitte gib die Personenzahl an.</span>
+            </div>
+
+            <div class="form-field full">
+              <label for="f-nachricht">Nachricht *</label>
+              <textarea id="f-nachricht" name="nachricht" required placeholder="Erzähl uns von eurem Event — Ort, Uhrzeit und wie wir dich am besten erreichen (Telefon oder E-Mail)."></textarea>
+              <span class="form-error">Bitte schreib uns kurz, worum es geht.</span>
+            </div>
+          </div>
+
+          <p class="form-summary">Bitte fülle die markierten Felder aus.</p>
+
+          <div class="form-footer">
+            <button type="submit" class="btn btn-yellow">Absenden</button>
+            <span class="form-status"></span>
+          </div>
+        </form>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
+<div class="divider" role="presentation"></div>
 
-  <!-- ═══════════ TICKER ═══════════ -->
-  <div class="py-4 marquee-wrap border-y-2 border-carbon" style="background:#C8202C;" aria-hidden="true">
-    <div class="marquee-track">
-      <div class="marquee-group">
-        <span class="tick-item">Al Pastor</span><span class="tick-item text-sol">✷</span>
-        <span class="tick-item">Suadero</span><span class="tick-item text-sol">✷</span>
-        <span class="tick-item">Campechano</span><span class="tick-item text-sol">✷</span>
-        <span class="tick-item">Arrachera</span><span class="tick-item text-sol">✷</span>
-        <span class="tick-item">Aguas Frescas</span><span class="tick-item text-sol">✷</span>
-        <span class="tick-item">Sin Filtro</span><span class="tick-item text-sol">✷</span>
+<!-- ============ SOCIAL WALL ============ -->
+<section class="social-wall">
+  <div class="social-wall-columns" aria-hidden="true">
+    <div class="social-col social-col-1">
+      <div class="social-col-track">
+        <img src="taco_pastor.png" alt="" loading="lazy" />
+        <img src="taco_suadero.png" alt="" loading="lazy" />
+        <img src="img_9907.jpg" alt="" loading="lazy" />
+        <img src="taco_campechano.png" alt="" loading="lazy" />
+        <img src="taco_pastor.png" alt="" loading="lazy" />
+        <img src="taco_suadero.png" alt="" loading="lazy" />
+        <img src="img_9907.jpg" alt="" loading="lazy" />
+        <img src="taco_campechano.png" alt="" loading="lazy" />
       </div>
-      <div class="marquee-group">
-        <span class="tick-item">Al Pastor</span><span class="tick-item text-sol">✷</span>
-        <span class="tick-item">Suadero</span><span class="tick-item text-sol">✷</span>
-        <span class="tick-item">Campechano</span><span class="tick-item text-sol">✷</span>
-        <span class="tick-item">Arrachera</span><span class="tick-item text-sol">✷</span>
-        <span class="tick-item">Aguas Frescas</span><span class="tick-item text-sol">✷</span>
-        <span class="tick-item">Sin Filtro</span><span class="tick-item text-sol">✷</span>
+    </div>
+    <div class="social-col social-col-2 social-col--reverse">
+      <div class="social-col-track">
+        <img src="taco_asada.png" alt="" loading="lazy" />
+        <img src="taco_campechano.png" alt="" loading="lazy" />
+        <img src="taco_suadero.png" alt="" loading="lazy" />
+        <img src="img_9907.jpg" alt="" loading="lazy" />
+        <img src="taco_asada.png" alt="" loading="lazy" />
+        <img src="taco_campechano.png" alt="" loading="lazy" />
+        <img src="taco_suadero.png" alt="" loading="lazy" />
+        <img src="img_9907.jpg" alt="" loading="lazy" />
       </div>
-      <div class="marquee-group">
-        <span class="tick-item">Al Pastor</span><span class="tick-item text-sol">✷</span>
-        <span class="tick-item">Suadero</span><span class="tick-item text-sol">✷</span>
-        <span class="tick-item">Campechano</span><span class="tick-item text-sol">✷</span>
-        <span class="tick-item">Arrachera</span><span class="tick-item text-sol">✷</span>
-        <span class="tick-item">Aguas Frescas</span><span class="tick-item text-sol">✷</span>
-        <span class="tick-item">Sin Filtro</span><span class="tick-item text-sol">✷</span>
-      </div>
-      <div class="marquee-group">
-        <span class="tick-item">Al Pastor</span><span class="tick-item text-sol">✷</span>
-        <span class="tick-item">Suadero</span><span class="tick-item text-sol">✷</span>
-        <span class="tick-item">Campechano</span><span class="tick-item text-sol">✷</span>
-        <span class="tick-item">Arrachera</span><span class="tick-item text-sol">✷</span>
-        <span class="tick-item">Aguas Frescas</span><span class="tick-item text-sol">✷</span>
-        <span class="tick-item">Sin Filtro</span><span class="tick-item text-sol">✷</span>
+    </div>
+    <div class="social-col social-col-3 social-col--slow">
+      <div class="social-col-track">
+        <img src="taco_pastor.png" alt="" loading="lazy" />
+        <img src="taco_asada.png" alt="" loading="lazy" />
+        <img src="taco_campechano.png" alt="" loading="lazy" />
+        <img src="taco_suadero.png" alt="" loading="lazy" />
+        <img src="taco_pastor.png" alt="" loading="lazy" />
+        <img src="taco_asada.png" alt="" loading="lazy" />
+        <img src="taco_campechano.png" alt="" loading="lazy" />
+        <img src="taco_suadero.png" alt="" loading="lazy" />
       </div>
     </div>
   </div>
 
-
-  <!-- ═══════════ WERTE / VALORES — oversized numbered editorial list ═══════════ -->
-  <section id="werte" class="relative overflow-hidden pt-16 md:pt-20 pb-10 md:pb-12 px-5 md:px-8" style="background:#C8202C;">
-    <span class="outline-word absolute left-2 md:left-6 select-none" style="top:-0.18em; font-size: clamp(6rem, 22vw, 20rem); -webkit-text-stroke: 2px rgba(253,255,66,0.28);" aria-hidden="true">Valores</span>
-
-    <div class="max-w-[1500px] mx-auto relative z-10">
-      <div class="reveal mb-10 md:mb-14">
-        <p class="kicker" style="color:#FDFF42;" data-i18n="werte_eyebrow">Unsere Werte</p>
-        <h2 class="h-rotulo on-red mt-5" style="font-size: clamp(2.6rem, 8vw, 6rem);" data-i18n="werte_headline">
-          Unsere Werte
-        </h2>
-      </div>
-
-      <div class="border-t-2 border-black/20">
-
-        <div class="reveal grid grid-cols-1 md:grid-cols-[auto_1fr] gap-x-8 md:gap-x-16 gap-y-4 py-7 md:py-9 border-b-2 border-black/20 items-start">
-          <span class="h-display text-sol" style="font-size: clamp(2.5rem, 6vw, 4.5rem); line-height:1;">01</span>
-          <div class="md:grid md:grid-cols-[1fr_1.4fr] md:gap-16">
-            <h3 class="h-display text-masa mb-4 md:mb-0" style="font-size: clamp(1.5rem, 3vw, 2.4rem);" data-i18n="werte_q_title">Qualität ohne Kompromisse</h3>
-            <p class="text-masa/95 text-base md:text-lg leading-relaxed" data-i18n="werte_q_text">Wir wollen den Geschmack Mexikos so authentisch wie möglich repräsentieren, ohne dass dabei Qualität abhanden kommt. Dafür wird täglich gekocht und frisch zubereitet — ganz ohne TK-Scheiß.</p>
-          </div>
-        </div>
-
-        <div class="reveal grid grid-cols-1 md:grid-cols-[auto_1fr] gap-x-8 md:gap-x-16 gap-y-4 py-7 md:py-9 border-b-2 border-black/20 items-start">
-          <span class="h-display text-sol" style="font-size: clamp(2.5rem, 6vw, 4.5rem); line-height:1;">02</span>
-          <div class="md:grid md:grid-cols-[1fr_1.4fr] md:gap-16">
-            <h3 class="h-display text-masa mb-4 md:mb-0" style="font-size: clamp(1.5rem, 3vw, 2.4rem);" data-i18n="werte_k_title">Kulturauftrag</h3>
-            <p class="text-masa/95 text-base md:text-lg leading-relaxed" data-i18n="werte_k_text">Das mexikanische Street Food ist ein essenzieller Teil Mexikos und ernährt täglich Millionen von Menschen. Wir wollen, dass ihr Teil dieser Reise voller Geschmack werdet.</p>
-          </div>
-        </div>
-
-        <div class="reveal grid grid-cols-1 md:grid-cols-[auto_1fr] gap-x-8 md:gap-x-16 gap-y-4 py-7 md:py-9 items-start">
-          <span class="h-display text-sol" style="font-size: clamp(2.5rem, 6vw, 4.5rem); line-height:1;">03</span>
-          <div class="md:grid md:grid-cols-[1fr_1.4fr] md:gap-16">
-            <h3 class="h-display text-masa mb-4 md:mb-0" style="font-size: clamp(1.5rem, 3vw, 2.4rem);" data-i18n="werte_h_title">Heritage</h3>
-            <p class="text-masa/95 text-base md:text-lg leading-relaxed" data-i18n="werte_h_text">Als Nicht-Mexikaner, die das Street Food aus Mexiko vermissen, ist unser Twist als „Chinitos" mehr als nur ein Gimmick – er ist Teil unserer eigenen Geschichte. Die mexikanischen Aromen bleiben dabei ganz klar im Mittelpunkt. Wir ergänzen sie lediglich um unsere eigene Perspektive und machen das Ganze noch geiler!</p>
-          </div>
-        </div>
-
-      </div>
+  <div class="social-wall-content">
+    <div class="scrim">
+      <h2>Aus unseren Socials</h2>
+      <p>Bald mehr von der Straße, direkt aus unserer Küche und von unseren Events.</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <div class="checker-strip" aria-hidden="true"></div>
+<div class="divider" role="presentation"></div>
 
-
-  <!-- ═══════════ MENU — sticky heading + unified card family ═══════════ -->
-  <section id="menu" class="pt-16 md:pt-20 pb-20 md:pb-24 px-5 md:px-8" style="background:#F5EFE6;">
-    <div class="max-w-[1500px] mx-auto grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-10 lg:gap-16 items-start">
-
-      <!-- Sticky heading column -->
-      <div class="lg:sticky lg:top-28">
-        <p class="kicker text-chili" data-i18n="menu_eyebrow">Unsere Speisekarte</p>
-        <h2 class="h-rotulo mt-5" style="font-size: clamp(2.8rem, 6vw, 4.6rem);" data-i18n="menu_headline">
-          Vom Trompo.<br />Auf die Tortilla.
-        </h2>
-        <p class="text-ink text-base md:text-lg leading-relaxed mt-6 max-w-[38ch]" data-i18n="menu_sub">
-          Vier Schritte. Vier Minuten. Kein Tex-Mex. Keine Custom-Bowl. Nur das, was auf der Calle funktioniert — seit Jahrzehnten.
-        </p>
-        <div class="mt-8 border-l-4 border-chili pl-4">
-          <p class="font-mono text-sm text-ink leading-relaxed" data-i18n="menu_note">Bestellt wird vor Ort — Königsallee 52, Düsseldorf. Keine App, kein Schnickschnack.</p>
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-brand-row">
+          <img src="logo.png" alt="Los Chinitos" />
+          <span class="footer-wordmark">Los Chinitos</span>
         </div>
+        <span class="script-tag">tacos sin filtros</span>
       </div>
 
-      <!-- Cards -->
-      <div class="grid grid-cols-12 gap-4 md:gap-5">
-
-        <!-- Al Pastor — feature horizontal -->
-        <article class="dish reveal col-span-12 md:col-span-7 flex flex-col sm:flex-row">
-          <div class="ph sm:w-[46%] relative" style="min-height:240px;">
-            <img src="taco_pastor.png" alt="Al Pastor Taco" class="absolute inset-0" />
-          </div>
-          <div class="sm:w-[54%] p-6 flex flex-col">
-            <div class="flex items-center justify-between mb-3">
-              <span class="idx">N.º 01 · BESTSELLER</span>
-            </div>
-            <h3 class="h-display text-carbon leading-none mb-3" style="font-size: 2rem;">Al Pastor</h3>
-            <p class="text-ink text-sm md:text-base leading-relaxed mb-5" data-i18n="desc_pastor">Mariniertes Schweinefleisch vom drehenden Trompo. 16 Stunden Marinade, am Spieß gegrillt — mit Ananas, weißer Zwiebel, Koriander und Limette.</p>
-            <div class="mt-auto flex items-center justify-between">
-              <span class="font-mono text-xs text-adobe uppercase tracking-wider">Plaza Garibaldi, CDMX</span>
-              <span class="pricetag">€ 7,50</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- Suadero — Founder's Pick -->
-        <article class="dish reveal d1 col-span-12 md:col-span-5 flex flex-col">
-          <div class="ph relative flex-1" style="min-height:200px;">
-            <img src="taco_suadero.png" alt="Suadero Taco" class="absolute inset-0" />
-          </div>
-          <div class="p-6">
-            <span class="idx">N.º 02 · ★ FOUNDER'S PICK</span>
-            <h3 class="h-display text-carbon leading-none mt-2 mb-3" style="font-size: 1.9rem;">Suadero</h3>
-            <p class="text-ink text-sm md:text-base leading-relaxed mb-5" data-i18n="desc_suadero">Langsam geschmorte Rinderbrust — knusprig auf der Plancha abgebraten. Die ehrlichste Füllung auf der Karte.</p>
-            <div class="flex items-center justify-end">
-              <span class="pricetag">€ 11,00</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- Campechano -->
-        <article class="dish reveal col-span-12 sm:col-span-6 md:col-span-4 flex flex-col">
-          <div class="ph" style="height:180px;">
-            <img src="taco_campechano.png" alt="Campechano Taco" />
-          </div>
-          <div class="p-5 flex flex-col flex-1">
-            <span class="idx">N.º 03</span>
-            <h3 class="h-display text-carbon leading-none mt-1.5 mb-2" style="font-size: 1.5rem;">Campechano</h3>
-            <p class="text-ink text-sm leading-relaxed mb-4" data-i18n="desc_campechano">Suadero + Chorizo. Beides. Einfach geil.</p>
-            <div class="mt-auto flex justify-end"><span class="pricetag">€ 6,50</span></div>
-          </div>
-        </article>
-
-        <!-- Arrachera -->
-        <article class="dish reveal d1 col-span-12 sm:col-span-6 md:col-span-4 flex flex-col">
-          <div class="ph" style="height:180px;">
-            <img src="taco_asada.png" alt="Arrachera Taco" />
-          </div>
-          <div class="p-5 flex flex-col flex-1">
-            <span class="idx">N.º 04</span>
-            <h3 class="h-display text-carbon leading-none mt-1.5 mb-2" style="font-size: 1.5rem;">Arrachera</h3>
-            <p class="text-ink text-sm leading-relaxed mb-4" data-i18n="desc_asada">Gegrilltes Rindersteak, heiß vom Grill. Zwiebel, Koriander, Limette.</p>
-            <div class="mt-auto flex justify-end"><span class="pricetag">€ 11,00</span></div>
-          </div>
-        </article>
-
-        <!-- Aguas Frescas — typographic (no photo) -->
-        <article class="dish reveal d2 col-span-12 sm:col-span-12 md:col-span-4 flex flex-col" style="background:#C8202C; border-color:#1A1A1A;">
-          <div class="p-6 flex flex-col flex-1 justify-between text-masa" style="min-height:180px;">
-            <div>
-              <span class="idx" style="color:#F5EFE6;">N.º 05 · BEBIDAS</span>
-              <h3 class="h-display leading-none mt-2 mb-3" style="font-size: 1.9rem;" data-i18n="menu_bebidas_title">Aguas Frescas</h3>
-              <p class="text-masa/90 text-sm md:text-base leading-relaxed" data-i18n="menu_bebidas_desc">Jamaica, Horchata, Tamarindo, Tepache. Frisch gerührt, direkt aus CDMX.</p>
-            </div>
-            <div class="mt-5 flex justify-end">
-              <span class="font-mono font-bold text-masa border-2 border-masa px-3 py-1" style="transform:rotate(-2deg); display:inline-block;">Ab € 2,90</span>
-            </div>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-
-  <div class="checker-strip" aria-hidden="true"></div>
-
-  <!-- ═══════════ STORY — editorial split, founders photo ═══════════ -->
-  <section id="story" class="relative pt-14 md:pt-16 pb-24 md:pb-28 px-5 md:px-8 overflow-hidden" style="background:#EDE5D5;">
-
-    <!-- Angel de la Independencia — full-bleed on the right, fades into the page on all inner edges -->
-    <img src="angel_independencia.png" onerror="this.style.display='none'" alt="" aria-hidden="true"
-      class="hidden md:block pointer-events-none select-none absolute top-0 right-0 object-cover object-center"
-      style="height: clamp(320px, 46vw, 620px); width: 58%; max-width: 900px;
-        -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 62%), linear-gradient(to bottom, transparent 0%, #000 16%, #000 68%, transparent 100%);
-        -webkit-mask-composite: source-in;
-        mask-image: linear-gradient(to right, transparent 0%, #000 62%), linear-gradient(to bottom, transparent 0%, #000 16%, #000 68%, transparent 100%);
-        mask-composite: intersect;" />
-
-    <div class="max-w-[1500px] mx-auto relative z-10">
-
-      <div class="mb-12 md:mb-16 reveal relative z-10">
-        <p class="kicker text-chili" data-i18n="story_eyebrow">Unsere Geschichte</p>
-        <h2 class="h-rotulo mt-5" style="font-size: clamp(2.6rem, 6.4vw, 5rem); line-height: 1.08;" data-i18n="story_headline">
-          Es fing nicht<br />mit einem<br />Businessplan an.
-        </h2>
-      </div>
-
-      <p class="reveal text-ink text-lg md:text-2xl leading-relaxed max-w-[62ch] mb-20 md:mb-28 relative z-10" data-i18n="story_intro">
-        Angefangen hat alles in Mexikos Hauptstadt, <span class="text-chili">Ciudad de México</span>. An einem Freitagabend. Mit je drei Tacos al Pastor pro Person. Schon der erste Biss hat uns so überzeugt, dass wir ihn unbedingt mit euch teilen wollten.
-      </p>
-
-      <!-- Row 1: photo + text -->
-      <div class="story-grid grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center mb-24 md:mb-32">
-        <div class="reveal relative">
-          <div class="overflow-hidden aspect-[4/3] border-2 border-masa/20">
-            <img src="img_9907.jpg" alt="Ciudad de México, Roma Norte" class="w-full h-full object-cover" />
-          </div>
-          <div class="absolute -bottom-4 -right-3 md:-right-5 bg-chili border-2 border-carbon px-5 py-3" style="transform: rotate(-2deg);">
-            <p class="font-mono text-masa text-xs font-bold" data-i18n="story_badge_city">Ciudad de México, CDMX</p>
-            <p class="font-mono text-masa/80 text-xs" data-i18n="story_badge_sub">Gelernt von den Besten.</p>
-          </div>
-        </div>
-        <div class="reveal d1">
-          <span class="idx">01 — LOS FUNDADORES</span>
-          <h3 class="h-display text-carbon mt-3 mb-5" style="font-size: clamp(1.6rem, 3vw, 2.4rem);" data-i18n="story_row1_title">
-            Drei Kommilitonen — mit einem ganz großen Traum.
-          </h3>
-          <p class="text-ink leading-relaxed mb-4 text-base md:text-lg" data-i18n="story_row1_p1">
-            Nach einem endlosen Studium, der Corona-Pandemie und einigen Jahren im Berufsleben, in denen wir nicht wirklich unser Glück gefunden haben, haben wir – Linh, Toni und Mazlum – beschlossen, uns mit etwas selbstständig zu machen, das wir alle lieben: geiles, authentisches mexikanisches Essen.
-          </p>
-          <p class="text-ink leading-relaxed text-base md:text-lg" data-i18n="story_row1_p2">
-            Eine Esskultur, die ehrlich, würzig, schnell und unfassbar lecker ist. Familien, die ihre Rezepte seit Generationen weitergeben und perfektionieren. Eine Kultur, in der hart gearbeitet wird und man stolz auf das ist, was man schafft.
-          </p>
-        </div>
-      </div>
-
-      <!-- Row 2: text + founders photo (Vietnam flag, CDMX) -->
-      <div class="story-grid grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
-        <div class="reveal order-2 md:order-1">
-          <span class="idx">02 — EL NOMBRE</span>
-          <h3 class="h-display text-carbon mt-3 mb-5" style="font-size: clamp(1.6rem, 3vw, 2.4rem);" data-i18n="story_row2_title">
-            In dieser Stadt nannten sie uns <span class="text-chili">„Chinitos."</span>
-          </h3>
-          <p class="text-ink leading-relaxed mb-4 text-base md:text-lg" data-i18n="story_row2_p1">
-            Nicht böse gemeint. Es ist vielmehr eine kulturelle Eigenheit: Menschen mit ostasiatischen Wurzeln werden in Mexiko oft „Chinito" genannt. Nach den ersten Momenten der Verlegenheit wurde uns klar: Das ist kein Affront, sondern ein Zeichen der Zugehörigkeit. Aus „Chinito" wurde „Compa". Aus „Compa" wurde „Hermano".
-          </p>
-          <p class="text-ink leading-relaxed mb-8 text-base md:text-lg" data-i18n="story_row2_p2">
-            Auf unseren Reisen durch Mexiko haben wir nicht nur unglaublich viel über Tacos gelernt, sondern wurden überall mit einer Herzlichkeit empfangen, die uns bis heute geprägt hat. Genau diese Herzlichkeit möchten wir mit unseren Tacos an euch weitergeben.
-          </p>
-          <blockquote class="border-l-4 border-chili pl-5">
-            <p class="h-display text-carbon leading-tight" style="font-size: clamp(1.3rem, 2.6vw, 2rem); text-transform:none;" data-i18n="story_quote">
-              „Wir sind keine Mexikaner. Wir tun nicht so. Wir sind drei dicke Freunde, die Tacos in Mexiko lieben gelernt haben — und diese Liebe mit euch teilen wollen."
-            </p>
-          </blockquote>
-        </div>
-
-        <!-- Founders in CDMX with the Vietnamese flag -->
-        <div class="reveal d1 order-1 md:order-2 flex items-center justify-center">
-          <div class="relative w-full max-w-[440px]">
-            <div>
-              <img src="founders_flag.png" alt="Die Gründer von Los Chinitos mit der vietnamesischen Flagge in Mexiko-Stadt" class="w-full h-full object-cover" />
-            </div>
-            <div class="absolute -bottom-4 -left-3 bg-sol border-2 border-carbon px-4 py-2" style="transform: rotate(-3deg);">
-              <p class="font-mono text-carbon text-xs font-bold">Los Chinitos · CDMX</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <div class="checker-strip" aria-hidden="true"></div>
-
-  <!-- ═══════════ LOCATIONS — honest: one real, one teaser ═══════════ -->
-  <section id="locations" class="pt-16 md:pt-20 pb-20 md:pb-24 px-5 md:px-8" style="background:#F5EFE6;">
-    <div class="max-w-[1500px] mx-auto">
-
-      <div class="reveal mb-12 md:mb-16">
-        <p class="kicker text-chili" data-i18n="loc_eyebrow">Standorte</p>
-        <h2 class="h-rotulo mt-5" style="font-size: clamp(2.6rem, 7vw, 5.4rem);" data-i18n="loc_headline">
-          Ein Laden. Kein Filialnetz.
-        </h2>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-5 items-stretch">
-
-        <!-- Real location -->
-        <div class="reveal bg-white border-2 border-carbon flex flex-col rounded-2xl overflow-hidden shadow-[6px_6px_0_rgba(26,26,26,0.9)]">
-          <div class="flex items-start justify-between gap-4 p-7 border-b-2 border-carbon">
-            <div>
-              <p class="h-display text-carbon" style="font-size: clamp(1.8rem, 3.5vw, 2.6rem);">Düsseldorf — Mitte</p>
-              <p class="text-ink text-base mt-1">Königsallee 52, 40212 Düsseldorf</p>
-            </div>
-            <span class="font-mono text-xs font-bold uppercase tracking-wider text-masa bg-carbon px-3 py-1.5 shrink-0" data-i18n="loc_open">Jetzt offen</span>
-          </div>
-          <div class="p-7 flex flex-wrap items-center gap-x-8 gap-y-4">
-            <div class="flex items-center gap-2 text-ink">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C8202C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              <span class="font-mono text-sm">Mo–So · 11:00–23:00</span>
-            </div>
-            <a href="tel:+4921183745520" class="flex items-center gap-2 text-ink hover:text-chili transition-colors">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C8202C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.5 12 19.79 19.79 0 011.21 3.18 2 2 0 013.22 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-              <span class="font-mono text-sm">+49 211 8374 5520</span>
-            </a>
-            <a href="https://www.google.com/maps/search/?api=1&query=K%C3%B6nigsallee+52+40212+D%C3%BCsseldorf" target="_blank" rel="noopener" class="btn-red mt-1">
-              <span data-i18n="loc_find">Route öffnen</span>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Honest "next" teaser -->
-        <div class="reveal d1 border-2 border-carbon flex flex-col justify-between p-7 rounded-2xl shadow-[6px_6px_0_rgba(26,26,26,0.9)]" style="background:#C8202C;">
-          <div>
-            <p class="font-mono text-xs font-bold uppercase tracking-[0.2em] text-masa/80 mb-3">2025 →</p>
-            <p class="h-display text-masa leading-none" style="font-size: clamp(1.7rem, 3vw, 2.3rem);" data-i18n="loc_next_title">Ein Standort. Der nächste könnte deiner sein.</p>
-            <p class="text-masa/90 text-base leading-relaxed mt-4" data-i18n="loc_next_text">Kein Franchise-Imperium. Noch nicht. Wenn du eine Stadt für Los Chinitos brennen siehst — sag uns Bescheid.</p>
-          </div>
-          <a href="#franchise" class="btn-red on-dark-focus self-start mt-8" style="border:2px solid #1A1A1A;">
-            <span data-i18n="loc_secure">Deine Stadt sichern</span>
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Kontakt</h4>
+          <a href="mailto:info@loschinitos.de">info@loschinitos.de</a>
+          <p>Witzelstraße 46<br />40225 Düsseldorf</p>
+          <a class="footer-social" href="https://www.instagram.com/tacosloschinitos/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+            Instagram
           </a>
         </div>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ═══════════ FRANCHISE ═══════════ -->
-  <div class="checker-strip sol" aria-hidden="true"></div>
-
-  <section id="franchise" class="relative overflow-hidden pt-16 md:pt-20 pb-24 md:pb-28 px-5 md:px-8" style="background:#FDFF42;">
-    <div class="max-w-[1500px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_460px] gap-14 lg:gap-16 items-start relative z-10">
-
-      <div>
-        <p class="kicker text-chili reveal" data-i18n="fr_eyebrow">Franchise</p>
-        <h2 class="h-rotulo on-sol mt-5 mb-6 reveal d1" style="font-size: clamp(2.6rem, 6.5vw, 5rem);" data-i18n="fr_headline">
-          Bring Los Chinitos <span style="color:#1A1A1A;">in deine Stadt.</span>
-        </h2>
-        <p class="text-ink leading-relaxed mb-10 max-w-[48ch] reveal d2 text-base md:text-lg" data-i18n="fr_sub">
-          Vier Schritte, vier Minuten, null Abkürzungen — und ein System, das sich replizieren lässt, ohne die Seele zu verlieren. Wir suchen Partner, die das genauso ernst nehmen wie wir.
-        </p>
-
-        <ul class="space-y-5 reveal d3">
-          <li class="flex items-start gap-4 border-t-2 border-carbon/25 pt-5">
-            <span class="font-mono font-bold text-chili shrink-0">01</span>
-            <p class="text-ink text-base md:text-lg leading-relaxed" data-i18n="fr_li1">Mind. 80 m² Ladenfläche in hochfrequentierten Lagen</p>
-          </li>
-          <li class="flex items-start gap-4 border-t-2 border-carbon/25 pt-5">
-            <span class="font-mono font-bold text-chili shrink-0">02</span>
-            <p class="text-ink text-base md:text-lg leading-relaxed" data-i18n="fr_li2">6-wöchiges Onboarding in Düsseldorf oder CDMX</p>
-          </li>
-          <li class="flex items-start gap-4 border-t-2 border-carbon/25 pt-5">
-            <span class="font-mono font-bold text-chili shrink-0">03</span>
-            <p class="text-ink text-base md:text-lg leading-relaxed" data-i18n="fr_li3">Startinvestition ab € 95.000 — inkl. Ausbau, Equipment, Erstwarenbestand</p>
-          </li>
-          <li class="flex items-start gap-4 border-t-2 border-carbon/25 pt-5">
-            <span class="font-mono font-bold text-chili shrink-0">04</span>
-            <p class="text-ink text-base md:text-lg leading-relaxed" data-i18n="fr_li4">Geschütztes Territorium in deinem Stadtbezirk</p>
-          </li>
-        </ul>
-
-        <div class="mt-12 reveal border-l-4 border-chili pl-5">
-          <p class="h-display text-carbon leading-tight mb-2" style="font-size: clamp(1.4rem, 2.6vw, 2rem); text-transform:none;" data-i18n="fr_quote">
-            „Buenas cosas tardan. Pero no mucho."
-          </p>
-          <p class="font-mono text-xs text-ink/70" data-i18n="fr_quote_sub">Gute Dinge brauchen Zeit. Aber nicht viel. — Wandtext, Königsallee 52</p>
-        </div>
-      </div>
-
-      <!-- Form -->
-      <div class="reveal d2 p-7 md:p-8 border-2 border-carbon rounded-2xl" style="background:#FFFFFF; box-shadow: 6px 6px 0 rgba(26,26,26,0.9);">
-        <h3 class="h-display text-carbon mb-1" style="font-size: 1.6rem;" data-i18n="fr_form_title">Franchise-Infos anfragen</h3>
-        <p class="font-mono text-xs text-adobe mb-7" data-i18n="fr_form_sub">Compa, wir melden uns innerhalb von 48 h.</p>
-
-        <form id="franchise-form" onsubmit="handleSubmit(event)" class="space-y-4">
-          <div class="space-y-1.5">
-            <label class="field-label" for="f-name" data-i18n="fr_label_name">Name</label>
-            <input id="f-name" name="name" type="text" required placeholder="Alex Rivera" class="field" />
-          </div>
-          <div class="space-y-1.5">
-            <label class="field-label" for="f-email" data-i18n="fr_label_email">E-Mail</label>
-            <input id="f-email" name="email" type="email" required placeholder="alex@example.com" class="field" />
-          </div>
-          <div class="space-y-1.5">
-            <label class="field-label" for="f-city" data-i18n="fr_label_city">Zielstadt</label>
-            <input id="f-city" name="city" type="text" required placeholder="München" class="field" />
-          </div>
-          <div class="space-y-1.5">
-            <label class="field-label" for="f-budget" data-i18n="fr_label_budget">Investitionsrahmen</label>
-            <select id="f-budget" name="budget" class="field appearance-none">
-              <option value="" data-i18n="fr_budget_placeholder">Bitte wählen</option>
-              <option value="95-150">€ 95.000 – 150.000</option>
-              <option value="150-300">€ 150.000 – 300.000</option>
-              <option value="300+">€ 300.000+</option>
-            </select>
-          </div>
-          <button type="submit" id="f-btn" class="btn-red w-full justify-center mt-2">
-            <span id="f-txt" data-i18n="fr_submit">Anfrage senden</span>
-            <svg id="f-ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </button>
-          <div id="f-ok" class="hidden text-center text-sm text-green-700 font-semibold pt-1" data-i18n="fr_ok">¡Provecho! Wir melden uns innerhalb von 48 h.</div>
-          <div id="f-err" class="hidden text-center text-sm text-red-600 font-semibold pt-1" data-i18n="fr_err">Etwas ist schiefgelaufen — versuch es nochmal.</div>
-        </form>
-      </div>
-    </div>
-  </section>
-
-
-  <div class="checker-strip gold" aria-hidden="true"></div>
-
-  <!-- ═══════════ FAQ ═══════════ -->
-  <section id="faq" class="py-20 md:py-24 px-5 md:px-8" style="background:#EDE5D5;">
-    <div class="max-w-[1500px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_620px] gap-12 md:gap-16 items-start">
-      <div class="reveal md:sticky md:top-28">
-        <p class="kicker text-chili" data-i18n="faq_eyebrow">FAQ</p>
-        <h2 class="h-rotulo mt-5" style="font-size: clamp(2.4rem, 5.5vw, 4.4rem);" data-i18n="faq_headline">
-          Häufige Fragen.
-        </h2>
-      </div>
-      <div class="space-y-3 reveal d1">
-
-        <div class="acc-item bg-white border-2 border-carbon overflow-hidden rounded-2xl shadow-[6px_6px_0_rgba(26,26,26,0.9)]">
-          <button class="w-full flex items-center justify-between gap-4 px-6 py-5 text-left" onclick="toggleAcc(this)" aria-expanded="false">
-            <span class="font-bold text-carbon text-base" data-i18n="faq_q1">Brauche ich Gastronomie-Erfahrung?</span>
-            <svg class="acc-ico shrink-0 transition-transform duration-300" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C8202C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="acc-body"><p class="text-ink text-base leading-relaxed px-6 pb-5" data-i18n="faq_a1">Nein. Unser 6-wöchiges Training deckt alles ab — Küchenstandards, Gästeflow, Lieferantenbeziehungen. Viele unserer erfolgreichsten Franchise-Partner kamen aus dem Einzelhandel, Hotellerie oder Unternehmensbereich.</p></div>
-        </div>
-
-        <div class="acc-item bg-white border-2 border-carbon overflow-hidden rounded-2xl shadow-[6px_6px_0_rgba(26,26,26,0.9)]">
-          <button class="w-full flex items-center justify-between gap-4 px-6 py-5 text-left" onclick="toggleAcc(this)" aria-expanded="false">
-            <span class="font-bold text-carbon text-base" data-i18n="faq_q2">Kann ich die Karte lokal anpassen?</span>
-            <svg class="acc-ico shrink-0 transition-transform duration-300" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C8202C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="acc-body"><p class="text-ink text-base leading-relaxed px-6 pb-5" data-i18n="faq_a2">Der Kern bleibt fix — das schützt die Authentizität. Es gibt aber ein vierteljährliches Specials-Programm, über das Partner lokale Adaptionen vorschlagen und testen können, vorbehaltlich der Genehmigung durch die Zentralküche.</p></div>
-        </div>
-
-        <div class="acc-item bg-white border-2 border-carbon overflow-hidden rounded-2xl shadow-[6px_6px_0_rgba(26,26,26,0.9)]">
-          <button class="w-full flex items-center justify-between gap-4 px-6 py-5 text-left" onclick="toggleAcc(this)" aria-expanded="false">
-            <span class="font-bold text-carbon text-base" data-i18n="faq_q3">Wie lang ist die durchschnittliche Amortisationszeit?</span>
-            <svg class="acc-ico shrink-0 transition-transform duration-300" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C8202C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="acc-body"><p class="text-ink text-base leading-relaxed px-6 pb-5" data-i18n="faq_a3">Standorte in hochfrequentierten urbanen Lagen erreichen den Break-even typischerweise nach 14–22 Monaten. Unser FDD enthält echte Zahlen — keine Prognosen, die wir nicht belegen können.</p></div>
-        </div>
-
-        <div class="acc-item bg-white border-2 border-carbon overflow-hidden rounded-2xl shadow-[6px_6px_0_rgba(26,26,26,0.9)]">
-          <button class="w-full flex items-center justify-between gap-4 px-6 py-5 text-left" onclick="toggleAcc(this)" aria-expanded="false">
-            <span class="font-bold text-carbon text-base" data-i18n="faq_q4">Werden Zutaten zentral geliefert oder lokal bezogen?</span>
-            <svg class="acc-ico shrink-0 transition-transform duration-300" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C8202C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="acc-body"><p class="text-ink text-base leading-relaxed px-6 pb-5" data-i18n="faq_a4">Beides. Getrocknete Chiles, Gewürzmischungen, Masa-Harina kommen über unser Zentrallager direkt von unseren Partnern in Oaxaca und Jalisco. Frische Produkte (Gemüse, Fleisch, Molkereiprodukte) werden über zugelassene lokale Lieferanten bezogen.</p></div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-
-  <div class="checker-strip" aria-hidden="true"></div>
-
-  <!-- ═══════════ FOOTER ═══════════ -->
-  <footer class="pt-16 pb-10 px-5 md:px-8" style="background:#E4DDD2; color:#5A524A;">
-    <div class="max-w-[1500px] mx-auto">
-      <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-12 mb-14">
-
-        <div>
-          <img src="logo.png" alt="Los Chinitos" class="h-24 w-auto mb-6" style="mix-blend-mode: multiply;" />
-          <p class="h-display text-carbon mb-6" style="font-size:1.5rem; text-transform:none;">Tacos. Sin filtro.</p>
-          <div class="flex items-center gap-3">
-            <a href="#" aria-label="Instagram" class="w-10 h-10 border-2 border-carbon/25 text-carbon flex items-center justify-center hover:bg-chili hover:border-chili hover:text-white transition-colors duration-200">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-            </a>
-            <a href="#" aria-label="TikTok" class="w-10 h-10 border-2 border-carbon/25 text-carbon flex items-center justify-center hover:bg-chili hover:border-chili hover:text-white transition-colors duration-200">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.15 8.15 0 004.77 1.52V6.74a4.85 4.85 0 01-1-.05z"/></svg>
-            </a>
-            <a href="#" aria-label="LinkedIn" class="w-10 h-10 border-2 border-carbon/25 text-carbon flex items-center justify-center hover:bg-chili hover:border-chili hover:text-white transition-colors duration-200">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <div class="flex gap-12 md:gap-16">
-          <div>
-            <p class="kicker text-chili mb-5" data-i18n="footer_company">Unternehmen</p>
-            <ul class="space-y-3 text-sm text-ink">
-              <li><a href="#story" class="hover:text-chili transition-colors duration-200" data-i18n="footer_story">Unsere Story</a></li>
-              <li><a href="#locations" class="hover:text-chili transition-colors duration-200" data-i18n="footer_locations">Standorte</a></li>
-              <li><a href="#franchise" class="hover:text-chili transition-colors duration-200" data-i18n="footer_franchise_link">Franchise</a></li>
-              <li><a href="#" class="hover:text-chili transition-colors duration-200" data-i18n="footer_press">Presse</a></li>
-              <li><a href="#" class="hover:text-chili transition-colors duration-200" data-i18n="footer_jobs">Jobs</a></li>
-            </ul>
-          </div>
-          <div>
-            <p class="kicker text-chili mb-5" data-i18n="footer_contact">Kontakt</p>
-            <ul class="space-y-3 text-sm text-ink">
-              <li><a href="mailto:hola@loschinitos.de" class="hover:text-chili transition-colors duration-200">hola@loschinitos.de</a></li>
-              <li><a href="#" class="hover:text-chili transition-colors duration-200" data-i18n="footer_press_req">Presse-Anfragen</a></li>
-              <li><a href="#franchise" class="hover:text-chili transition-colors duration-200" data-i18n="footer_franchise_req">Franchise-Anfragen</a></li>
-              <li class="pt-2 text-adobe">Witzelstraße 46,<br />40225 Düsseldorf</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="border-t-2 border-carbon/15 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono text-adobe">
-        <p data-i18n="footer_copy">© 2026 Los Chinitos GmbH · Tacos. Sin filtro.</p>
-        <div class="flex items-center gap-6">
-          <a href="#" class="hover:text-chili transition-colors" data-i18n="footer_privacy">Datenschutz</a>
-          <a href="#" class="hover:text-chili transition-colors" data-i18n="footer_imprint">Impressum</a>
-          <a href="#" class="hover:text-chili transition-colors" data-i18n="footer_cookies">Cookie-Einstellungen</a>
+        <div class="footer-col">
+          <h4>Rechtliches</h4>
+          <a href="impressum.html">Impressum</a>
+          <a href="impressum.html#datenschutz">Datenschutz</a>
+          <a href="#anfragen">Catering anfragen →</a>
         </div>
       </div>
     </div>
-  </footer>
 
+    <div class="footer-divider"></div>
+    <p class="footer-bottom">© <span data-year></span> Los Chinitos GbR</p>
+  </div>
+</footer>
 
-  <!-- ═══════════ JAVASCRIPT ═══════════ -->
-  <script>
-    // ── Scroll progress ──
-    window.addEventListener('scroll', () => {
-      const h = document.documentElement.scrollHeight - window.innerHeight;
-      const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
-      document.getElementById('progress-bar').style.width = pct + '%';
-    }, { passive: true });
-
-    // ── Reveal on scroll (headings + key blocks only) ──
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-    // Trigger hero reveals immediately
-    document.querySelectorAll('#hero .reveal').forEach((el, i) => {
-      setTimeout(() => el.classList.add('visible'), i * 120 + 120);
-    });
-
-    // ── Mobile menu ──
-    const mobBtn = document.getElementById('mob-btn');
-    const mobMenu = document.getElementById('mob-menu');
-    const icoOpen = document.getElementById('ico-open');
-    const icoClose = document.getElementById('ico-close');
-    let menuOpen = false;
-    function setMenu(open) {
-      menuOpen = open;
-      mobMenu.classList.toggle('is-hidden', !open);
-      mobMenu.classList.toggle('flex', open);
-      icoOpen.classList.toggle('hidden', open);
-      icoClose.classList.toggle('hidden', !open);
-      mobBtn.setAttribute('aria-expanded', String(open));
-    }
-    mobBtn.addEventListener('click', () => setMenu(!menuOpen));
-    document.querySelectorAll('#mob-menu a').forEach(a => a.addEventListener('click', () => setMenu(false)));
-
-    // ── FAQ accordion ──
-    function toggleAcc(btn) {
-      const body = btn.nextElementSibling;
-      const ico = btn.querySelector('.acc-ico');
-      const isOpen = body.classList.contains('open');
-      document.querySelectorAll('.acc-body').forEach(b => b.classList.remove('open'));
-      document.querySelectorAll('.acc-ico').forEach(i => i.style.transform = '');
-      document.querySelectorAll('.acc-item button').forEach(b => b.setAttribute('aria-expanded', 'false'));
-      if (!isOpen) {
-        body.classList.add('open');
-        ico.style.transform = 'rotate(180deg)';
-        btn.setAttribute('aria-expanded', 'true');
-      }
-    }
-
-    // ── Franchise form (demo) ──
-    function handleSubmit(e) {
-      e.preventDefault();
-      const btn = document.getElementById('f-btn');
-      const txt = document.getElementById('f-txt');
-      const okKey = (t[currentLang] && t[currentLang].fr_submit) || 'Anfrage senden';
-      btn.disabled = true;
-      txt.textContent = '…';
-      setTimeout(() => {
-        btn.disabled = false;
-        txt.textContent = okKey;
-        document.getElementById('f-ok').classList.remove('hidden');
-        e.target.reset();
-        setTimeout(() => document.getElementById('f-ok').classList.add('hidden'), 5000);
-      }, 1500);
-    }
-
-    // ── Language switcher ──
-    const langMeta = {
-      de: { flag: '🇩🇪', code: 'DE' }, en: { flag: '🇬🇧', code: 'EN' },
-      es: { flag: '🇲🇽', code: 'ES' }, nl: { flag: '🇳🇱', code: 'NL' },
-      it: { flag: '🇮🇹', code: 'IT' }, fr: { flag: '🇫🇷', code: 'FR' }
-    };
-
-    const t = {
-      de: {
-        nav_menu: 'Menu', nav_story: 'Story', nav_locations: 'Standorte', nav_franchise: 'Franchise', nav_cta: 'Besuch uns',
-        hero_eyebrow: 'CDMX-Style Taquería · Düsseldorf', hero_est: 'Gegründet 2025 · Düsseldorf',
-        hero_sub: 'Wir sind keine Mexikaner. Aber unser Trompo schon.', hero_cta1: 'Menu entdecken',
-        werte_eyebrow: 'Unsere Werte', werte_headline: 'Unsere Werte',
-        werte_q_title: 'Qualität ohne Kompromisse',
-        werte_q_text: 'Wir wollen den Geschmack Mexikos so authentisch wie möglich repräsentieren, ohne dass dabei Qualität abhanden kommt. Dafür wird täglich gekocht und frisch zubereitet — ganz ohne TK-Scheiß.',
-        werte_k_title: 'Kulturauftrag',
-        werte_k_text: 'Das mexikanische Street Food ist ein essenzieller Teil Mexikos und ernährt täglich Millionen von Menschen. Wir wollen, dass ihr Teil dieser Reise voller Geschmack werdet.',
-        werte_h_title: 'Heritage',
-        werte_h_text: 'Als Nicht-Mexikaner, die das Street Food aus Mexiko vermissen, ist unser Twist als „Chinitos" mehr als nur ein Gimmick – er ist Teil unserer eigenen Geschichte. Die mexikanischen Aromen bleiben dabei ganz klar im Mittelpunkt. Wir ergänzen sie lediglich um unsere eigene Perspektive und machen das Ganze noch geiler!',
-        menu_eyebrow: 'Unsere Speisekarte', menu_headline: 'Vom Trompo.<br />Auf die Tortilla.',
-        menu_sub: 'Vier Schritte. Vier Minuten. Kein Tex-Mex. Keine Custom-Bowl. Nur das, was auf der Calle funktioniert — seit Jahrzehnten.',
-        menu_note: 'Bestellt wird vor Ort — Königsallee 52, Düsseldorf. Keine App, kein Schnickschnack.',
-        menu_bebidas_title: 'Aguas Frescas', menu_bebidas_desc: 'Jamaica, Horchata, Tamarindo, Tepache. Frisch gerührt, direkt aus CDMX.',
-        desc_pastor: 'Mariniertes Schweinefleisch vom drehenden Trompo. 16 Stunden Marinade, am Spieß gegrillt — mit Ananas, weißer Zwiebel, Koriander und Limette.',
-        desc_suadero: 'Langsam geschmorte Rinderbrust — knusprig auf der Plancha abgebraten. Die ehrlichste Füllung auf der Karte.',
-        desc_campechano: 'Suadero + Chorizo. Beides. Einfach geil.',
-        desc_asada: 'Gegrilltes Rindersteak, heiß vom Grill. Zwiebel, Koriander, Limette.',
-        story_eyebrow: 'Unsere Geschichte', story_headline: 'Es fing nicht<br />mit einem<br />Businessplan an.',
-        story_intro: 'Angefangen hat alles in Mexikos Hauptstadt, <span class="text-chili">Ciudad de México</span>. An einem Freitagabend. Mit je drei Tacos al Pastor pro Person. Schon der erste Biss hat uns so überzeugt, dass wir ihn unbedingt mit euch teilen wollten.',
-        story_badge_city: 'Ciudad de México, CDMX', story_badge_sub: 'Gelernt von den Besten.',
-        story_row1_title: 'Drei Kommilitonen — mit einem ganz großen Traum.',
-        story_row1_p1: 'Nach einem endlosen Studium, der Corona-Pandemie und einigen Jahren im Berufsleben, in denen wir nicht wirklich unser Glück gefunden haben, haben wir – Linh, Toni und Mazlum – beschlossen, uns mit etwas selbstständig zu machen, das wir alle lieben: geiles, authentisches mexikanisches Essen.',
-        story_row1_p2: 'Eine Esskultur, die ehrlich, würzig, schnell und unfassbar lecker ist. Familien, die ihre Rezepte seit Generationen weitergeben und perfektionieren. Eine Kultur, in der hart gearbeitet wird und man stolz auf das ist, was man schafft.',
-        story_row2_title: 'In dieser Stadt nannten sie uns <span class="text-chili">„Chinitos."</span>',
-        story_row2_p1: 'Nicht böse gemeint. Es ist vielmehr eine kulturelle Eigenheit: Menschen mit ostasiatischen Wurzeln werden in Mexiko oft „Chinito" genannt. Nach den ersten Momenten der Verlegenheit wurde uns klar: Das ist kein Affront, sondern ein Zeichen der Zugehörigkeit. Aus „Chinito" wurde „Compa". Aus „Compa" wurde „Hermano".',
-        story_row2_p2: 'Auf unseren Reisen durch Mexiko haben wir nicht nur unglaublich viel über Tacos gelernt, sondern wurden überall mit einer Herzlichkeit empfangen, die uns bis heute geprägt hat. Genau diese Herzlichkeit möchten wir mit unseren Tacos an euch weitergeben.',
-        story_quote: '„Wir sind keine Mexikaner. Wir tun nicht so. Wir sind drei dicke Freunde, die Tacos in Mexiko lieben gelernt haben — und diese Liebe mit euch teilen wollen."',
-        loc_eyebrow: 'Standorte', loc_headline: 'Ein Laden. Kein Filialnetz.',
-        loc_find: 'Route öffnen', loc_open: 'Jetzt offen',
-        loc_next_title: 'Ein Standort. Der nächste könnte deiner sein.',
-        loc_next_text: 'Kein Franchise-Imperium. Noch nicht. Wenn du eine Stadt für Los Chinitos brennen siehst — sag uns Bescheid.',
-        loc_secure: 'Deine Stadt sichern',
-        fr_eyebrow: 'Franchise', fr_headline: 'Bring Los Chinitos <span class="text-chili">in deine Stadt.</span>',
-        fr_sub: 'Vier Schritte, vier Minuten, null Abkürzungen — und ein System, das sich replizieren lässt, ohne die Seele zu verlieren. Wir suchen Partner, die das genauso ernst nehmen wie wir.',
-        fr_li1: 'Mind. 80 m² Ladenfläche in hochfrequentierten Lagen', fr_li2: '6-wöchiges Onboarding in Düsseldorf oder CDMX', fr_li3: 'Startinvestition ab € 95.000 — inkl. Ausbau, Equipment, Erstwarenbestand', fr_li4: 'Geschütztes Territorium in deinem Stadtbezirk',
-        fr_quote: '„Buenas cosas tardan. Pero no mucho."', fr_quote_sub: 'Gute Dinge brauchen Zeit. Aber nicht viel. — Wandtext, Königsallee 52',
-        fr_form_title: 'Franchise-Infos anfragen', fr_form_sub: 'Compa, wir melden uns innerhalb von 48 h.',
-        fr_label_name: 'Name', fr_label_email: 'E-Mail', fr_label_city: 'Zielstadt', fr_label_budget: 'Investitionsrahmen', fr_budget_placeholder: 'Bitte wählen', fr_submit: 'Anfrage senden', fr_ok: '¡Provecho! Wir melden uns innerhalb von 48 h.', fr_err: 'Etwas ist schiefgelaufen — versuch es nochmal.',
-        faq_eyebrow: 'FAQ', faq_headline: 'Häufige Fragen.',
-        faq_q1: 'Brauche ich Gastronomie-Erfahrung?', faq_a1: 'Nein. Unser 6-wöchiges Training deckt alles ab — Küchenstandards, Gästeflow, Lieferantenbeziehungen. Viele unserer erfolgreichsten Franchise-Partner kamen aus dem Einzelhandel, Hotellerie oder Unternehmensbereich.',
-        faq_q2: 'Kann ich die Karte lokal anpassen?', faq_a2: 'Der Kern bleibt fix — das schützt die Authentizität. Es gibt aber ein vierteljährliches Specials-Programm, über das Partner lokale Adaptionen vorschlagen und testen können, vorbehaltlich der Genehmigung durch die Zentralküche.',
-        faq_q3: 'Wie lang ist die durchschnittliche Amortisationszeit?', faq_a3: 'Standorte in hochfrequentierten urbanen Lagen erreichen den Break-even typischerweise nach 14–22 Monaten. Unser FDD enthält echte Zahlen — keine Prognosen, die wir nicht belegen können.',
-        faq_q4: 'Werden Zutaten zentral geliefert oder lokal bezogen?', faq_a4: 'Beides. Getrocknete Chiles, Gewürzmischungen, Masa-Harina kommen über unser Zentrallager direkt von unseren Partnern in Oaxaca und Jalisco. Frische Produkte (Gemüse, Fleisch, Molkereiprodukte) werden über zugelassene lokale Lieferanten bezogen.',
-        footer_company: 'Unternehmen', footer_contact: 'Kontakt',
-        footer_story: 'Unsere Story', footer_locations: 'Standorte', footer_franchise_link: 'Franchise', footer_press: 'Presse', footer_jobs: 'Jobs',
-        footer_press_req: 'Presse-Anfragen', footer_franchise_req: 'Franchise-Anfragen',
-        footer_copy: '© 2026 Los Chinitos GmbH · Tacos. Sin filtro.',
-        footer_privacy: 'Datenschutz', footer_imprint: 'Impressum', footer_cookies: 'Cookie-Einstellungen'
-      },
-      en: {
-        nav_menu: 'Menu', nav_story: 'Story', nav_locations: 'Locations', nav_franchise: 'Franchise', nav_cta: 'Visit us',
-        hero_eyebrow: 'CDMX-Style Taquería · Düsseldorf', hero_est: 'Est. 2025 · Düsseldorf',
-        hero_sub: "We're not Mexican. But our Trompo is.", hero_cta1: 'Explore Menu',
-        werte_eyebrow: 'Our Values', werte_headline: 'Our Values',
-        werte_q_title: 'Quality without compromise',
-        werte_q_text: 'We want to represent the flavour of Mexico as authentically as possible without compromising on quality. That\'s why everything is cooked fresh every day — no frozen stuff, ever.',
-        werte_k_title: 'Cultural Mission',
-        werte_k_text: 'Mexican street food is an essential part of Mexico that feeds millions of people every day. We want you to be part of this flavourful journey.',
-        werte_h_title: 'Heritage',
-        werte_h_text: 'As non-Mexicans who miss the street food of Mexico, our twist as "Chinitos" is more than just a gimmick — it\'s part of our own story. The Mexican flavours clearly stay at the centre; we simply add our own perspective and make the whole thing even better!',
-        menu_eyebrow: 'Our Menu', menu_headline: 'From the Trompo.<br />Onto the Tortilla.',
-        menu_sub: 'Four steps. Four minutes. No Tex-Mex. No custom bowls. Just what works on the street — for decades.',
-        menu_note: 'Order in person — Königsallee 52, Düsseldorf. No app, no fuss.',
-        menu_bebidas_title: 'Aguas Frescas', menu_bebidas_desc: 'Jamaica, Horchata, Tamarindo, Tepache. Freshly stirred, straight from CDMX.',
-        desc_pastor: 'Marinated pork from the rotating Trompo. 16-hour marinade, spit-grilled — with pineapple, white onion, coriander and lime.',
-        desc_suadero: 'Slowly braised beef brisket — crisped on the Plancha. The most honest filling on the menu.',
-        desc_campechano: 'Suadero + Chorizo. Both. Simply great.',
-        desc_asada: 'Grilled beef steak, hot off the grill. Onion, coriander, lime.',
-        story_eyebrow: 'Our Story', story_headline: 'It didn\'t start<br />with a<br />business plan.',
-        story_intro: 'It all started in the capital of Mexico, <span class="text-chili">Ciudad de México</span>. On a Friday evening. With three tacos al pastor each. That first bite convinced us so deeply that we had to share it with you.',
-        story_badge_city: 'Ciudad de México, CDMX', story_badge_sub: 'Learned from the best.',
-        story_row1_title: 'Three college friends — with one very big dream.',
-        story_row1_p1: 'After an endless degree, the Corona pandemic and a few years in jobs where we never really found our happiness, we — Linh, Toni and Mazlum — decided to go independent with something we all love: incredible, authentic Mexican food.',
-        story_row1_p2: 'A food culture that is honest, spicy, fast and incredibly delicious. Families passing down and perfecting their recipes for generations. A culture where you work hard — and take pride in what you create.',
-        story_row2_title: 'In that city they called us <span class="text-chili">"Chinitos."</span>',
-        story_row2_p1: 'No offence meant. It\'s more of a cultural quirk: in Mexico, people with East Asian roots are often called "Chinito". After the first awkward moments it became clear: this isn\'t an affront, but a sign of belonging. "Chinito" became "Compa". "Compa" became "Hermano".',
-        story_row2_p2: 'On our travels through Mexico we didn\'t just learn an incredible amount about tacos — we were welcomed everywhere with a warmth that has shaped us to this day. It\'s exactly this warmth that we want to pass on to you with our tacos.',
-        story_quote: '"We\'re not Mexican. We don\'t pretend to be. We\'re three chubby friends who fell in love with tacos in Mexico — and want to share that love with you."',
-        loc_eyebrow: 'Locations', loc_headline: 'One shop. No chain.',
-        loc_find: 'Get directions', loc_open: 'Now open',
-        loc_next_title: 'One location. The next could be yours.',
-        loc_next_text: 'Not a franchise empire. Not yet. If you see a city that\'s ready for Los Chinitos — tell us.',
-        loc_secure: 'Secure your city',
-        fr_eyebrow: 'Franchise', fr_headline: 'Bring Los Chinitos <span class="text-chili">to your city.</span>',
-        fr_sub: 'Four steps, four minutes, zero shortcuts — and a system that can be replicated without losing its soul. We\'re looking for partners who take that just as seriously as we do.',
-        fr_li1: 'Min. 80 m² retail space in high-footfall locations', fr_li2: '6-week onboarding in Düsseldorf or CDMX', fr_li3: 'Starting investment from € 95,000 — incl. fit-out, equipment, initial inventory', fr_li4: 'Protected territory in your city district',
-        fr_quote: '"Buenas cosas tardan. Pero no mucho."', fr_quote_sub: 'Good things take time. But not much. — Wall text, Königsallee 52',
-        fr_form_title: 'Request franchise info', fr_form_sub: 'Compa, we\'ll get back to you within 48 h.',
-        fr_label_name: 'Name', fr_label_email: 'Email', fr_label_city: 'Target city', fr_label_budget: 'Investment range', fr_budget_placeholder: 'Please select', fr_submit: 'Send inquiry', fr_ok: '¡Provecho! We\'ll get back to you within 48 h.', fr_err: 'Something went wrong — please try again.',
-        faq_eyebrow: 'FAQ', faq_headline: 'Frequently Asked.',
-        faq_q1: 'Do I need hospitality experience?', faq_a1: 'No. Our 6-week training covers everything — kitchen standards, guest flow, supplier relationships. Many of our most successful franchise partners came from retail, hospitality or the corporate world.',
-        faq_q2: 'Can I adapt the menu locally?', faq_a2: 'The core stays fixed — that\'s what protects authenticity. But there\'s a quarterly specials programme through which partners can propose and test local adaptations, subject to approval by the central kitchen.',
-        faq_q3: 'What is the average payback period?', faq_a3: 'Locations in high-footfall urban areas typically reach break-even after 14–22 months. Our FDD contains real numbers — no projections we can\'t back up.',
-        faq_q4: 'Are ingredients supplied centrally or sourced locally?', faq_a4: 'Both. Dried chiles, spice blends and masa harina come via our central warehouse directly from our partners in Oaxaca and Jalisco. Fresh produce (vegetables, meat, dairy) is sourced through approved local suppliers.',
-        footer_company: 'Company', footer_contact: 'Contact',
-        footer_story: 'Our Story', footer_locations: 'Locations', footer_franchise_link: 'Franchise', footer_press: 'Press', footer_jobs: 'Jobs',
-        footer_press_req: 'Press inquiries', footer_franchise_req: 'Franchise inquiries',
-        footer_copy: '© 2026 Los Chinitos GmbH · Tacos. Sin filtro.',
-        footer_privacy: 'Privacy Policy', footer_imprint: 'Imprint', footer_cookies: 'Cookie Settings'
-      },
-      es: {
-        nav_menu: 'Menú', nav_story: 'Historia', nav_locations: 'Ubicaciones', nav_franchise: 'Franquicia', nav_cta: 'Visítanos',
-        hero_eyebrow: 'Taquería Estilo CDMX · Düsseldorf', hero_est: 'Desde 2025 · Düsseldorf',
-        hero_sub: 'No somos mexicanos. Pero nuestro Trompo sí.', hero_cta1: 'Ver menú',
-        werte_eyebrow: 'Nuestros Valores', werte_headline: 'Nuestros Valores',
-        werte_q_title: 'Calidad sin compromiso',
-        werte_q_text: 'Queremos representar el sabor de México de la manera más auténtica posible, sin sacrificar la calidad. Por eso cocinamos fresco todos los días — sin congelados, punto.',
-        werte_k_title: 'Misión Cultural',
-        werte_k_text: 'El street food mexicano es una parte esencial de México que alimenta a millones de personas cada día. Queremos que seas parte de este viaje lleno de sabor.',
-        werte_h_title: 'Herencia',
-        werte_h_text: 'Como no-mexicanos que extrañamos el street food de México, nuestro giro como "Chinitos" es más que un simple gimmick: es parte de nuestra propia historia. Los sabores mexicanos siguen siendo, sin duda, el centro. Solo los complementamos con nuestra propia perspectiva y hacemos todo aún más chido.',
-        menu_eyebrow: 'Nuestro Menú', menu_headline: 'Del Trompo.<br />A la Tortilla.',
-        menu_sub: 'Cuatro pasos. Cuatro minutos. Sin Tex-Mex. Sin custom bowls. Solo lo que funciona en la calle — desde hace décadas.',
-        menu_note: 'Se ordena en persona — Königsallee 52, Düsseldorf. Sin app, sin rollos.',
-        menu_bebidas_title: 'Aguas Frescas', menu_bebidas_desc: 'Jamaica, Horchata, Tamarindo, Tepache. Recién preparadas, directo de CDMX.',
-        desc_pastor: 'Cerdo marinado del trompo giratorio. 16 horas de marinada, asado al pastor — con piña, cebolla blanca, cilantro y limón.',
-        desc_suadero: 'Pecho de res braseado lentamente — dorado crujiente en la plancha. El relleno más honesto del menú.',
-        desc_campechano: 'Suadero + Chorizo. Ambos. Simplemente delicioso.',
-        desc_asada: 'Filete de res a la parrilla, caliente del comal. Cebolla, cilantro, limón.',
-        story_eyebrow: 'Nuestra Historia', story_headline: 'No empezó<br />con un plan<br />de negocios.',
-        story_intro: 'Todo comenzó en la capital de México, <span class="text-chili">Ciudad de México</span>. Un viernes por la noche. Con tres tacos al pastor cada uno. Ese primer bocado nos convenció tanto que tuvimos que compartirlo con ustedes.',
-        story_badge_city: 'Ciudad de México, CDMX', story_badge_sub: 'Aprendido de los mejores.',
-        story_row1_title: 'Tres compas de universidad — con un sueño muy grande.',
-        story_row1_p1: 'Tras una carrera interminable, la pandemia de Corona y algunos años en trabajos donde no encontramos realmente nuestra felicidad, nosotros — Linh, Toni y Mazlum — decidimos independizarnos con algo que todos amamos: comida mexicana auténtica y deliciosa.',
-        story_row1_p2: 'Una cultura gastronómica honesta, picante, rápida e increíblemente deliciosa. Familias que transmiten y perfeccionan sus recetas desde hace generaciones. Una cultura en la que se trabaja duro y uno se enorgullece de lo que logra.',
-        story_row2_title: 'En esa ciudad nos llamaban <span class="text-chili">"Chinitos."</span>',
-        story_row2_p1: 'Sin mala intención. Es más bien una peculiaridad cultural: en México, a las personas con raíces del este asiático a menudo les dicen "Chinito". Tras los primeros momentos de vergüenza lo entendimos: no es una ofensa, sino una señal de pertenencia. De "Chinito" pasó a "Compa". De "Compa" pasó a "Hermano".',
-        story_row2_p2: 'En nuestros viajes por México no solo aprendimos muchísimo sobre tacos, sino que fuimos recibidos en todas partes con una calidez que nos marca hasta hoy. Justamente esa calidez queremos transmitirles con nuestros tacos.',
-        story_quote: '"No somos mexicanos. No fingimos serlo. Somos tres cuates gorditos que aprendieron a amar los tacos en México — y queremos compartir ese amor con ustedes."',
-        loc_eyebrow: 'Ubicaciones', loc_headline: 'Un local. Sin cadena.',
-        loc_find: 'Cómo llegar', loc_open: 'Ahora abierto',
-        loc_next_title: 'Una sucursal. La próxima podría ser la tuya.',
-        loc_next_text: 'No somos un imperio de franquicias. Todavía. Si ves una ciudad lista para Los Chinitos — dínoslo.',
-        loc_secure: 'Asegura tu ciudad',
-        fr_eyebrow: 'Franquicia', fr_headline: 'Lleva Los Chinitos <span class="text-chili">a tu ciudad.</span>',
-        fr_sub: 'Cuatro pasos, cuatro minutos, cero atajos — y un sistema que se puede replicar sin perder el alma. Buscamos socios que lo tomen tan en serio como nosotros.',
-        fr_li1: 'Mín. 80 m² de espacio en ubicaciones de alta afluencia', fr_li2: 'Incorporación de 6 semanas en Düsseldorf o CDMX', fr_li3: 'Inversión inicial desde € 95.000 — incl. obra, equipo, stock inicial', fr_li4: 'Territorio protegido en tu distrito',
-        fr_quote: '"Buenas cosas tardan. Pero no mucho."', fr_quote_sub: 'Las cosas buenas tardan. Pero no mucho. — Texto mural, Königsallee 52',
-        fr_form_title: 'Solicitar info de franquicia', fr_form_sub: 'Compa, te respondemos en 48 h.',
-        fr_label_name: 'Nombre', fr_label_email: 'Correo', fr_label_city: 'Ciudad objetivo', fr_label_budget: 'Rango de inversión', fr_budget_placeholder: 'Selecciona', fr_submit: 'Enviar solicitud', fr_ok: '¡Provecho! Te respondemos en 48 h.', fr_err: 'Algo salió mal — inténtalo de nuevo.',
-        faq_eyebrow: 'FAQ', faq_headline: 'Preguntas frecuentes.',
-        faq_q1: '¿Necesito experiencia en gastronomía?', faq_a1: 'No. Nuestro entrenamiento de 6 semanas cubre todo — estándares de cocina, flujo de clientes, relaciones con proveedores. Muchos de nuestros socios de franquicia más exitosos venían del comercio minorista, la hostelería o el mundo corporativo.',
-        faq_q2: '¿Puedo adaptar el menú localmente?', faq_a2: 'El núcleo se mantiene fijo — eso es lo que protege la autenticidad. Pero existe un programa trimestral de especiales a través del cual los socios pueden proponer y probar adaptaciones locales, sujeto a la aprobación de la cocina central.',
-        faq_q3: '¿Cuál es el período de amortización promedio?', faq_a3: 'Las ubicaciones en zonas urbanas de alta afluencia suelen alcanzar el punto de equilibrio en 14–22 meses. Nuestro FDD contiene cifras reales — sin proyecciones que no podamos respaldar.',
-        faq_q4: '¿Los ingredientes se suministran centralmente o se obtienen localmente?', faq_a4: 'Ambas cosas. Los chiles secos, las mezclas de especias y la masa harina llegan a través de nuestro almacén central directamente de nuestros socios en Oaxaca y Jalisco. Los productos frescos (verduras, carne, lácteos) se obtienen a través de proveedores locales autorizados.',
-        footer_company: 'Empresa', footer_contact: 'Contacto',
-        footer_story: 'Nuestra Historia', footer_locations: 'Ubicaciones', footer_franchise_link: 'Franquicia', footer_press: 'Prensa', footer_jobs: 'Empleos',
-        footer_press_req: 'Consultas de prensa', footer_franchise_req: 'Consultas de franquicia',
-        footer_copy: '© 2026 Los Chinitos GmbH · Tacos. Sin filtro.',
-        footer_privacy: 'Privacidad', footer_imprint: 'Aviso legal', footer_cookies: 'Cookies'
-      },
-      nl: {
-        nav_menu: 'Menu', nav_story: 'Verhaal', nav_locations: 'Locaties', nav_franchise: 'Franchise', nav_cta: 'Kom langs',
-        hero_eyebrow: 'CDMX-stijl Taquería · Düsseldorf', hero_est: 'Sinds 2025 · Düsseldorf',
-        hero_sub: 'We zijn geen Mexicanen. Maar onze Trompo wel.', hero_cta1: 'Menu bekijken',
-        werte_eyebrow: 'Onze Waarden', werte_headline: 'Onze Waarden',
-        werte_q_title: 'Kwaliteit zonder compromis',
-        werte_q_text: 'We willen de smaak van Mexico zo authentiek mogelijk vertegenwoordigen, zonder in te leveren op kwaliteit. Daarom koken we elke dag vers — zonder ingevroren troep.',
-        werte_k_title: 'Culturele Missie',
-        werte_k_text: 'Mexicaans streetfood is een essentieel onderdeel van Mexico dat dagelijks miljoenen mensen voedt. Wij willen dat jij deel uitmaakt van deze smaakvolle reis.',
-        werte_h_title: 'Erfgoed',
-        werte_h_text: 'Als niet-Mexicanen die het streetfood uit Mexico missen, is onze draai als "Chinitos" meer dan zomaar een gimmick — het is deel van ons eigen verhaal. De Mexicaanse smaken blijven duidelijk centraal staan. We voegen er alleen onze eigen kijk aan toe en maken het geheel nog geiler!',
-        menu_eyebrow: 'Ons Menu', menu_headline: 'Van de Trompo.<br />Op de Tortilla.',
-        menu_sub: 'Vier stappen. Vier minuten. Geen Tex-Mex. Geen custom bowls. Alleen wat op straat werkt — al decennialang.',
-        menu_note: 'Bestellen doe je ter plekke — Königsallee 52, Düsseldorf. Geen app, geen poespas.',
-        menu_bebidas_title: 'Aguas Frescas', menu_bebidas_desc: 'Jamaica, Horchata, Tamarindo, Tepache. Vers geroerd, direct uit CDMX.',
-        desc_pastor: 'Gemarineerd varkensvlees van de draaiende Trompo. 16 uur marineren, aan het spit gegrild — met ananas, witte ui, koriander en limoen.',
-        desc_suadero: 'Langzaam gestoofd rundvlees — knapperig gebakken op de plancha. De eerlijkste vulling op het menu.',
-        desc_campechano: 'Suadero + Chorizo. Beide. Gewoon geweldig.',
-        desc_asada: 'Gegrild rundvlees, heet van de grill. Ui, koriander, limoen.',
-        story_eyebrow: 'Ons Verhaal', story_headline: 'Het begon niet<br />met een<br />businessplan.',
-        story_intro: 'Het begon allemaal in de hoofdstad van Mexico, <span class="text-chili">Ciudad de México</span>. Op een vrijdagavond. Met elk drie tacos al pastor. Die eerste hap overtuigde ons zo sterk dat we het met jullie moesten delen.',
-        story_badge_city: 'Ciudad de México, CDMX', story_badge_sub: 'Geleerd van de besten.',
-        story_row1_title: 'Drie studievrienden — met één hele grote droom.',
-        story_row1_p1: 'Na een eindeloze studie, de coronapandemie en een paar jaar in banen waar we niet echt ons geluk vonden, besloten wij — Linh, Toni en Mazlum — zelfstandig te gaan met iets waar we allemaal van houden: geweldig, authentiek Mexicaans eten.',
-        story_row1_p2: 'Een eetcultuur die eerlijk, pittig, snel en ongelooflijk lekker is. Families die hun recepten al generaties lang doorgeven en perfectioneren. Een cultuur waarin hard wordt gewerkt en men trots is op wat men maakt.',
-        story_row2_title: 'In die stad noemden ze ons <span class="text-chili">"Chinitos."</span>',
-        story_row2_p1: 'Niet kwaad bedoeld. Het is eerder een culturele eigenaardigheid: mensen met Oost-Aziatische wortels worden in Mexico vaak "Chinito" genoemd. Na de eerste ongemakkelijke momenten werd het ons duidelijk: dit is geen belediging, maar een teken van verbondenheid. Uit "Chinito" werd "Compa". Uit "Compa" werd "Hermano".',
-        story_row2_p2: 'Op onze reizen door Mexico leerden we niet alleen ongelooflijk veel over taco\'s, maar werden we overal ontvangen met een hartelijkheid die ons tot op de dag van vandaag heeft gevormd. Precies die hartelijkheid willen we met onze taco\'s aan jullie doorgeven.',
-        story_quote: '"We zijn geen Mexicanen. We doen ook niet alsof. We zijn drie dikke vrienden die in Mexico van taco\'s zijn gaan houden — en die liefde met jullie willen delen."',
-        loc_eyebrow: 'Locaties', loc_headline: 'Eén zaak. Geen keten.',
-        loc_find: 'Route openen', loc_open: 'Nu open',
-        loc_next_title: 'Eén locatie. De volgende kan van jou zijn.',
-        loc_next_text: 'Geen franchise-imperium. Nog niet. Zie jij een stad klaar voor Los Chinitos — laat het ons weten.',
-        loc_secure: 'Zeker jouw stad',
-        fr_eyebrow: 'Franchise', fr_headline: 'Breng Los Chinitos <span class="text-chili">naar jouw stad.</span>',
-        fr_sub: 'Vier stappen, vier minuten, nul shortcuts — en een systeem dat te repliceren is zonder de ziel te verliezen. We zoeken partners die dit net zo serieus nemen als wij.',
-        fr_li1: 'Min. 80 m² winkelruimte op drukbezochte locaties', fr_li2: '6 weken onboarding in Düsseldorf of CDMX', fr_li3: 'Startinvestering vanaf € 95.000 — incl. inrichting, apparatuur, beginvoorraad', fr_li4: 'Beschermd territorium in jouw stadsdistrict',
-        fr_quote: '"Buenas cosas tardan. Pero no mucho."', fr_quote_sub: 'Goede dingen kosten tijd. Maar niet veel. — Wandtekst, Königsallee 52',
-        fr_form_title: 'Franchise-info aanvragen', fr_form_sub: 'Compa, we reageren binnen 48 uur.',
-        fr_label_name: 'Naam', fr_label_email: 'E-mail', fr_label_city: 'Doelstad', fr_label_budget: 'Investeringsbudget', fr_budget_placeholder: 'Selecteer', fr_submit: 'Aanvraag versturen', fr_ok: '¡Provecho! We nemen binnen 48 uur contact op.', fr_err: 'Er ging iets mis — probeer het opnieuw.',
-        faq_eyebrow: 'FAQ', faq_headline: 'Veelgestelde vragen.',
-        faq_q1: 'Heb ik horecaervaring nodig?', faq_a1: 'Nee. Onze 6 weken durende training dekt alles — keukenstandaarden, gastenstroom, leveranciersrelaties. Veel van onze meest succesvolle franchisepartners kwamen uit de detailhandel, horeca of het bedrijfsleven.',
-        faq_q2: 'Kan ik het menu lokaal aanpassen?', faq_a2: 'De kern blijft vast — dat beschermt de authenticiteit. Er is echter een kwartaallijks specials-programma waarmee partners lokale aanpassingen kunnen voorstellen en testen, mits goedgekeurd door de centrale keuken.',
-        faq_q3: 'Wat is de gemiddelde terugverdientijd?', faq_a3: 'Locaties op drukbezochte stedelijke plekken bereiken typisch break-even na 14–22 maanden. Ons FDD bevat echte cijfers — geen prognoses die we niet kunnen onderbouwen.',
-        faq_q4: 'Worden ingrediënten centraal geleverd of lokaal ingekocht?', faq_a4: 'Beide. Gedroogde chiles, kruidenmengsels en masa harina komen via ons centraal magazijn rechtstreeks van onze partners in Oaxaca en Jalisco. Verse producten (groenten, vlees, zuivel) worden betrokken via erkende lokale leveranciers.',
-        footer_company: 'Bedrijf', footer_contact: 'Contact',
-        footer_story: 'Ons Verhaal', footer_locations: 'Locaties', footer_franchise_link: 'Franchise', footer_press: 'Pers', footer_jobs: 'Vacatures',
-        footer_press_req: 'Persaanvragen', footer_franchise_req: 'Franchise-aanvragen',
-        footer_copy: '© 2026 Los Chinitos GmbH · Tacos. Sin filtro.',
-        footer_privacy: 'Privacybeleid', footer_imprint: 'Impressum', footer_cookies: 'Cookie-instellingen'
-      },
-      it: {
-        nav_menu: 'Menu', nav_story: 'Storia', nav_locations: 'Sedi', nav_franchise: 'Franchising', nav_cta: 'Vieni a trovarci',
-        hero_eyebrow: 'Taquería in stile CDMX · Düsseldorf', hero_est: 'Dal 2025 · Düsseldorf',
-        hero_sub: 'Non siamo messicani. Ma il nostro Trompo sì.', hero_cta1: 'Scopri il menu',
-        werte_eyebrow: 'I Nostri Valori', werte_headline: 'I Nostri Valori',
-        werte_q_title: 'Qualità senza compromessi',
-        werte_q_text: 'Vogliamo rappresentare il sapore del Messico nel modo più autentico possibile, senza rinunciare alla qualità. Per questo cuciniamo fresco ogni giorno — senza congelati, punto.',
-        werte_k_title: 'Missione Culturale',
-        werte_k_text: 'Il cibo di strada messicano è una parte essenziale del Messico che nutre milioni di persone ogni giorno. Vogliamo che tu faccia parte di questo viaggio ricco di sapori.',
-        werte_h_title: 'Patrimonio',
-        werte_h_text: 'Da non-messicani che sentono la mancanza dello street food del Messico, il nostro tocco come "Chinitos" è più di un semplice gimmick: fa parte della nostra storia. I sapori messicani restano chiaramente al centro. Noi li arricchiamo solo con la nostra prospettiva e rendiamo il tutto ancora più buono!',
-        menu_eyebrow: 'Il Nostro Menu', menu_headline: 'Dal Trompo.<br />Sulla Tortilla.',
-        menu_sub: 'Quattro passi. Quattro minuti. Niente Tex-Mex. Niente custom bowl. Solo ciò che funziona per strada — da decenni.',
-        menu_note: 'Si ordina sul posto — Königsallee 52, Düsseldorf. Niente app, niente fronzoli.',
-        menu_bebidas_title: 'Aguas Frescas', menu_bebidas_desc: 'Jamaica, Horchata, Tamarindo, Tepache. Preparate al momento, direttamente da CDMX.',
-        desc_pastor: 'Maiale marinato dal Trompo rotante. 16 ore di marinatura, grigliato allo spiedo — con ananas, cipolla bianca, coriandolo e lime.',
-        desc_suadero: 'Petto di manzo brasato lentamente — croccante sulla plancha. Il ripieno più onesto del menu.',
-        desc_campechano: 'Suadero + Chorizo. Entrambi. Semplicemente buono.',
-        desc_asada: 'Bistecca di manzo alla griglia, bollente. Cipolla, coriandolo, lime.',
-        story_eyebrow: 'La Nostra Storia', story_headline: 'Non è iniziato<br />con un<br />business plan.',
-        story_intro: 'Tutto è iniziato nella capitale del Messico, <span class="text-chili">Ciudad de México</span>. Un venerdì sera. Con tre tacos al pastor ciascuno. Quel primo morso ci ha convinto così tanto che abbiamo dovuto condividerlo con voi.',
-        story_badge_city: 'Ciudad de México, CDMX', story_badge_sub: 'Imparato dai migliori.',
-        story_row1_title: 'Tre compagni di università — con un sogno molto grande.',
-        story_row1_p1: 'Dopo una laurea infinita, la pandemia di Corona e alcuni anni in lavori dove non abbiamo davvero trovato la nostra felicità, noi — Linh, Toni e Mazlum — abbiamo deciso di metterci in proprio con qualcosa che amiamo tutti: cibo messicano autentico e straordinario.',
-        story_row1_p2: 'Una cultura gastronomica onesta, piccante, veloce e incredibilmente buona. Famiglie che tramandano e perfezionano le loro ricette da generazioni. Una cultura in cui si lavora sodo e si è orgogliosi di ciò che si crea.',
-        story_row2_title: 'In quella città ci chiamavano <span class="text-chili">"Chinitos."</span>',
-        story_row2_p1: 'Senza cattive intenzioni. È piuttosto una particolarità culturale: in Messico, le persone con radici dell\'Asia orientale vengono spesso chiamate "Chinito". Dopo i primi momenti di imbarazzo abbiamo capito: non è un affronto, ma un segno di appartenenza. Da "Chinito" è diventato "Compa". Da "Compa" è diventato "Hermano".',
-        story_row2_p2: 'Nei nostri viaggi attraverso il Messico non abbiamo solo imparato tantissimo sui tacos, ma siamo stati accolti ovunque con un calore che ci segna ancora oggi. È proprio questo calore che vogliamo trasmettervi con i nostri tacos.',
-        story_quote: '"Non siamo messicani. Non facciamo finta di esserlo. Siamo tre amiconi che in Messico hanno imparato ad amare i tacos — e vogliamo condividere questo amore con voi."',
-        loc_eyebrow: 'Sedi', loc_headline: 'Un locale. Nessuna catena.',
-        loc_find: 'Indicazioni', loc_open: 'Aperto ora',
-        loc_next_title: 'Una sede. La prossima potrebbe essere la tua.',
-        loc_next_text: 'Non un impero del franchising. Non ancora. Se vedi una città pronta per Los Chinitos — diccelo.',
-        loc_secure: 'Assicura la tua città',
-        fr_eyebrow: 'Franchising', fr_headline: 'Porta Los Chinitos <span class="text-chili">nella tua città.</span>',
-        fr_sub: 'Quattro passi, quattro minuti, zero scorciatoie — e un sistema replicabile senza perdere l\'anima. Cerchiamo partner che lo prendano sul serio quanto noi.',
-        fr_li1: 'Min. 80 m² di superficie in zone ad alta affluenza', fr_li2: 'Onboarding di 6 settimane a Düsseldorf o CDMX', fr_li3: 'Investimento iniziale da € 95.000 — incl. allestimento, attrezzature, scorte iniziali', fr_li4: 'Territorio protetto nel tuo quartiere',
-        fr_quote: '"Buenas cosas tardan. Pero no mucho."', fr_quote_sub: 'Le cose buone richiedono tempo. Ma non molto. — Testo murale, Königsallee 52',
-        fr_form_title: 'Richiedi info franchising', fr_form_sub: 'Compa, ti risponderemo entro 48 ore.',
-        fr_label_name: 'Nome', fr_label_email: 'Email', fr_label_city: 'Città obiettivo', fr_label_budget: 'Fascia di investimento', fr_budget_placeholder: 'Seleziona', fr_submit: 'Invia richiesta', fr_ok: '¡Provecho! Ti risponderemo entro 48 ore.', fr_err: 'Qualcosa è andato storto — riprova.',
-        faq_eyebrow: 'FAQ', faq_headline: 'Domande frequenti.',
-        faq_q1: 'Ho bisogno di esperienza nella ristorazione?', faq_a1: 'No. La nostra formazione di 6 settimane copre tutto — standard di cucina, flusso degli ospiti, rapporti con i fornitori. Molti dei nostri partner franchising di maggior successo provenivano dal commercio al dettaglio, dall\'ospitalità o dal mondo aziendale.',
-        faq_q2: 'Posso adattare il menu localmente?', faq_a2: 'Il nucleo rimane fisso — è ciò che protegge l\'autenticità. Ma esiste un programma trimestrale di speciali attraverso cui i partner possono proporre e testare adattamenti locali, soggetti all\'approvazione della cucina centrale.',
-        faq_q3: 'Qual è il periodo di ammortamento medio?', faq_a3: 'Le sedi in aree urbane ad alta affluenza raggiungono tipicamente il break-even dopo 14–22 mesi. Il nostro FDD contiene cifre reali — nessuna proiezione che non possiamo supportare.',
-        faq_q4: 'Gli ingredienti vengono forniti centralmente o approvvigionati localmente?', faq_a4: 'Entrambe le cose. Peperoncini secchi, miscele di spezie e masa harina arrivano tramite il nostro magazzino centrale direttamente dai nostri partner in Oaxaca e Jalisco. I prodotti freschi (verdure, carne, latticini) vengono approvvigionati tramite fornitori locali approvati.',
-        footer_company: 'Azienda', footer_contact: 'Contatto',
-        footer_story: 'La Nostra Storia', footer_locations: 'Sedi', footer_franchise_link: 'Franchising', footer_press: 'Stampa', footer_jobs: 'Lavoro',
-        footer_press_req: 'Richieste stampa', footer_franchise_req: 'Richieste franchising',
-        footer_copy: '© 2026 Los Chinitos GmbH · Tacos. Sin filtro.',
-        footer_privacy: 'Privacy', footer_imprint: 'Note legali', footer_cookies: 'Impostazioni cookie'
-      },
-      fr: {
-        nav_menu: 'Menu', nav_story: 'Histoire', nav_locations: 'Adresses', nav_franchise: 'Franchise', nav_cta: 'Venez nous voir',
-        hero_eyebrow: 'Taquería style CDMX · Düsseldorf', hero_est: 'Depuis 2025 · Düsseldorf',
-        hero_sub: 'On n\'est pas mexicains. Mais notre Trompo, si.', hero_cta1: 'Voir le menu',
-        werte_eyebrow: 'Nos Valeurs', werte_headline: 'Nos Valeurs',
-        werte_q_title: 'Qualité sans compromis',
-        werte_q_text: 'Nous voulons représenter la saveur du Mexique aussi authentiquement que possible, sans sacrifier la qualité. C\'est pourquoi tout est cuisiné frais chaque jour — sans surgelés, jamais.',
-        werte_k_title: 'Mission Culturelle',
-        werte_k_text: 'Le street food mexicain est une partie essentielle du Mexique qui nourrit des millions de personnes chaque jour. Nous voulons que vous fassiez partie de ce voyage savoureux.',
-        werte_h_title: 'Héritage',
-        werte_h_text: 'En tant que non-Mexicains qui regrettent le street food du Mexique, notre touche en tant que "Chinitos" est plus qu\'un simple gadget : elle fait partie de notre propre histoire. Les saveurs mexicaines restent clairement au centre. Nous les complétons simplement avec notre propre perspective et rendons le tout encore meilleur !',
-        menu_eyebrow: 'Notre Menu', menu_headline: 'Du Trompo.<br />Sur la Tortilla.',
-        menu_sub: 'Quatre étapes. Quatre minutes. Pas de Tex-Mex. Pas de bowls. Juste ce qui fonctionne dans la rue — depuis des décennies.',
-        menu_note: 'On commande sur place — Königsallee 52, Düsseldorf. Pas d\'appli, pas de chichi.',
-        menu_bebidas_title: 'Aguas Frescas', menu_bebidas_desc: 'Jamaica, Horchata, Tamarindo, Tepache. Préparées fraîches, tout droit de CDMX.',
-        desc_pastor: 'Porc mariné du Trompo rotatif. 16 heures de marinade, grillé à la broche — avec ananas, oignon blanc, coriandre et citron vert.',
-        desc_suadero: 'Poitrine de bœuf braisée lentement — croustillante sur la plancha. La garniture la plus honnête du menu.',
-        desc_campechano: 'Suadero + Chorizo. Les deux. Tout simplement délicieux.',
-        desc_asada: 'Steak de bœuf grillé, chaud du gril. Oignon, coriandre, citron vert.',
-        story_eyebrow: 'Notre Histoire', story_headline: 'Ça n\'a pas commencé<br />avec un<br />business plan.',
-        story_intro: 'Tout a commencé dans la capitale du Mexique, <span class="text-chili">Ciudad de México</span>. Un vendredi soir. Avec trois tacos al pastor chacun. Cette première bouchée nous a tellement convaincus que nous devions la partager avec vous.',
-        story_badge_city: 'Ciudad de México, CDMX', story_badge_sub: 'Appris des meilleurs.',
-        story_row1_title: 'Trois amis d\'université — avec un très grand rêve.',
-        story_row1_p1: 'Après des études interminables, la pandémie de Corona et quelques années dans des emplois où nous n\'avons pas vraiment trouvé notre bonheur, nous — Linh, Toni et Mazlum — avons décidé de nous mettre à notre compte avec quelque chose que nous aimons tous : une cuisine mexicaine authentique et délicieuse.',
-        story_row1_p2: 'Une culture gastronomique honnête, épicée, rapide et incroyablement délicieuse. Des familles qui transmettent et perfectionnent leurs recettes depuis des générations. Une culture où l\'on travaille dur — et où l\'on est fier de ce que l\'on crée.',
-        story_row2_title: 'Dans cette ville ils nous appelaient <span class="text-chili">« Chinitos. »</span>',
-        story_row2_p1: 'Sans mauvaise intention. C\'est plutôt une particularité culturelle : au Mexique, les personnes aux racines est-asiatiques sont souvent appelées « Chinito ». Après les premiers moments de gêne, nous avons compris : ce n\'est pas un affront, mais un signe d\'appartenance. « Chinito » est devenu « Compa ». « Compa » est devenu « Hermano ».',
-        story_row2_p2: 'Lors de nos voyages à travers le Mexique, nous n\'avons pas seulement énormément appris sur les tacos : nous avons été accueillis partout avec une chaleur qui nous marque encore aujourd\'hui. C\'est exactement cette chaleur que nous voulons vous transmettre avec nos tacos.',
-        story_quote: '« Nous ne sommes pas mexicains. Nous ne faisons pas semblant de l\'être. Nous sommes trois bons copains qui ont appris à aimer les tacos au Mexique — et nous voulons partager cet amour avec vous. »',
-        loc_eyebrow: 'Adresses', loc_headline: 'Une adresse. Pas de chaîne.',
-        loc_find: 'Itinéraire', loc_open: 'Ouvert maintenant',
-        loc_next_title: 'Une adresse. La prochaine pourrait être la vôtre.',
-        loc_next_text: 'Pas un empire de la franchise. Pas encore. Si vous voyez une ville prête pour Los Chinitos — dites-le-nous.',
-        loc_secure: 'Sécurise ta ville',
-        fr_eyebrow: 'Franchise', fr_headline: 'Amène Los Chinitos <span class="text-chili">dans ta ville.</span>',
-        fr_sub: 'Quatre étapes, quatre minutes, zéro raccourcis — et un système réplicable sans perdre son âme. Nous cherchons des partenaires qui le prennent aussi au sérieux que nous.',
-        fr_li1: 'Min. 80 m² de surface commerciale dans des zones à forte fréquentation', fr_li2: 'Onboarding de 6 semaines à Düsseldorf ou CDMX', fr_li3: 'Investissement de départ à partir de 95 000 € — incl. aménagement, équipement, stock initial', fr_li4: 'Territoire protégé dans votre arrondissement',
-        fr_quote: '« Buenas cosas tardan. Pero no mucho. »', fr_quote_sub: 'Les bonnes choses prennent du temps. Mais pas beaucoup. — Texte mural, Königsallee 52',
-        fr_form_title: 'Demander des infos franchise', fr_form_sub: 'Compa, on vous répond dans les 48 h.',
-        fr_label_name: 'Nom', fr_label_email: 'E-mail', fr_label_city: 'Ville cible', fr_label_budget: 'Budget d\'investissement', fr_budget_placeholder: 'Veuillez sélectionner', fr_submit: 'Envoyer la demande', fr_ok: '¡Provecho! Nous vous répondrons dans les 48 h.', fr_err: 'Quelque chose s\'est mal passé — réessayez.',
-        faq_eyebrow: 'FAQ', faq_headline: 'Questions fréquentes.',
-        faq_q1: 'Ai-je besoin d\'expérience en restauration ?', faq_a1: 'Non. Notre formation de 6 semaines couvre tout — normes de cuisine, flux des clients, relations avec les fournisseurs. Beaucoup de nos partenaires franchisés les plus performants venaient du commerce de détail, de l\'hôtellerie ou du monde de l\'entreprise.',
-        faq_q2: 'Puis-je adapter le menu localement ?', faq_a2: 'Le noyau reste fixe — c\'est ce qui protège l\'authenticité. Mais il existe un programme trimestriel de spéciaux grâce auquel les partenaires peuvent proposer et tester des adaptations locales, sous réserve d\'approbation par la cuisine centrale.',
-        faq_q3: 'Quelle est la durée moyenne d\'amortissement ?', faq_a3: 'Les établissements dans les zones urbaines à forte fréquentation atteignent généralement le seuil de rentabilité après 14 à 22 mois. Notre FDD contient de vrais chiffres — aucune projection que nous ne pouvons pas étayer.',
-        faq_q4: 'Les ingrédients sont-ils fournis centralement ou approvisionnés localement ?', faq_a4: 'Les deux. Les piments séchés, les mélanges d\'épices et la masa harina arrivent via notre entrepôt central directement de nos partenaires à Oaxaca et Jalisco. Les produits frais (légumes, viande, produits laitiers) sont approvisionnés via des fournisseurs locaux agréés.',
-        footer_company: 'Entreprise', footer_contact: 'Contact',
-        footer_story: 'Notre Histoire', footer_locations: 'Adresses', footer_franchise_link: 'Franchise', footer_press: 'Presse', footer_jobs: 'Emplois',
-        footer_press_req: 'Demandes presse', footer_franchise_req: 'Demandes franchise',
-        footer_copy: '© 2026 Los Chinitos GmbH · Tacos. Sin filtro.',
-        footer_privacy: 'Confidentialité', footer_imprint: 'Mentions légales', footer_cookies: 'Paramètres cookies'
-      }
-    };
-
-    let currentLang = 'de';
-
-    function applyLang(lang) {
-      const tr = t[lang];
-      if (!tr) return;
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (tr[key] !== undefined) el.innerHTML = tr[key];
-      });
-      document.querySelectorAll('.lang-opt').forEach(btn => {
-        btn.classList.toggle('active-lang', btn.getAttribute('data-lang') === lang);
-      });
-      currentLang = lang;
-      document.documentElement.lang = lang;
-      localStorage.setItem('lc-lang', lang);
-    }
-
-    function setLang(lang) {
-      const meta = langMeta[lang];
-      if (!meta) return;
-      document.getElementById('lang-flag').textContent = meta.flag;
-      document.getElementById('lang-code').textContent = meta.code;
-      applyLang(lang);
-      closeLangMenu();
-    }
-
-    function toggleLangMenu() {
-      const dd = document.getElementById('lang-dropdown');
-      const isOpen = dd.style.pointerEvents === 'auto';
-      if (isOpen) closeLangMenu();
-      else {
-        dd.style.opacity = '1';
-        dd.style.transform = 'translateY(0) scale(1)';
-        dd.style.pointerEvents = 'auto';
-        document.getElementById('lang-chevron').style.transform = 'rotate(180deg)';
-        document.getElementById('lang-btn').setAttribute('aria-expanded', 'true');
-      }
-    }
-
-    function closeLangMenu() {
-      const dd = document.getElementById('lang-dropdown');
-      if (dd) {
-        dd.style.opacity = '0';
-        dd.style.transform = 'translateY(-8px) scale(0.97)';
-        dd.style.pointerEvents = 'none';
-      }
-      const ch = document.getElementById('lang-chevron');
-      if (ch) ch.style.transform = 'rotate(0deg)';
-      const b = document.getElementById('lang-btn');
-      if (b) b.setAttribute('aria-expanded', 'false');
-    }
-
-    document.addEventListener('click', e => {
-      if (!document.getElementById('lang-switcher')?.contains(e.target)) closeLangMenu();
-    });
-
-    // Restore saved language
-    const savedLang = localStorage.getItem('lc-lang');
-    if (savedLang && t[savedLang]) setLang(savedLang);
-  </script>
+<script src="js/main.js"></script>
 </body>
-
 </html>
