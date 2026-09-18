@@ -84,7 +84,7 @@
   <div class="hero-inner">
     <div class="hero-card">
       <h1>TACOS</h1>
-      <img class="hero-wordmark" src="logo-wordmark.svg" alt="Los Chinitos" />
+      <img class="hero-wordmark" src="logo-wordmark-inverse.svg" alt="Los Chinitos" />
       <span class="hero-tagline script-tag quoted">tacos sin filtros</span>
       <p>Platzhalter: ein bis zwei Sätze Positionierung — CDMX-Taquería, Trompo, kein Tex-Mex. Ton: knapp, direkt, ohne Folklore.</p>
       <div class="hero-actions">
@@ -467,6 +467,22 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll);
   onScroll(); // run once on load
+
+  // "Unsere Story" links land on the fully revealed frame (image + both
+  // texts in place, progress 0.80 = inside the hold before the closing
+  // beat), not on the empty start of the pinned section.
+  var STORY_LANDING = 0.80;
+  function storyLandingY() {
+    var rect = container.getBoundingClientRect();
+    return rect.top + window.scrollY - window.innerHeight + STORY_LANDING * rect.height;
+  }
+  document.querySelectorAll('a[href="#story"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      if (!container || window.innerWidth <= 768) return;
+      e.preventDefault();
+      window.scrollTo({ top: storyLandingY(), behavior: 'smooth' });
+    });
+  });
 })();
 </script>
 </body>
