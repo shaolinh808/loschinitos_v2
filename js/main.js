@@ -103,7 +103,7 @@
      ============================================================ */
   var storyScroll = document.querySelector('.story-scroll');
   if (storyScroll && !reduceMotion && window.matchMedia('(min-width: 769px)').matches) {
-    var photo = storyScroll.querySelector('.story-photo-wrap');
+    var center = storyScroll.querySelector('.story-center');
     var left = storyScroll.querySelector('.story-col-left');
     var right = storyScroll.querySelector('.story-col-right');
     var badgeLeft = storyScroll.querySelector('.story-badge-left');
@@ -125,27 +125,21 @@
       var scrolled = -rect.top;
       var p = Math.min(1, Math.max(0, scrolled / total));
 
-      var pImg = progressFor(p, 0, 0.28);
-      photo.style.opacity = pImg;
-      photo.style.transform = 'translateY(' + lerp(70, 0, pImg) + 'px)';
+      var pCenter = progressFor(p, 0, 0.16);
+      center.style.opacity = pCenter;
+      center.style.transform = 'translateY(' + lerp(40, 0, pCenter) + 'px)';
 
-      var pLeft = progressFor(p, 0.22, 0.52);
+      var pLeft = progressFor(p, 0.1, 0.4);
       left.style.opacity = pLeft;
       left.style.transform = 'translateY(' + lerp(70, 0, pLeft) + 'px)';
 
-      var pRight = progressFor(p, 0.46, 0.76);
+      var pRight = progressFor(p, 0.4, 0.7);
       right.style.opacity = pRight;
       right.style.transform = 'translateY(' + lerp(70, 0, pRight) + 'px)';
 
-      var pBadge = progressFor(p, 0.74, 1);
-      if (badgeLeft) {
-        badgeLeft.style.opacity = pBadge;
-        badgeLeft.style.transform = 'translateY(-50%) scale(' + lerp(0.7, 1, pBadge) + ')';
-      }
-      if (badgeRight) {
-        badgeRight.style.opacity = pBadge;
-        badgeRight.style.transform = 'translateY(-50%) scale(' + lerp(0.7, 1, pBadge) + ')';
-      }
+      var pBadge = progressFor(p, 0.05, 0.2);
+      if (badgeLeft) badgeLeft.style.opacity = pBadge;
+      if (badgeRight) badgeRight.style.opacity = pBadge;
     };
 
     var onScroll = function () {
@@ -155,7 +149,7 @@
       }
     };
 
-    photo.style.opacity = 0;
+    center.style.opacity = 0;
     left.style.opacity = 0;
     right.style.opacity = 0;
 

@@ -257,6 +257,12 @@ Colors: brand base kept (chili `#C8202C`, masa `#F5EFE6`, carbon `#1A1A1A`). Add
 
 ## Redesign v3 — Checkerboard / editorial rebuild (3-page site)
 
+> **Superseded by v4 below.** v3 was built from a written text brief
+> without the actual component-prototype mockup in hand, and guessed
+> wrong on several specifics (display font, product photography vs.
+> placeholders, exact copy). Kept here for history only — don't use it
+> as a reference for the current site.
+
 Full replacement of the site with a new design commissioned separately from
 a component prototype (red `#E4000A` / yellow `#FFD400` / near-black,
 checkerboard divider strips, a scroll-pinned founder story, a catering
@@ -360,3 +366,134 @@ js/main.js          — shared behaviour (nav, story pin, tilt cards, form, page
 6. Two product-grid photos (Ribeye Gaonera is a stand-in for
    "Gaonera"-style asada) plus real photography for the two illustrated
    slots (Salsas, Aguas Frescas) would let all 6 cards use real photos.
+
+---
+
+## Redesign v4 — matched 1:1 to the real component-prototype mockup
+
+Linh supplied the actual prototype exports (`Los_Chinitos_-_Startseite/
+Danke/Impressum_standalone.html` — self-extracting single-file bundles
+from the component tool) and asked for an exact match with nothing left
+over from the v3 guess. v4 is a from-scratch rebuild against that real
+mockup: every font, color, copy string, section order, and asset was
+re-derived by unpacking the mockup's bundled assets and reading its
+live computed styles (via a headless-browser inspection pass), not by
+re-reading the original text brief.
+
+### What v3 got wrong (now fixed)
+- **Display font**: mockup uses **Anton** (Google Fonts) everywhere,
+  not Junegull. v3's "match the established brand font" reasoning was
+  wrong for this deliverable — Anton is what's actually in the approved
+  design. `junegull.otf` is no longer loaded by this site (file kept in
+  the repo, unused here).
+- **Product grid**: the mockup shows all 6 product cards as the same
+  light-grey diagonal-stripe placeholder (`.placeholder-fill` — same
+  pattern used for the hero-video placeholder), captioned exactly
+  "Pastor" / "Suadero" / "Ribeye Gaonera" / "Hongos al Ajilo" /
+  "Quesadilla" / "Salsas". v3 had substituted real taco photos with
+  mismatched names (Campechano instead of the brief's actual list) —
+  reverted to match the mockup exactly.
+- **Copy**: every placeholder paragraph, heading, button label and
+  form-field placeholder now matches the mockup's exact text (pulled
+  from `document.body.innerText` on the live-rendered prototype), not
+  paraphrased/invented copy. Several strings differ subtly from what
+  v3 guessed (e.g. the Anfragen paragraph literally says "Ab X
+  Personen, Umkreis Y km", the Datum/Personenzahl/Nachricht fields use
+  simple placeholders "Dein Name" / "z. B. 60" / "Deine Nachricht", the
+  "Bitte wählen" select option has no "(optional)" suffix).
+- **Real logo assets recovered from the mockup bundle**: the prototype
+  wasn't using grey boxes for the logo — it has real (AI-generated,
+  explicitly placeholder, made "at the request of a user" per the
+  files' own embedded C2PA content-credentials metadata) SVG/PNG assets
+  that were extracted from the bundle's blob URLs and copied into this
+  repo:
+  - `logo-icon.svg` — the small circular badge (rays + trompo +
+    arched "LOS CHINITOS" / "tacos sin filtros" text), used at ~34px in
+    the nav/footer and reused (rotated, 16% opacity) as the two
+    "rotating badge" graphics either side of the founder story.
+  - `logo-wordmark.svg` — a standalone "LOS CHINITOS" wordmark
+    (naturally wide, no cropping needed), used in the nav, hero card,
+    red divider band, and footer.
+  - `logo-emblem.png` — the larger circular emblem (rays + trompo,
+    no text) used centered in the red divider band, inverted to white
+    via CSS filter.
+  - `logo-rays.svg` — the sunburst-only layer, used behind the founder
+    photo in the story section.
+  - Old `logo.png` (single combined badge) is no longer referenced by
+    this build; kept in the repo since other things (the `los-chinitos-
+    pptx` skill) still use it.
+
+### Founder-story section, rebuilt to match
+The mockup's version is richer than v3's implementation:
+- A small "tacos sin filtros" script caption above an arched **"WE ARE
+  LOS CHINITOS"** headline (built as real, accessible SVG `<textPath>`
+  text on a circular arc — not a raster image) sitting over a sunburst
+  (`logo-rays.svg`) behind the founder photo.
+- The founder photo (`img_9907.jpg`) gets a red duotone treatment
+  (`grayscale` + a `mix-blend-mode: multiply` red layer) matching the
+  mockup's red-tinted photo, instead of a plain color photo.
+- The center block (tagline + arc + photo + names) pins via
+  `position: sticky` while the left/right text columns and the two
+  far-edge rotating badges fade/slide in on a scroll-progress timeline
+  — same JS mechanism as v3, retimed to the new content and confirmed
+  correct by scripting real (non-smooth) scroll positions and
+  screenshotting each stage.
+- Quoted labels ("PASTOR", "TONI", "CHINITOS", the taglines, etc.) use
+  a dedicated `.quoted` class (CSS `content: "\201C"/"\201D"` on
+  `::before`/`::after`) kept separate from `.script-tag` (the
+  UnifrakturMaguntia styling), since the mockup quotes plenty of things
+  that are **not** set in the script font.
+
+### Social wall, rebuilt to match
+The mockup is a handful of large, individually-rotated solid black
+cards scattered across the red section (each with a small grey "IG 0X"
+/ "TT 0X" placeholder-label corner), with the "AUS UNSEREN SOCIALS"
+heading and paragraph sitting plainly top-left — not v3's 3-column
+auto-scrolling marquee with a centered scrim card. Rebuilt with 4
+absolutely-positioned, independently-rotated `.social-tile` cards.
+
+### Impressum, corrected
+- No "Rechtliches" eyebrow, no `Gesellschafter:` label — the three
+  partner names are their own lines directly under "Los Chinitos GbR",
+  exactly as the mockup has it.
+- Section headings match verbatim: "Information zu § 36 VSBG" (not
+  "Verbraucherstreitbeilegung..."), "Das Impressum gilt auch für
+  folgende Social-Media-Profile".
+- **USt-IdNr. `DE464614783`** — the mockup has this filled in (not a
+  placeholder), so it's used verbatim. Worth double-checking with Linh
+  that it's correct before launch, since a wrong VAT ID on a public
+  Impressum is worse than a visible "wird ergänzt".
+- The full Datenschutzerklärung section v3 had written is **removed** —
+  the mockup's Impressum page doesn't have one (only a "Datenschutz"
+  footer link with no destination content yet). `Datenschutz` in the
+  footer currently points at `impressum.html` itself as a placeholder
+  destination. This is a real gap for a page with a data-collecting
+  form; flagging it rather than re-inventing GDPR copy that isn't in
+  the approved design.
+- Danke's paragraph corrected to "Wir melden uns so schnell wie
+  möglich bei dir zurück." (the mockup doesn't mention "48 Stunden"
+  here, unlike the Anfragen section, which does).
+
+### Deliberate departures from the mockup (flagged, not silent)
+The mockup itself uses placeholder graphics in two spots where this
+repo already has real, on-brand assets. Judgment call: use the real
+assets instead of the mockup's grey/diagonal-stripe placeholder, since
+the placeholder text is literally describing this exact content:
+- **Hero background**: real `suadero_taco_website.mp4` instead of the
+  mockup's "VIDEOPLATZHALTER (LOOP) — TROMPO / TACOS AL PASTOR IN
+  BEWEGUNG" grey placeholder.
+- **Founder photo**: same call already made correctly in v3 — the
+  mockup itself also uses a real (different) photo here, so this
+  wasn't actually a departure.
+If the preference is to show the literal grey placeholder in the hero
+until a client-approved final edit of the video exists, say so and
+it's a small change.
+
+### Known sandbox-only artifact (not a real bug)
+Headless-testing Chromium in this environment can't load Google Fonts
+(the sandbox's egress proxy isn't trusted by Playwright's bundled
+browser) and can't decode the hero `.mp4` (Playwright ships the
+open-source Chromium build, which has no licensed H.264 decoder) — both
+verified as environment-only limitations, not code issues. Real
+browsers (Chrome/Firefox/Safari/Edge) support H.264 and will load
+Google Fonts normally.
