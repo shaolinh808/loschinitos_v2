@@ -522,6 +522,23 @@ Google Fonts normally.
   Assets der alten Homepage wurden aus dem Repo entfernt — alle in der
   Git-History (bis Commit `24fb68d`) weiterhin vorhanden.
 
+### Nachträge
+- **Sprachen**: DE / EN / ES-MX über `js/i18n.js`. Deutsch steht als
+  Quelltext im Markup; übersetzbare Elemente tragen `data-i18n`
+  (Text), `data-i18n-html` (mit `<br>`/Spans) oder
+  `data-i18n-<attribut>`. Umschalter in der Navbar (Desktop) bzw. im
+  Mobile-Menü; Auswahl liegt in `localStorage` (`lc-lang`), ohne
+  Auswahl entscheidet die Browsersprache. Formular-Werte (`value`)
+  bleiben deutsch, nur Labels wechseln. Impressum-Text bleibt bewusst
+  deutsch (Rechtstext). Rein clientseitig — Suchmaschinen sehen DE.
+- **FAQ** (`#faq`) direkt unter dem Anfrage-Formular; Antworten mit
+  Zahlen sind als „Platzhalter:" markiert.
+- **E-Mail-Links** kopieren die Adresse zusätzlich in die Zwischenablage
+  (mit Hinweis), weil `mailto:` ohne eingerichtetes Mailprogramm
+  sonst nichts sichtbar tut.
+- Footer: Wordmark groß und zentriert, ohne Icon. Navbar ohne Schatten.
+  Galerie: `expandRatio .42`, fluide Höhe → offene Kachel ~1,1:1.
+
 ### Fehlt inhaltlich (kein Material im Projekt)
 - Produktfotos für Ribeye Gaonera, Hongos al Ajilo, Quesadilla, Salsas
   (aktuell Platzhalter-Kacheln). `taco_asada.webp` / `taco_campechano.webp`

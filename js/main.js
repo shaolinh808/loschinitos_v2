@@ -5,10 +5,31 @@
   'use strict';
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var tr = function (key) { return window.LC_I18N ? window.LC_I18N.t(key) : key; };
 
   /* ---------- Footer year ---------- */
   document.querySelectorAll('[data-year]').forEach(function (el) {
     el.textContent = new Date().getFullYear();
+  });
+
+  /* ---------- mailto: also copy the address ----------
+     Without a configured mail client a mailto: click does nothing visible,
+     so the address is copied as well and a short confirmation is shown.
+     The default action is kept, so a configured client still opens. */
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest('a[href^="mailto:"]');
+    if (!link || !navigator.clipboard) return;
+    var address = link.getAttribute('href').replace(/^mailto:/, '').split('?')[0];
+    navigator.clipboard.writeText(address).then(function () {
+      var previous = link.parentNode.querySelector('.copy-hint');
+      if (previous) previous.remove();
+      var hint = document.createElement('span');
+      hint.className = 'copy-hint';
+      hint.setAttribute('role', 'status');
+      hint.textContent = tr('footer.emailCopied');
+      link.insertAdjacentElement('afterend', hint);
+      setTimeout(function () { hint.remove(); }, 1900);
+    }).catch(function () { /* clipboard blocked — the mailto still fires */ });
   });
 
   /* ---------- Navbar solid-on-scroll ---------- */
@@ -200,7 +221,6 @@
     var summary = form.querySelector('.form-summary');
     var status = form.querySelector('.form-status');
     var submitBtn = form.querySelector('button[type="submit"]');
-    var submitLabel = submitBtn.textContent;
 
     var messages = {
       name: 'Bitte gib deinen Namen an.',
@@ -260,7 +280,7 @@
       }
 
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Wird gesendet…';
+      submitBtn.textContent = tr('form.sending');
 
       fetch('/', {
         method: 'POST',
@@ -269,17 +289,16 @@
       })
         .then(function (res) {
           if (!res.ok) throw new Error('Form endpoint responded with ' + res.status);
-          submitBtn.textContent = 'Abgesendet';
+          submitBtn.textContent = tr('form.sent');
           submitBtn.classList.add('btn-success');
           setTimeout(function () { window.location.href = 'danke.html'; }, 500);
         })
         .catch(function (err) {
           console.error('Los Chinitos: Anfragen-Formular konnte nicht gesendet werden.', err);
           submitBtn.disabled = false;
-          submitBtn.textContent = submitLabel;
+          submitBtn.textContent = tr('form.submit');
           status.className = 'form-status is-error';
-          status.innerHTML = 'Ups, das hat nicht geklappt. Schreib uns direkt an ' +
-            '<a href="mailto:info@loschinitos.de">info@loschinitos.de</a>.';
+          status.innerHTML = tr('form.errorHtml');
         });
     });
   }

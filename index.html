@@ -51,37 +51,48 @@
 
 <header class="nav" id="site-nav">
   <div class="nav-inner">
-    <a href="#top" class="nav-brand" aria-label="Los Chinitos — nach oben">
+    <a href="#top" class="nav-brand" aria-label="Los Chinitos — nach oben" data-i18n-aria-label="nav.toTop">
       <img class="logo-icon" src="logo-icon.svg" alt="Los Chinitos Logo" />
       <img class="logo-wordmark" src="logo-wordmark.svg" alt="Los Chinitos" />
     </a>
 
     <div class="nav-center">
       <ul class="nav-links">
-        <li><a href="#story">Unsere Story</a></li>
-        <li><a href="#produkte">Produkte</a></li>
-        <li><a href="#events">Events</a></li>
+        <li><a href="#story" data-i18n="nav.story">Unsere Story</a></li>
+        <li><a href="#produkte" data-i18n="nav.products">Produkte</a></li>
+        <li><a href="#events" data-i18n="nav.events">Events</a></li>
         <li><a href="https://www.instagram.com/tacosloschinitos/" target="_blank" rel="noopener">Instagram</a></li>
       </ul>
 
       <div class="nav-cta">
-        <a href="#anfragen" class="btn btn-anfragen">Anfragen</a>
+        <a href="#anfragen" class="btn btn-anfragen" data-i18n="nav.cta">Anfragen</a>
       </div>
     </div>
 
-    <span class="nav-tagline script-tag quoted">tacos sin filtros</span>
-
-    <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="nav-right">
+      <div class="lang-switch hide-on-mobile" role="group" aria-label="Sprache" data-i18n-aria-label="lang.label">
+        <button type="button" data-lang="de" aria-pressed="true">DE</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        <button type="button" data-lang="es" aria-pressed="false">ES</button>
+      </div>
+      <span class="nav-tagline script-tag quoted">tacos sin filtros</span>
+      <button class="nav-toggle" aria-label="Menü öffnen" data-i18n-aria-label="nav.menuOpen" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 
-  <nav class="nav-mobile-panel" aria-label="Mobile Navigation">
-    <a href="#story">Unsere Story</a>
-    <a href="#produkte">Produkte</a>
-    <a href="#events">Events</a>
+  <nav class="nav-mobile-panel" aria-label="Mobile Navigation" data-i18n-aria-label="nav.mobile">
+    <a href="#story" data-i18n="nav.story">Unsere Story</a>
+    <a href="#produkte" data-i18n="nav.products">Produkte</a>
+    <a href="#events" data-i18n="nav.events">Events</a>
     <a href="https://www.instagram.com/tacosloschinitos/" target="_blank" rel="noopener">Instagram</a>
-    <a href="#anfragen" class="btn btn-white">Anfragen</a>
+    <a href="#anfragen" class="btn btn-white" data-i18n="nav.cta">Anfragen</a>
+    <div class="lang-switch" role="group" aria-label="Sprache" data-i18n-aria-label="lang.label">
+      <button type="button" data-lang="de" aria-pressed="true">DE</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      <button type="button" data-lang="es" aria-pressed="false">ES</button>
+    </div>
   </nav>
 </header>
 
@@ -94,10 +105,10 @@
       <h1>TACOS</h1>
       <img class="hero-wordmark" src="logo-wordmark-inverse.svg" alt="Los Chinitos" />
       <span class="hero-tagline script-tag quoted">tacos sin filtros</span>
-      <p>Platzhalter: ein bis zwei Sätze Positionierung — CDMX-Taquería, Trompo, kein Tex-Mex. Ton: knapp, direkt, ohne Folklore.</p>
+      <p data-i18n="hero.text">Platzhalter: ein bis zwei Sätze Positionierung — CDMX-Taquería, Trompo, kein Tex-Mex. Ton: knapp, direkt, ohne Folklore.</p>
       <div class="hero-actions">
-        <a href="#anfragen" class="btn btn-yellow">Catering anfragen</a>
-        <a href="#events" class="btn btn-outline-white">Nächstes Event</a>
+        <a href="#anfragen" class="btn btn-yellow" data-i18n="hero.ctaCatering">Catering anfragen</a>
+        <a href="#events" class="btn btn-outline-white" data-i18n="hero.ctaEvent">Nächstes Event</a>
       </div>
     </div>
   </div>
@@ -122,13 +133,13 @@
             </div>
           </div>
           <div class="story-text" data-story="left">
-            <h2>Es fing nicht mit einem Businessplan an</h2>
-            <p>Angefangen hat alles in der Hauptstadt Mexikos, Ciudad de México. An einem Montagmittag im Mercado de La Merced. Mit je drei Tacos al Pastor. Schon der erste Biss hat uns so überzeugt, dass wir ihn unbedingt mit euch teilen wollten.</p>
+            <h2 data-i18n="story.leftH">Es fing nicht mit einem Businessplan an</h2>
+            <p data-i18n="story.leftP">Angefangen hat alles in der Hauptstadt Mexikos, Ciudad de México. An einem Montagmittag im Mercado de La Merced. Mit je drei Tacos al Pastor. Schon der erste Biss hat uns so überzeugt, dass wir ihn unbedingt mit euch teilen wollten.</p>
           </div>
         </div>
 
         <div class="story-img-block" data-story="img">
-          <img src="founders-story.webp" alt="We are Los Chinitos — die drei Gründer" />
+          <img src="founders-story.webp" alt="We are Los Chinitos — die drei Gründer" data-i18n-alt="story.imgAlt" />
           <div class="story-names">
             <span class="quoted">TONI</span>
             <span class="quoted">LINH</span>
@@ -147,9 +158,9 @@
             </div>
           </div>
           <div class="story-text" data-story="right">
-            <h2>In dieser Stadt nannten sie uns <span class="quoted">CHINITOS</span></h2>
-            <p>Personen mit ostasiatischen Zügen werden von Mexikanern oft scherzhaft „Chinitos" genannt. Das ist nicht als Front, sondern vielmehr als Neckerei gedacht, quasi ein Zeichen der Zugehörigkeit. Aus Chinito wurde „compa" und aus „compa" wurde „hermano".</p>
-            <p>Auf unseren Reisen durch Mexiko haben wir nicht nur mega viel über Tacos gelernt, sondern wurden immer herzlich empfangen, das uns bis heute positiv geprägt hat. Genau diese Herzlichkeit möchten wir euch in Form unserer Tacos weitergeben.</p>
+            <h2 data-i18n-html="story.rightH">In dieser Stadt nannten sie uns <span class="quoted">CHINITOS</span></h2>
+            <p data-i18n="story.rightP1">Personen mit ostasiatischen Zügen werden von Mexikanern oft scherzhaft „Chinitos“ genannt. Das ist nicht als Front, sondern vielmehr als Neckerei gedacht, quasi ein Zeichen der Zugehörigkeit. Aus Chinito wurde „compa“ und aus „compa“ wurde „hermano“.</p>
+            <p data-i18n="story.rightP2">Auf unseren Reisen durch Mexiko haben wir nicht nur mega viel über Tacos gelernt, sondern wurden immer herzlich empfangen, das uns bis heute positiv geprägt hat. Genau diese Herzlichkeit möchten wir euch in Form unserer Tacos weitergeben.</p>
           </div>
         </div>
 
@@ -177,19 +188,19 @@
 <section class="section-pad" id="produkte">
   <div class="container">
     <div class="produkte-intro">
-      <h2>Was wir<br />kochen</h2>
-      <p>Fließtext-Platzhalter, ca. 40–60 Wörter. Hier steht später, wie gearbeitet wird: Trompo, Tortillas, Salsas, kurze Karte. Kein Marketing-Sprech, sondern konkret — Herkunft, Handwerk, warum es anders schmeckt als das, was man hier kennt.</p>
+      <h2 data-i18n-html="products.h">Was wir<br />kochen</h2>
+      <p data-i18n="products.p">Fließtext-Platzhalter, ca. 40–60 Wörter. Hier steht später, wie gearbeitet wird: Trompo, Tortillas, Salsas, kurze Karte. Kein Marketing-Sprech, sondern konkret — Herkunft, Handwerk, warum es anders schmeckt als das, was man hier kennt.</p>
     </div>
 
-    <div class="accordion-gallery" role="list" aria-label="Unsere Karte"
-         data-default-index="0" data-expand-ratio="0.52" data-parallax="0.5" data-tilt="8" data-trigger="hover">
+    <div class="accordion-gallery" role="list" aria-label="Unsere Karte" data-i18n-aria-label="products.galleryAria"
+         data-default-index="0" data-expand-ratio="0.42" data-parallax="0.5" data-tilt="8" data-trigger="hover">
       <div class="ag-panel" role="listitem" tabindex="0" aria-label="Pastor">
         <span class="ag-panel__frame">
           <span class="ag-panel__media"><img src="taco_pastor.webp" alt="Tacos al Pastor" loading="lazy" draggable="false" /></span>
           <span class="ag-panel__overlay" aria-hidden="true"></span>
           <span class="ag-panel__dim" aria-hidden="true"></span>
         </span>
-        <span class="ag-panel__label" aria-hidden="true"><span class="ag-panel__bar"></span><span class="ag-panel__text quoted">Pastor</span></span>
+        <span class="ag-panel__label" aria-hidden="true"><span class="ag-panel__text quoted">Pastor</span></span>
       </div>
       <div class="ag-panel" role="listitem" tabindex="0" aria-label="Suadero">
         <span class="ag-panel__frame">
@@ -197,7 +208,7 @@
           <span class="ag-panel__overlay" aria-hidden="true"></span>
           <span class="ag-panel__dim" aria-hidden="true"></span>
         </span>
-        <span class="ag-panel__label" aria-hidden="true"><span class="ag-panel__bar"></span><span class="ag-panel__text quoted">Suadero</span></span>
+        <span class="ag-panel__label" aria-hidden="true"><span class="ag-panel__text quoted">Suadero</span></span>
       </div>
       <div class="ag-panel ag-panel--placeholder" role="listitem" tabindex="0" aria-label="Ribeye Gaonera">
         <span class="ag-panel__frame">
@@ -205,15 +216,15 @@
           <span class="ag-panel__overlay" aria-hidden="true"></span>
           <span class="ag-panel__dim" aria-hidden="true"></span>
         </span>
-        <span class="ag-panel__label" aria-hidden="true"><span class="ag-panel__bar"></span><span class="ag-panel__text quoted">Ribeye Gaonera</span></span>
+        <span class="ag-panel__label" aria-hidden="true"><span class="ag-panel__text quoted">Ribeye Gaonera</span></span>
       </div>
-      <div class="ag-panel ag-panel--placeholder" role="listitem" tabindex="0" aria-label="Hongos al Ajilo">
+      <div class="ag-panel ag-panel--placeholder" role="listitem" tabindex="0" aria-label="Hongos al Ajillo">
         <span class="ag-panel__frame">
           <span class="ag-panel__media placeholder-fill"></span>
           <span class="ag-panel__overlay" aria-hidden="true"></span>
           <span class="ag-panel__dim" aria-hidden="true"></span>
         </span>
-        <span class="ag-panel__label" aria-hidden="true"><span class="ag-panel__bar"></span><span class="ag-panel__text quoted">Hongos al Ajilo</span></span>
+        <span class="ag-panel__label" aria-hidden="true"><span class="ag-panel__text quoted">Hongos al Ajillo</span></span>
       </div>
       <div class="ag-panel ag-panel--placeholder" role="listitem" tabindex="0" aria-label="Quesadilla">
         <span class="ag-panel__frame">
@@ -221,7 +232,7 @@
           <span class="ag-panel__overlay" aria-hidden="true"></span>
           <span class="ag-panel__dim" aria-hidden="true"></span>
         </span>
-        <span class="ag-panel__label" aria-hidden="true"><span class="ag-panel__bar"></span><span class="ag-panel__text quoted">Quesadilla</span></span>
+        <span class="ag-panel__label" aria-hidden="true"><span class="ag-panel__text quoted">Quesadilla</span></span>
       </div>
       <div class="ag-panel ag-panel--placeholder" role="listitem" tabindex="0" aria-label="Salsas">
         <span class="ag-panel__frame">
@@ -229,7 +240,7 @@
           <span class="ag-panel__overlay" aria-hidden="true"></span>
           <span class="ag-panel__dim" aria-hidden="true"></span>
         </span>
-        <span class="ag-panel__label" aria-hidden="true"><span class="ag-panel__bar"></span><span class="ag-panel__text quoted">Salsas</span></span>
+        <span class="ag-panel__label" aria-hidden="true"><span class="ag-panel__text quoted">Salsas</span></span>
       </div>
     </div>
   </div>
@@ -242,34 +253,34 @@
   <div class="container">
     <div class="events-grid">
       <div class="events-left">
-        <h2>Wo wir als<br />nächstes<br />stehen</h2>
-        <p>Kurzer Hinweis-Platzhalter: Termine kommen zuerst auf Instagram.</p>
-        <a href="https://www.instagram.com/tacosloschinitos/" target="_blank" rel="noopener" class="btn btn-yellow">@tacosloschinitos folgen</a>
+        <h2 data-i18n-html="events.h">Wo wir als<br />nächstes<br />stehen</h2>
+        <p data-i18n="events.p">Kurzer Hinweis-Platzhalter: Termine kommen zuerst auf Instagram.</p>
+        <a href="https://www.instagram.com/tacosloschinitos/" target="_blank" rel="noopener" class="btn btn-yellow" data-i18n="events.follow">@tacosloschinitos folgen</a>
       </div>
 
       <div class="events-right">
         <div class="event-row">
           <div>
-            <div class="event-loc">Ort – Platzhalter</div>
-            <div class="event-time">TT.MM. · 17–22 Uhr</div>
+            <div class="event-loc" data-i18n="events.loc">Ort – Platzhalter</div>
+            <div class="event-time" data-i18n="events.time1">TT.MM. · 17–22 Uhr</div>
           </div>
-          <span class="event-details">Details</span>
+          <span class="event-details" data-i18n="events.details">Details</span>
         </div>
         <div class="event-row">
           <div>
-            <div class="event-loc">Ort – Platzhalter</div>
-            <div class="event-time">TT.MM. · 12–18 Uhr</div>
+            <div class="event-loc" data-i18n="events.loc">Ort – Platzhalter</div>
+            <div class="event-time" data-i18n="events.time2">TT.MM. · 12–18 Uhr</div>
           </div>
-          <span class="event-details">Details</span>
+          <span class="event-details" data-i18n="events.details">Details</span>
         </div>
         <div class="event-row">
           <div>
-            <div class="event-loc">Ort – Platzhalter</div>
-            <div class="event-time">TT.MM. · 17–22 Uhr</div>
+            <div class="event-loc" data-i18n="events.loc">Ort – Platzhalter</div>
+            <div class="event-time" data-i18n="events.time1">TT.MM. · 17–22 Uhr</div>
           </div>
-          <span class="event-details">Details</span>
+          <span class="event-details" data-i18n="events.details">Details</span>
         </div>
-        <p class="events-caption">05 / Event-Modul — 3 Einträge, danach Archiv</p>
+        <p class="events-caption" data-i18n="events.caption">05 / Event-Modul — 3 Einträge, danach Archiv</p>
       </div>
     </div>
   </div>
@@ -282,8 +293,8 @@
   <div class="container">
     <div class="anfragen-grid">
       <div class="anfragen-left">
-        <h2>Catering<br />anfragen</h2>
-        <p>Platzhalter: Firmenfeier, Hochzeit, Geburtstag. Ab X Personen, Umkreis Y km. Antwort in 48 Stunden.</p>
+        <h2 data-i18n-html="inquiry.h">Catering<br />anfragen</h2>
+        <p data-i18n="inquiry.p">Platzhalter: Firmenfeier, Hochzeit, Geburtstag. Ab X Personen, Umkreis Y km. Antwort in 48 Stunden.</p>
       </div>
 
       <div class="form-card">
@@ -292,49 +303,88 @@
           <input type="text" name="_gotcha" style="position:absolute; left:-9999px" tabindex="-1" autocomplete="off" aria-hidden="true" />
           <div class="form-grid">
             <div class="form-field">
-              <label for="f-name">Name *</label>
-              <input type="text" id="f-name" name="name" placeholder="Dein Name" required />
-              <span class="form-error">Bitte gib deinen Namen an.</span>
+              <label for="f-name" data-i18n="form.name">Name *</label>
+              <input type="text" id="f-name" name="name" placeholder="Dein Name" data-i18n-placeholder="form.namePh" required />
+              <span class="form-error" data-i18n="form.nameErr">Bitte gib deinen Namen an.</span>
             </div>
 
             <div class="form-field">
-              <label for="f-anlass">Anlass</label>
+              <label for="f-anlass" data-i18n="form.occasion">Anlass</label>
               <select id="f-anlass" name="anlass">
-                <option value="">Bitte wählen</option>
-                <option value="Firmenfeier">Firmenfeier</option>
-                <option value="Hochzeit">Hochzeit</option>
-                <option value="Geburtstag">Geburtstag</option>
-                <option value="Sonstiges">Sonstiges</option>
+                <option value="" data-i18n="form.select">Bitte wählen</option>
+                <option value="Firmenfeier" data-i18n="form.optCompany">Firmenfeier</option>
+                <option value="Hochzeit" data-i18n="form.optWedding">Hochzeit</option>
+                <option value="Geburtstag" data-i18n="form.optBirthday">Geburtstag</option>
+                <option value="Sonstiges" data-i18n="form.optOther">Sonstiges</option>
               </select>
             </div>
 
             <div class="form-field">
-              <label for="f-datum">Datum *</label>
+              <label for="f-datum" data-i18n="form.date">Datum *</label>
               <input type="date" id="f-datum" name="datum" required />
-              <span class="form-error">Bitte wähle ein Datum.</span>
+              <span class="form-error" data-i18n="form.dateErr">Bitte wähle ein Datum.</span>
             </div>
 
             <div class="form-field">
-              <label for="f-personen">Personenzahl *</label>
-              <input type="number" id="f-personen" name="personen" min="1" placeholder="z. B. 60" required />
-              <span class="form-error">Bitte gib die Personenzahl an.</span>
+              <label for="f-personen" data-i18n="form.guests">Personenzahl *</label>
+              <input type="number" id="f-personen" name="personen" min="1" placeholder="z. B. 60" data-i18n-placeholder="form.guestsPh" required />
+              <span class="form-error" data-i18n="form.guestsErr">Bitte gib die Personenzahl an.</span>
             </div>
 
             <div class="form-field full">
-              <label for="f-nachricht">Nachricht *</label>
-              <textarea id="f-nachricht" name="nachricht" placeholder="Deine Nachricht" required></textarea>
-              <span class="form-error">Bitte schreib uns kurz, worum es geht.</span>
+              <label for="f-nachricht" data-i18n="form.message">Nachricht *</label>
+              <textarea id="f-nachricht" name="nachricht" placeholder="Deine Nachricht" data-i18n-placeholder="form.messagePh" required></textarea>
+              <span class="form-error" data-i18n="form.messageErr">Bitte schreib uns kurz, worum es geht.</span>
             </div>
           </div>
 
-          <p class="form-summary">Bitte fülle die markierten Felder aus.</p>
+          <p class="form-summary" data-i18n="form.summary">Bitte fülle die markierten Felder aus.</p>
 
           <div class="form-footer">
-            <button type="submit" class="btn btn-yellow">Absenden</button>
+            <button type="submit" class="btn btn-yellow" data-i18n="form.submit">Absenden</button>
             <span class="form-status"></span>
           </div>
         </form>
       </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider" role="presentation"></div>
+
+<!-- ============ FAQ ============ -->
+<section class="section-pad" id="faq">
+  <div class="container faq-grid">
+    <div class="faq-intro">
+      <h2 data-i18n-html="faq.h">Fragen &amp;<br />Antworten</h2>
+      <p data-i18n="faq.p">Das Wichtigste rund ums Catering — kurz beantwortet.</p>
+    </div>
+
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary data-i18n="faq.q1">Für welche Anlässe könnt ihr gebucht werden?</summary>
+        <div class="faq-a"><p data-i18n="faq.a1">Firmenfeiern, Hochzeiten, Geburtstage, Festivals und private Feiern — von klein bis groß. Erzähl uns einfach, was du planst.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary data-i18n="faq.q2">Ab wie vielen Personen ist Catering möglich?</summary>
+        <div class="faq-a"><p data-i18n="faq.a2">Platzhalter: ab X Personen. Bei kleineren Gruppen frag trotzdem gern an — oft finden wir eine Lösung.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary data-i18n="faq.q3">In welchem Umkreis seid ihr unterwegs?</summary>
+        <div class="faq-a"><p data-i18n="faq.a3">Platzhalter: Düsseldorf und Umkreis von Y km. Weitere Strecken auf Anfrage.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary data-i18n="faq.q4">Was braucht ihr vor Ort?</summary>
+        <div class="faq-a"><p data-i18n="faq.a4">Eine ebene Stellfläche für unseren Stand, einen Stromanschluss und Zugang für die Anlieferung. Die genauen Maße klären wir vorab mit dir.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary data-i18n="faq.q5">Gibt es vegetarische Optionen?</summary>
+        <div class="faq-a"><p data-i18n="faq.a5">Ja — zum Beispiel Hongos al Ajillo und Quesadillas. Sag uns bei der Anfrage, wie viele Gäste vegetarisch essen.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary data-i18n="faq.q6">Wie läuft eine Anfrage ab?</summary>
+        <div class="faq-a"><p data-i18n="faq.a6">Formular ausfüllen — wir melden uns mit Rückfragen und einem Angebot. Wenn alles passt, bestätigen wir den Termin schriftlich.</p></div>
+      </details>
     </div>
   </div>
 </section>
@@ -377,8 +427,8 @@
   </div>
 
   <div class="social-wall-copy">
-    <h2>Aus unseren<br />socials</h2>
-    <p>Platzhalter für Instagram- und TikTok-Material: Trompo, Gäste, Standorte. Wird später mit echten Feed-Bildern gefüllt.</p>
+    <h2 data-i18n-html="social.h">Aus unseren<br />socials</h2>
+    <p data-i18n="social.p">Platzhalter für Instagram- und TikTok-Material: Trompo, Gäste, Standorte. Wird später mit echten Feed-Bildern gefüllt.</p>
   </div>
 </section>
 
@@ -387,28 +437,23 @@
 <!-- ============ FOOTER ============ -->
 <footer class="site-footer">
   <div class="container">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <div class="footer-brand-row">
-          <img class="logo-icon" src="logo-icon.svg" alt="Los Chinitos" />
-          <img class="logo-wordmark" src="logo-wordmark.svg" alt="Los Chinitos" />
-        </div>
-        <span class="script-tag quoted">tacos sin filtros</span>
-      </div>
+    <div class="footer-brand">
+      <img class="logo-wordmark" src="logo-wordmark.svg" alt="Los Chinitos" />
+      <span class="script-tag quoted">tacos sin filtros</span>
+    </div>
 
-      <div class="footer-cols">
-        <div class="footer-col">
-          <a href="mailto:info@loschinitos.de">info@loschinitos.de</a>
-          <span>Witzelstraße 46<br />40225 Düsseldorf</span>
-          <a class="footer-social" href="https://www.instagram.com/tacosloschinitos/" target="_blank" rel="noopener" aria-label="Instagram">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
-          </a>
-        </div>
-        <div class="footer-col">
-          <a href="impressum.html">Impressum</a>
-          <a href="impressum.html">Datenschutz</a>
-          <a href="#anfragen" class="is-accent">Catering anfragen →</a>
-        </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <a href="mailto:info@loschinitos.de">info@loschinitos.de</a>
+        <span>Witzelstraße 46<br />40225 Düsseldorf</span>
+        <a class="footer-social" href="https://www.instagram.com/tacosloschinitos/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+        </a>
+      </div>
+      <div class="footer-col">
+        <a href="impressum.html" data-i18n="footer.imprint">Impressum</a>
+        <a href="impressum.html" data-i18n="footer.privacy">Datenschutz</a>
+        <a href="#anfragen" class="is-accent" data-i18n="footer.cta">Catering anfragen →</a>
       </div>
     </div>
 
@@ -417,6 +462,7 @@
   </div>
 </footer>
 
+<script src="js/i18n.js"></script>
 <script src="js/main.js"></script>
 <script>
 // ===== GRÜNDERSTORY scroll-pin math =====

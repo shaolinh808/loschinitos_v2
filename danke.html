@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Danke — Los Chinitos</title>
+<title data-i18n="thanks.title">Danke — Los Chinitos</title>
 <meta name="description" content="Danke für deine Catering-Anfrage bei Los Chinitos." />
 <meta name="robots" content="noindex" />
 
@@ -29,41 +29,43 @@
 
 <header class="nav nav--solid" data-nav-static>
   <div class="nav-inner">
-    <a href="index.html" class="nav-brand" data-go-home aria-label="Zurück zur Startseite">
+    <a href="index.html" class="nav-brand" data-go-home aria-label="Zurück zur Startseite" data-i18n-aria-label="nav.backHome">
       <img class="logo-icon" src="logo-icon.svg" alt="Los Chinitos Logo" />
       <img class="logo-wordmark" src="logo-wordmark.svg" alt="Los Chinitos" />
     </a>
-    <span class="nav-tagline script-tag quoted">tacos sin filtros</span>
+    <div class="nav-right">
+      <div class="lang-switch" role="group" aria-label="Sprache" data-i18n-aria-label="lang.label">
+        <button type="button" data-lang="de" aria-pressed="true">DE</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        <button type="button" data-lang="es" aria-pressed="false">ES</button>
+      </div>
+      <span class="nav-tagline script-tag quoted">tacos sin filtros</span>
+    </div>
   </div>
 </header>
 
 <main class="danke-main">
   <div>
     <h1>Gracias!</h1>
-    <p>Deine Anfrage ist bei uns angekommen. Wir melden uns so schnell wie möglich bei dir zurück.</p>
-    <a href="index.html" class="btn btn-red" data-go-home>Zurück zur Startseite →</a>
+    <p data-i18n="thanks.p">Deine Anfrage ist bei uns angekommen. Wir melden uns so schnell wie möglich bei dir zurück.</p>
+    <a href="index.html" class="btn btn-red" data-go-home data-i18n="thanks.back">Zurück zur Startseite →</a>
   </div>
 </main>
 
 <footer class="site-footer">
   <div class="container">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <div class="footer-brand-row">
-          <img class="logo-icon" src="logo-icon.svg" alt="Los Chinitos" />
-          <img class="logo-wordmark" src="logo-wordmark.svg" alt="Los Chinitos" />
-        </div>
-        <span class="script-tag quoted">tacos sin filtros</span>
-      </div>
+    <div class="footer-brand">
+      <img class="logo-wordmark" src="logo-wordmark.svg" alt="Los Chinitos" />
+      <span class="script-tag quoted">tacos sin filtros</span>
+    </div>
 
-      <div class="footer-cols">
-        <div class="footer-col">
-          <a href="mailto:info@loschinitos.de">info@loschinitos.de</a>
-          <span>Witzelstraße 46<br />40225 Düsseldorf</span>
-        </div>
-        <div class="footer-col">
-          <a href="impressum.html">Impressum</a>
-        </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <a href="mailto:info@loschinitos.de">info@loschinitos.de</a>
+        <span>Witzelstraße 46<br />40225 Düsseldorf</span>
+      </div>
+      <div class="footer-col">
+        <a href="impressum.html" data-i18n="footer.imprint">Impressum</a>
       </div>
     </div>
 
@@ -72,6 +74,7 @@
   </div>
 </footer>
 
+<script src="js/i18n.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
