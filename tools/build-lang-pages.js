@@ -18,7 +18,7 @@ const path = require('path');
 const vm = require('vm');
 
 const ROOT = path.resolve(__dirname, '..');
-const SITE = 'https://loschinitos.de/';
+const SITE = 'https://www.tacosloschinitos.de/';
 const LANGS = {
   en: { htmlLang: 'en', ogLocale: 'en_GB' },
   es: { htmlLang: 'es-MX', ogLocale: 'es_MX' }

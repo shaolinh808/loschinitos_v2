@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://loschinitos.de/</loc>
-    <xhtml:link rel="alternate" hreflang="de" href="https://loschinitos.de/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://loschinitos.de/en/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://loschinitos.de/es/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://loschinitos.de/" />
+    <loc>https://www.tacosloschinitos.de/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.tacosloschinitos.de/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tacosloschinitos.de/en/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.tacosloschinitos.de/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tacosloschinitos.de/" />
   </url>
   <url>
-    <loc>https://loschinitos.de/en/</loc>
-    <xhtml:link rel="alternate" hreflang="de" href="https://loschinitos.de/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://loschinitos.de/en/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://loschinitos.de/es/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://loschinitos.de/" />
+    <loc>https://www.tacosloschinitos.de/en/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.tacosloschinitos.de/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tacosloschinitos.de/en/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.tacosloschinitos.de/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tacosloschinitos.de/" />
   </url>
   <url>
-    <loc>https://loschinitos.de/es/</loc>
-    <xhtml:link rel="alternate" hreflang="de" href="https://loschinitos.de/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://loschinitos.de/en/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://loschinitos.de/es/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://loschinitos.de/" />
+    <loc>https://www.tacosloschinitos.de/es/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.tacosloschinitos.de/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tacosloschinitos.de/en/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.tacosloschinitos.de/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tacosloschinitos.de/" />
   </url>
-  <url><loc>https://loschinitos.de/impressum.html</loc></url>
-  <url><loc>https://loschinitos.de/datenschutz.html</loc></url>
+  <url><loc>https://www.tacosloschinitos.de/impressum.html</loc></url>
+  <url><loc>https://www.tacosloschinitos.de/datenschutz.html</loc></url>
 </urlset>

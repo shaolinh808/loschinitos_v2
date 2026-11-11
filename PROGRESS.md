@@ -552,4 +552,4 @@ Google Fonts normally.
   (aus der Entwicklungsumgebung nicht möglich: kein Token, Netlify-Hosts
   durch die Netzwerk-Policy gesperrt).
 - Branch `claude/new-session-e6odmv` nach `master` mergen.
-- Domain-Umzug `loschinitos.de` — bewusst letzter, manueller Schritt.
+- Domain: neue Hauptadresse `www.tacosloschinitos.de` (noch zu registrieren); `loschinitos.de` wird Weiterleitung. Bewusst letzter, manueller Schritt.
