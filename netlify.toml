@@ -13,6 +13,11 @@
     Cache-Control = "public, max-age=604800"
 
 [[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
   for = "/*.svg"
   [headers.values]
     Cache-Control = "public, max-age=604800"
@@ -21,3 +26,32 @@
   for = "/*.mp4"
   [headers.values]
     Cache-Control = "public, max-age=604800"
+
+# ------------------------------------------------------------------
+# Same-origin proxies (privacy): visitors' browsers only talk to our
+# own domain. Netlify fetches the data server-side, so neither Supabase
+# nor Behold ever sees a visitor's IP address.
+# ------------------------------------------------------------------
+[[redirects]]
+  from = "/api/events"
+  to = "https://yczjmnujsstoxzhmqnrc.supabase.co/rest/v1/rpc/website_events"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/inquiry"
+  to = "https://yczjmnujsstoxzhmqnrc.supabase.co/rest/v1/rpc/website_inquiry"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/instagram"
+  to = "https://feeds.behold.so/pqzoqnva6Ei6OrKuSFHd"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/ig-img/*"
+  to = "https://behold.pictures/:splat"
+  status = 200
+  force = true

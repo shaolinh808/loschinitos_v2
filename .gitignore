@@ -1,3 +1,6 @@
 # Raw font package + license docs — not for redistribution
 junegull.zip
 junegull_extracted/
+
+# Local Netlify folder
+.netlify

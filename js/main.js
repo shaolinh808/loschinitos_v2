@@ -213,6 +213,12 @@
   /* ============================================================
      ANFRAGEN — contact form validation + submit
      ============================================================ */
+  // thank-you page lives at the site root; keep the visitor's language
+  var thanksUrl = function () {
+    var lang = window.LC_I18N ? window.LC_I18N.lang : 'de';
+    return (window.LC_BASE || '') + 'danke.html' + (lang !== 'de' ? '?lang=' + lang : '');
+  };
+
   var form = document.getElementById('anfragen-form');
   if (form) {
     // Netlify Forms: the form is registered at deploy time via data-netlify
@@ -224,6 +230,7 @@
 
     var messages = {
       name: 'Bitte gib deinen Namen an.',
+      email: 'Bitte gib eine gültige E-Mail-Adresse an.',
       datum: 'Bitte wähle ein Datum.',
       personen: 'Bitte gib die Personenzahl an.',
       nachricht: 'Bitte schreib uns kurz, worum es geht.'
@@ -234,16 +241,46 @@
       wrap.classList.toggle('has-error', hasError);
     };
 
+    var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    var fieldOk = function (key, value) {
+      value = value.trim();
+      if (key === 'personen') return value !== '' && Number(value) >= 1;
+      if (key === 'email') return EMAIL_RE.test(value);
+      return value !== '';
+    };
+
+    // Live site: same-origin proxy (netlify.toml) → Supabase never sees the
+    // visitor's IP. Local previews call Supabase directly.
+    var CRM_KEY = 'sb_publishable_NKsTBPATicQs1rjTPm5lKg_EhXbO-eo';
+    var viaProxy = /^https?:$/.test(location.protocol) &&
+      !/^(localhost|127\.|0\.0\.0\.0|\[::1\])/.test(location.hostname);
+    var CRM_URL = viaProxy ? '/api/inquiry'
+      : 'https://yczjmnujsstoxzhmqnrc.supabase.co/rest/v1/rpc/website_inquiry';
+
+    var sendToCrm = function () {
+      var el = form.elements;
+      var payload = {
+        p_name: el.name.value,
+        p_email: el.email.value,
+        p_phone: el.telefon ? el.telefon.value : null,
+        p_occasion: el.anlass ? el.anlass.value : null,
+        p_date: el.datum.value,
+        p_guests: Number(el.personen.value),
+        p_message: el.nachricht.value,
+        p_honeypot: el._gotcha ? el._gotcha.value : ''
+      };
+      return fetch(CRM_URL, {
+        method: 'POST',
+        headers: { apikey: CRM_KEY, Authorization: 'Bearer ' + CRM_KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(function (res) { if (!res.ok) throw new Error('CRM ' + res.status); return res.json(); });
+    };
+
     var validate = function () {
       var valid = true;
-      ['name', 'datum', 'personen', 'nachricht'].forEach(function (key) {
+      ['name', 'email', 'datum', 'personen', 'nachricht'].forEach(function (key) {
         var field = form.elements[key];
-        var ok = true;
-        if (key === 'personen') {
-          ok = field.value.trim() !== '' && Number(field.value) >= 1;
-        } else {
-          ok = field.value.trim() !== '';
-        }
+        var ok = fieldOk(key, field.value);
         setError(field, !ok);
         if (!ok) valid = false;
       });
@@ -254,10 +291,7 @@
     form.querySelectorAll('input, select, textarea').forEach(function (field) {
       field.addEventListener('input', function () {
         if (field.name && messages[field.name]) {
-          var ok = field.name === 'personen'
-            ? field.value.trim() !== '' && Number(field.value) >= 1
-            : field.value.trim() !== '';
-          setError(field, !ok);
+          setError(field, !fieldOk(field.name, field.value));
         }
       });
     });
@@ -275,23 +309,31 @@
 
       // Honeypot spam trap — real users never fill this in.
       if (form.elements['_gotcha'] && form.elements['_gotcha'].value) {
-        window.location.href = 'danke.html';
+        window.location.href = thanksUrl();
         return;
       }
 
       submitBtn.disabled = true;
       submitBtn.textContent = tr('form.sending');
 
-      fetch('/', {
+      // 1) straight into the CRM (contact + deal "Catering: <Name>")
+      var crm = sendToCrm().then(function () { return true; }, function (err) {
+        console.warn('Los Chinitos: CRM-Übergabe fehlgeschlagen, Netlify-Formular bleibt als Backup.', err);
+        return false;
+      });
+      // 2) Netlify Forms as before (e-mail notification + backup copy)
+      var netlify = fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams(new FormData(form)).toString()
-      })
-        .then(function (res) {
-          if (!res.ok) throw new Error('Form endpoint responded with ' + res.status);
+      }).then(function (res) { return res.ok; }, function () { return false; });
+
+      Promise.all([crm, netlify])
+        .then(function (results) {
+          if (!results[0] && !results[1]) throw new Error('Weder CRM noch Netlify haben die Anfrage angenommen');
           submitBtn.textContent = tr('form.sent');
           submitBtn.classList.add('btn-success');
-          setTimeout(function () { window.location.href = 'danke.html'; }, 500);
+          setTimeout(function () { window.location.href = thanksUrl(); }, 500);
         })
         .catch(function (err) {
           console.error('Los Chinitos: Anfragen-Formular konnte nicht gesendet werden.', err);

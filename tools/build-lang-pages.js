@@ -1,0 +1,113 @@
+#!/usr/bin/env node
+/* ============================================================
+   Builds /en/index.html and /es/index.html from index.html.
+
+   index.html (German) and js/i18n.js stay the single source of truth.
+   This script writes the English and Spanish home pages with their
+   texts already in the HTML, so search engines and AI crawlers that
+   do not run JavaScript see the right language at its own URL.
+
+   Run after every text or layout change to index.html / js/i18n.js:
+       node tools/build-lang-pages.js
+   No dependencies.
+   ============================================================ */
+'use strict';
+
+const fs = require('fs');
+const path = require('path');
+const vm = require('vm');
+
+const ROOT = path.resolve(__dirname, '..');
+const SITE = 'https://loschinitos.de/';
+const LANGS = {
+  en: { htmlLang: 'en', ogLocale: 'en_GB' },
+  es: { htmlLang: 'es-MX', ogLocale: 'es_MX' }
+};
+
+/* ---------- load the dictionary from js/i18n.js ---------- */
+const i18nSrc = fs.readFileSync(path.join(ROOT, 'js/i18n.js'), 'utf8');
+const start = i18nSrc.indexOf('var DICT = {');
+const end = i18nSrc.indexOf('\n  };', start);
+if (start < 0 || end < 0) throw new Error('DICT not found in js/i18n.js');
+const DICT = vm.runInNewContext('(' + i18nSrc.slice(start + 'var DICT = '.length, end + 4) + ')');
+
+const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const escAttr = (s) => esc(s).replace(/"/g, '&quot;');
+
+function t(lang, key) {
+  const v = DICT[lang] && DICT[lang][key];
+  if (v === undefined) throw new Error(`Missing ${lang} translation for "${key}"`);
+  return v;
+}
+
+/* ---------- helpers ---------- */
+const isRelative = (u) => u && !/^(#|\/|[a-z][a-z0-9+.-]*:|data:)/i.test(u);
+
+function build(lang) {
+  const conf = LANGS[lang];
+  let html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+  let count = 0;
+
+  // 1) element text: data-i18n (plain text) and data-i18n-html (markup)
+  html = html.replace(
+    /<([a-z][a-z0-9]*)\b([^>]*?)\sdata-i18n(-html)?="([^"]+)"([^>]*)>([\s\S]*?)<\/\1>/gi,
+    (m, tag, before, isHtml, key, after, inner) => {
+      if (new RegExp('<' + tag + '\\b', 'i').test(inner)) return m; // nested same tag: leave to JS
+      count++;
+      const val = t(lang, key);
+      return `<${tag}${before} data-i18n${isHtml || ''}="${key}"${after}>${isHtml ? val : esc(val)}</${tag}>`;
+    }
+  );
+
+  // 2) translated attributes: data-i18n-alt / -placeholder / -aria-label / -title
+  html = html.replace(/<[a-z][^>]*\sdata-i18n-(alt|placeholder|aria-label|title)="[^"]+"[^>]*>/gi, (tag) => {
+    return tag.replace(/\sdata-i18n-(alt|placeholder|aria-label|title)="([^"]+)"/gi, (m, attr, key) => {
+      const val = escAttr(t(lang, key));
+      const re = new RegExp(`(\\s${attr}=")[^"]*(")`, 'i');
+      if (re.test(tag)) tag = tag.replace(re, `$1${val}$2`);
+      count++;
+      return m;
+    }) && tag;
+  });
+
+  // 3) head: language, title, description, social tags, canonical
+  html = html
+    .replace('<html lang="de" data-page-lang="de">', `<html lang="${conf.htmlLang}" data-page-lang="${lang}">`)
+    .replace(/<title>[^<]*<\/title>/, `<title>${esc(t(lang, 'meta.title'))}</title>`)
+    .replace(/(<meta name="description" content=")[^"]*(")/, `$1${escAttr(t(lang, 'meta.description'))}$2`)
+    .replace(/(<meta property="og:title" content=")[^"]*(")/, `$1${escAttr(t(lang, 'meta.title'))}$2`)
+    .replace(/(<meta property="og:description" content=")[^"]*(")/, `$1${escAttr(t(lang, 'meta.description'))}$2`)
+    .replace(/(<meta property="og:locale" content=")[^"]*(")/, `$1${conf.ogLocale}$2`)
+    .replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${SITE}${lang}/$2`)
+    .replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${SITE}${lang}/$2`);
+
+  // 4) FAQ structured data in this language
+  html = html.replace(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g, (m, json) => {
+    const data = JSON.parse(json);
+    if (data['@type'] !== 'FAQPage') return m;
+    data.inLanguage = conf.htmlLang;
+    data.mainEntity.forEach((q, i) => {
+      q.name = t(lang, `faq.q${i + 1}`);
+      q.acceptedAnswer.text = t(lang, `faq.a${i + 1}`);
+    });
+    return '<script type="application/ld+json">\n' + JSON.stringify(data, null, 1) + '\n</script>';
+  });
+
+  // 5) relative paths now live one folder deeper
+  html = html.replace(/\s(src|href|srcset|poster)="([^"]+)"/g, (m, attr, url) => {
+    if (!isRelative(url)) return m;
+    if (attr === 'srcset') return ` srcset="${url.split(',').map((p) => p.trim()).map((p) => (isRelative(p) ? '../' + p : p)).join(', ')}"`;
+    return ` ${attr}="../${url}"`;
+  });
+
+  // 6) tell the scripts where the site root is
+  html = html.replace('<script src="../js/i18n.js"></script>', '<script>window.LC_BASE = \'../\';</script>\n<script src="../js/i18n.js"></script>');
+  if (!html.includes("window.LC_BASE = '../'")) throw new Error('could not inject LC_BASE');
+
+  const header = `<!-- GENERATED by tools/build-lang-pages.js from index.html + js/i18n.js. Do not edit by hand. -->\n`;
+  fs.mkdirSync(path.join(ROOT, lang), { recursive: true });
+  fs.writeFileSync(path.join(ROOT, lang, 'index.html'), html.replace('<!DOCTYPE html>', '<!DOCTYPE html>\n' + header));
+  console.log(`${lang}/index.html: ${count} texts translated`);
+}
+
+Object.keys(LANGS).forEach(build);
