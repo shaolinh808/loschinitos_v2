@@ -157,8 +157,8 @@
         startDate: start,
         eventStatus: 'https://schema.org/EventScheduled',
         eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-        organizer: { '@id': 'https://www.tacosloschinitos.de/#org' },
-        image: ['https://www.tacosloschinitos.de/hero-tacos.webp'],
+        organizer: { '@id': 'https://loschinitos.de/#org' },
+        image: ['https://loschinitos.de/hero-tacos.webp'],
         location: {
           '@type': 'Place',
           name: ev.venue || 'Düsseldorf',
