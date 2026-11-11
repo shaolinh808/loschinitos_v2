@@ -679,6 +679,8 @@
 // On screens <=768px it does nothing (CSS above switches #story-sticky to a
 // normal static stacked block instead).
 (function () {
+  // phones (portrait <=768px, or held sideways) get the static stacked layout
+  var compactQuery = window.matchMedia('(max-width: 768px), (max-height: 560px) and (orientation: landscape)');
   var container = document.getElementById('story-container');
   var img = document.querySelector('[data-story="img"]');
   var left = document.querySelector('[data-story="left"]');
@@ -732,7 +734,7 @@
     ticking = true;
     requestAnimationFrame(function () {
       ticking = false;
-      if (window.innerWidth <= 768) {
+      if (compactQuery.matches) {
         resetMobile();
         return;
       }
@@ -759,7 +761,7 @@
   }
   document.querySelectorAll('a[href="#story"]').forEach(function (a) {
     a.addEventListener('click', function (e) {
-      if (!container || window.innerWidth <= 768) return;
+      if (!container || compactQuery.matches) return;
       e.preventDefault();
       window.scrollTo({ top: storyLandingY(), behavior: 'smooth' });
     });

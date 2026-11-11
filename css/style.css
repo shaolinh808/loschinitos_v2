@@ -322,6 +322,9 @@ section { position: relative; }
   flex-direction: column;
   gap: 4px;
   box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+  max-height: calc(100vh - var(--nav-h));
+  max-height: calc(100svh - var(--nav-h));
+  overflow-y: auto;
 }
 .nav-mobile-panel.is-open { display: flex; }
 .nav-mobile-panel a {
@@ -346,7 +349,7 @@ section { position: relative; }
   .nav-links a { padding: 10px 10px; font-size: 10px; }
   .nav-cta .btn { padding: 9px 16px; font-size: 10px; }
 }
-@media (max-width: 640px) {
+@media (max-width: 640px), (max-height: 560px) and (orientation: landscape) {
   .nav-links { display: none; }
   .nav-cta { display: none; }
   .nav-toggle { display: flex; }
@@ -363,7 +366,7 @@ section { position: relative; }
   .nav-brand .logo-wordmark { height: 14px; }
   .nav-inner { column-gap: 6px; }
 }
-@media (min-width: 641px) {
+@media (min-width: 641px) and (min-height: 561px), (min-width: 641px) and (orientation: portrait) {
   .nav-mobile-panel { display: none !important; }
 }
 
@@ -416,6 +419,9 @@ section { position: relative; }
 .hero {
   position: relative;
   min-height: 100vh;
+  min-height: 100svh;
+  padding-top: var(--nav-h);
+  box-sizing: border-box;
   display: flex;
   align-items: flex-end;
   overflow: hidden;
@@ -493,7 +499,25 @@ section { position: relative; }
 .btn-outline-white:hover { background: #fff; color: var(--ink); }
 
 @media (max-width: 640px) {
-  .hero-card { margin: 0 0 32px; }
+  .hero-card { margin: 0 0 28px; }
+  /* portrait phones: centre the three plates, buttons side by side */
+  .hero-media { object-position: 50% 30%; }
+  .hero-card .hero-title-main { font-size: 64px; }
+  .hero-card .hero-wordmark { height: 30px; margin-top: 8px; }
+  .hero-card .hero-tagline { font-size: 20px; margin-top: 6px; }
+  .hero-card p { font-size: 14px; line-height: 1.55; margin-top: 12px; }
+  .hero-card .hero-actions { flex-wrap: nowrap; gap: 10px; margin-top: 18px; }
+  .hero-card .hero-actions .btn { flex: 1 1 0; min-width: 0; padding: 14px 10px; font-size: 11px; }
+}
+/* phones held sideways: everything has to fit into ~330px of height */
+@media (max-height: 560px) and (orientation: landscape) {
+  .hero-card { margin: 0 0 18px; max-width: 520px; }
+  .hero-card .hero-title-main { font-size: 46px; }
+  .hero-card .hero-wordmark { height: 22px; margin-top: 6px; }
+  .hero-card .hero-tagline { font-size: 16px; margin-top: 4px; }
+  .hero-card p { font-size: 13px; line-height: 1.45; margin-top: 8px; }
+  .hero-card .hero-actions { margin-top: 12px; gap: 10px; }
+  .hero-card .hero-actions .btn { padding: 11px 20px; font-size: 11px; }
 }
 
 /* ============================================================
@@ -527,10 +551,10 @@ section { position: relative; }
 .story-names { display: flex; justify-content: space-between; padding: 0 4px; }
 .story-names span { font-family: Anton, sans-serif; font-size: 22px; letter-spacing: -0.02em; text-transform: uppercase; color: #E4000A; }
 
-@media (max-width: 900px) {
+@media (max-width: 900px), (max-height: 560px) and (orientation: landscape) {
   .story-grid { grid-template-columns: 1fr !important; gap: 28px !important; }
 }
-@media (max-width: 768px) {
+@media (max-width: 768px), (max-height: 560px) and (orientation: landscape) {
   #story-container { height: auto !important; }
   #story-sticky { position: static !important; height: auto !important; overflow: visible !important; padding: 56px 0 !important; }
   .story-grid { grid-auto-flow: row !important; }
@@ -539,6 +563,10 @@ section { position: relative; }
   .story-badge-slot { display: block !important; height: auto !important; max-width: none !important; }
   .story-badge { display: none !important; }
   .story-img-block { order: -1 !important; }
+}
+@media (max-height: 560px) and (orientation: landscape) {
+  .story-img-block { max-width: 360px; width: 100%; margin: 0 auto; }
+  .story-text { max-width: 640px; margin: 0 auto; }
 }
 
 /* ============================================================
@@ -843,7 +871,16 @@ a.social-tile { display: block; }
 .social-wall-copy p { margin: 0; max-width: 44ch; font-size: 15px; line-height: 1.6; color: #fff; text-wrap: pretty; text-shadow: 0 2px 16px rgba(0,0,0,0.35); }
 
 @media (max-width: 640px) {
-  .social-wall { grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
+  .social-wall-section { min-height: 560px; padding: 40px 0 48px; }
+  .social-wall { gap: 14px; left: -18%; right: -18%; }
+  .social-track { gap: 14px; }
+  .social-tile { border-radius: 12px; }
+  .social-wall-section::after { background: linear-gradient(180deg, rgba(228,0,10,0.95) 0%, rgba(228,0,10,0.8) 26%, rgba(228,0,10,0) 52%); }
+}
+@media (max-height: 560px) and (orientation: landscape) {
+  .social-wall-section { min-height: 380px; }
+  .social-wall { gap: 18px; left: 22%; right: -8%; }
+  .social-track { gap: 18px; }
 }
 
 /* ============================================================

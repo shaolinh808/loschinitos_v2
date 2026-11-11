@@ -257,7 +257,8 @@
           img.src = FALLBACK[i % FALLBACK.length].src;
         };
         img.src = item.src;
-        img.loading = 'lazy';
+        // no lazy-loading here: iOS Safari never "sees" images inside the
+        // rotated, constantly moving wall and would leave the tiles empty
         img.decoding = 'async';
         a.appendChild(img);
         track.appendChild(a);

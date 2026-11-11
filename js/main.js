@@ -61,7 +61,7 @@
       });
     });
     window.addEventListener('resize', function () {
-      if (window.innerWidth > 640) {
+      if (!window.matchMedia('(max-width: 640px), (max-height: 560px) and (orientation: landscape)').matches) {
         navMobilePanel.classList.remove('is-open');
         navToggle.setAttribute('aria-expanded', 'false');
       }
