@@ -539,17 +539,17 @@ Google Fonts normally.
 - Footer: Wordmark groß und zentriert, ohne Icon. Navbar ohne Schatten.
   Galerie: `expandRatio .42`, fluide Höhe → offene Kachel ~1,1:1.
 
-### Fehlt inhaltlich (kein Material im Projekt)
-- Produktfotos für Ribeye Gaonera, Hongos al Ajilo, Quesadilla, Salsas
-  (aktuell Platzhalter-Kacheln). `taco_asada.webp` / `taco_campechano.webp`
-  liegen bereit, stehen aber nicht auf der Karte im Mockup.
-- Alle "Platzhalter:"-Texte (Hero, Produkte-Intro, Events, Catering-Intro,
-  Social-Wall), Event-Termine, Social-Wall-Bilder.
-- Datenschutzerklärung (Footer-Link "Datenschutz" zeigt auf das Impressum).
+### Stand 11.11.2026
+- Fotos: Hero (drei Tacos) sowie Pastor, Ribeye Gaonera und Suadero sind
+  eingebaut; übrige Gerichte zeigen „Coming soon“. Ungenutzte Medien entfernt.
+- Texte final, Events kommen live aus dem CRM, Instagram über Behold,
+  Datenschutzerklärung eigene Seite, EN/ES-Seiten unter /en/ und /es/.
+- Netlify-Projekt `loschinitos-preview-k7x2` ist mit GitHub verbunden,
+  Production-Branch `claude/new-session-e6odmv` (jeder Push geht live).
 
 ### Offen
-- Netlify-Site anlegen / Repo verbinden und Test-Einsendung prüfen
-  (aus der Entwicklungsumgebung nicht möglich: kein Token, Netlify-Hosts
-  durch die Netzwerk-Policy gesperrt).
-- Branch `claude/new-session-e6odmv` nach `master` mergen.
-- Domain-Umzug `loschinitos.de` — bewusst letzter, manueller Schritt.
+- Seite nach dem ersten Git-Deploy prüfen (Events, Instagram, Formular).
+- Domain `loschinitos.de` (united-domains) bei Netlify eintragen, DNS umstellen.
+- Search Console und Bing Webmaster Tools, danach Website im
+  Google-Unternehmensprofil und in der Instagram-Bio eintragen.
+- Später: Branch nach `master` mergen und Production-Branch zurückstellen.
