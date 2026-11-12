@@ -79,11 +79,19 @@ function build(lang) {
     .replace(/(<meta property="og:description" content=")[^"]*(")/, `$1${escAttr(t(lang, 'meta.description'))}$2`)
     .replace(/(<meta property="og:locale" content=")[^"]*(")/, `$1${conf.ogLocale}$2`)
     .replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${SITE}${lang}/$2`)
-    .replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${SITE}${lang}/$2`);
+    .replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${SITE}${lang}/$2`)
+    .replace(/(<meta property="og:image:alt" content=")[^"]*(")/, `$1${escAttr(t(lang, 'meta.ogImageAlt'))}$2`);
 
   // 4) FAQ structured data in this language
   html = html.replace(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g, (m, json) => {
     const data = JSON.parse(json);
+    const types = [].concat(data['@type']);
+    if (types.includes('Organization')) {
+      data.description = t(lang, 'meta.orgDescription');
+      data.knowsAbout = t(lang, 'meta.knowsAbout').split('|');
+      if (Array.isArray(data.servesCuisine)) data.servesCuisine[0] = t(lang, 'meta.cuisine');
+      return '<script type="application/ld+json">\n' + JSON.stringify(data, null, 1) + '\n</script>';
+    }
     if (data['@type'] !== 'FAQPage') return m;
     data.inLanguage = conf.htmlLang;
     data.mainEntity.forEach((q, i) => {

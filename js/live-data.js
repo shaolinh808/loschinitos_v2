@@ -27,7 +27,7 @@
   // account created). Shown first. `src` is a cover image in the site folder;
   // leave it empty to show a branded "Reel" tile instead.
   var PINNED = [
-    { href: 'https://www.instagram.com/reel/DfeRvm9uaGn/', src: '', alt: 'Reel – Los Chinitos auf Instagram' }
+    { href: 'https://www.instagram.com/reel/DfeRvm9uaGn/', src: '', altKey: 'img.reel' }
   ];
   var FALLBACK = [
     { src: (window.LC_BASE || '') + 'taco_pastor.webp', altKey: 'img.pastor' },
@@ -152,8 +152,8 @@
       var start = ev.event_date + (ev.start_time ? 'T' + ev.start_time.slice(0, 5) + ':00' + berlinOffset(ev.event_date) : '');
       var item = {
         '@type': 'Event',
-        name: 'Los Chinitos Taco-Pop-up' + (ev.venue ? ' im ' + ev.venue : ''),
-        description: 'Tacos im Stil von Mexiko-Stadt – Pastor, Suadero, Ribeye Gaonera. Ohne Tex-Mex.',
+        name: t('events.ldName') + (ev.venue ? t('events.ldAt') + ev.venue : ''),
+        description: t('events.ldDesc'),
         startDate: start,
         eventStatus: 'https://schema.org/EventScheduled',
         eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
@@ -209,7 +209,7 @@
     var tracks = document.querySelectorAll('.social-track');
     if ((!posts.length && !PINNED.length) || !tracks.length) return;
 
-    var slots = PINNED.map(function (p) { return { href: p.href, src: p.src, alt: p.alt, brand: !p.src }; });
+    var slots = PINNED.map(function (p) { return { href: p.href, src: p.src, alt: t(p.altKey), brand: !p.src }; });
     posts.forEach(function (p) {
       slots.push({
         href: p.permalink || INSTAGRAM_PROFILE,
