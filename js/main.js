@@ -61,7 +61,7 @@
       });
     });
     window.addEventListener('resize', function () {
-      if (!window.matchMedia('(max-width: 640px), (max-height: 560px) and (orientation: landscape)').matches) {
+      if (!window.matchMedia('(max-width: 900px), (max-height: 560px) and (orientation: landscape)').matches) {
         navMobilePanel.classList.remove('is-open');
         navToggle.setAttribute('aria-expanded', 'false');
       }
@@ -239,6 +239,24 @@
     var setError = function (field, hasError) {
       var wrap = field.closest('.form-field');
       wrap.classList.toggle('has-error', hasError);
+      if (hasError) field.setAttribute('aria-invalid', 'true');
+      else field.removeAttribute('aria-invalid');
+    };
+
+    // no enquiries for dates in the past
+    var todayIso = function () {
+      var d = new Date();
+      return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    };
+    if (form.elements.datum) form.elements.datum.min = todayIso();
+
+    // give up after 15 s instead of showing "sending…" forever
+    var withTimeout = function (url, opts) {
+      if (!window.AbortController) return fetch(url, opts);
+      var ctrl = new AbortController();
+      var timer = setTimeout(function () { ctrl.abort(); }, 15000);
+      opts.signal = ctrl.signal;
+      return fetch(url, opts).finally(function () { clearTimeout(timer); });
     };
 
     var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -246,6 +264,7 @@
       value = value.trim();
       if (key === 'personen') return value !== '' && Number(value) >= 1;
       if (key === 'email') return EMAIL_RE.test(value);
+      if (key === 'datum') return value !== '' && value >= todayIso();
       return value !== '';
     };
 
@@ -269,7 +288,7 @@
         p_message: el.nachricht.value,
         p_honeypot: el._gotcha ? el._gotcha.value : ''
       };
-      return fetch(CRM_URL, {
+      return withTimeout(CRM_URL, {
         method: 'POST',
         headers: { apikey: CRM_KEY, Authorization: 'Bearer ' + CRM_KEY, 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -322,7 +341,7 @@
         return false;
       });
       // 2) Netlify Forms as before (e-mail notification + backup copy)
-      var netlify = fetch('/', {
+      var netlify = withTimeout('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams(new FormData(form)).toString()
@@ -341,6 +360,7 @@
           submitBtn.textContent = tr('form.submit');
           status.className = 'form-status is-error';
           status.innerHTML = tr('form.errorHtml');
+          status.focus();
         });
     });
   }

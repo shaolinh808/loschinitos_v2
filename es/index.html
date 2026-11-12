@@ -232,6 +232,7 @@
   <div class="hero-inner">
     <div class="hero-card">
       <!-- one H1 = "Tacos – Los Chinitos": headline word + wordmark, same look as before -->
+      <p class="hero-kicker" data-i18n="hero.kicker">Pop-ups y taquizas en Düsseldorf</p>
       <h1 class="hero-title"><span class="hero-title-main">TACOS</span><img class="hero-wordmark" src="../logo-wordmark-inverse.svg" alt="– Los Chinitos" /></h1>
       <span class="hero-tagline script-tag quoted">tacos sin filtros</span>
       <p data-i18n="hero.text">Nuestro homenaje a las taquerías de la Ciudad de México. Nada de Tex-Mex, solo un ligero toque “Chinitos”.</p>
@@ -405,6 +406,11 @@
       <div class="anfragen-left">
         <h2 data-i18n-html="inquiry.h">Cotiza tu<br />taquiza</h2>
         <p data-i18n="inquiry.p">Taquizas y catering para tu evento de empresa, boda o cumpleaños: nosotros llevamos los tacos. Cuéntanos de tu evento y te respondemos en menos de 48 horas.</p>
+        <ol class="anfragen-steps">
+          <li data-i18n="inquiry.step1">Llenas el formulario</li>
+          <li data-i18n="inquiry.step2">Te mandamos cotización en menos de 48 horas</li>
+          <li data-i18n="inquiry.step3">Apartamos la fecha</li>
+        </ol>
       </div>
 
       <div class="form-card">
@@ -414,14 +420,14 @@
           <div class="form-grid">
             <div class="form-field">
               <label for="f-name" data-i18n="form.name">Nombre *</label>
-              <input type="text" id="f-name" name="name" placeholder="Tu nombre" data-i18n-placeholder="form.namePh" required />
-              <span class="form-error" data-i18n="form.nameErr">Por favor, escribe tu nombre.</span>
+              <input type="text" id="f-name" name="name" placeholder="Tu nombre" data-i18n-placeholder="form.namePh" autocomplete="name" required aria-describedby="f-name-err" />
+              <span class="form-error" id="f-name-err" data-i18n="form.nameErr">Por favor, escribe tu nombre.</span>
             </div>
 
             <div class="form-field">
               <label for="f-email" data-i18n="form.email">Correo *</label>
-              <input type="email" id="f-email" name="email" placeholder="tu@correo.com" data-i18n-placeholder="form.emailPh" autocomplete="email" required />
-              <span class="form-error" data-i18n="form.emailErr">Por favor, escribe un correo válido.</span>
+              <input type="email" id="f-email" name="email" placeholder="tu@correo.com" data-i18n-placeholder="form.emailPh" autocomplete="email" required aria-describedby="f-email-err" />
+              <span class="form-error" id="f-email-err" data-i18n="form.emailErr">Por favor, escribe un correo válido.</span>
             </div>
 
             <div class="form-field">
@@ -442,29 +448,30 @@
 
             <div class="form-field">
               <label for="f-datum" data-i18n="form.date">Fecha *</label>
-              <input type="date" id="f-datum" name="datum" required />
-              <span class="form-error" data-i18n="form.dateErr">Por favor, elige una fecha.</span>
+              <input type="date" id="f-datum" name="datum" required aria-describedby="f-datum-err" />
+              <span class="form-error" id="f-datum-err" data-i18n="form.dateErr">Por favor, elige una fecha a partir de hoy.</span>
             </div>
 
             <div class="form-field">
               <label for="f-personen" data-i18n="form.guests">Número de invitados *</label>
-              <input type="number" id="f-personen" name="personen" min="1" placeholder="p. ej. 60" data-i18n-placeholder="form.guestsPh" required />
-              <span class="form-error" data-i18n="form.guestsErr">Por favor, indica el número de invitados.</span>
+              <input type="number" id="f-personen" name="personen" min="1" placeholder="p. ej. 60" data-i18n-placeholder="form.guestsPh" required aria-describedby="f-personen-err" />
+              <span class="form-error" id="f-personen-err" data-i18n="form.guestsErr">Por favor, indica el número de invitados.</span>
             </div>
 
             <div class="form-field full">
               <label for="f-nachricht" data-i18n="form.message">Mensaje *</label>
-              <textarea id="f-nachricht" name="nachricht" placeholder="Lugar, horario, peticiones especiales …" data-i18n-placeholder="form.messagePh" required></textarea>
-              <span class="form-error" data-i18n="form.messageErr">Cuéntanos tantito de qué se trata.</span>
+              <textarea id="f-nachricht" name="nachricht" placeholder="Lugar, horario, peticiones especiales …" data-i18n-placeholder="form.messagePh" required aria-describedby="f-nachricht-err"></textarea>
+              <span class="form-error" id="f-nachricht-err" data-i18n="form.messageErr">Cuéntanos tantito de qué se trata.</span>
             </div>
           </div>
 
-          <p class="form-summary" data-i18n="form.summary">Por favor, llena los campos marcados.</p>
+          <p class="form-summary" data-i18n="form.summary" role="alert">Por favor, llena los campos marcados.</p>
 
           <div class="form-footer">
             <button type="submit" class="btn btn-yellow" data-i18n="form.submit">Enviar</button>
-            <span class="form-status"></span>
+            <span class="form-status" role="status" tabindex="-1"></span>
           </div>
+          <p class="form-privacy" data-i18n-html="form.privacy">Solo usamos tus datos para responder a tu solicitud. Más info en el <a href="/datenschutz.html">aviso de privacidad</a>.</p>
         </form>
       </div>
     </div>
@@ -623,6 +630,7 @@
   <div class="social-wall-copy">
     <h2 data-i18n-html="social.h">Desde nuestras<br />redes</h2>
     <p data-i18n="social.p">Échale un ojo a lo que andamos haciendo en Instagram: @tacosloschinitos.</p>
+    <a href="https://www.instagram.com/tacosloschinitos/" target="_blank" rel="noopener" class="btn btn-yellow" data-i18n="events.follow">Sigue a @tacosloschinitos</a>
   </div>
 </section>
 
@@ -684,7 +692,7 @@
 // normal static stacked block instead).
 (function () {
   // phones (portrait <=768px, or held sideways) get the static stacked layout
-  var compactQuery = window.matchMedia('(max-width: 768px), (max-height: 560px) and (orientation: landscape)');
+  var compactQuery = window.matchMedia('(max-width: 900px), (max-height: 560px) and (orientation: landscape), (prefers-reduced-motion: reduce)');
   var container = document.getElementById('story-container');
   var img = document.querySelector('[data-story="img"]');
   var left = document.querySelector('[data-story="left"]');

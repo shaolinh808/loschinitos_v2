@@ -229,6 +229,7 @@
   <div class="hero-inner">
     <div class="hero-card">
       <!-- one H1 = "Tacos – Los Chinitos": headline word + wordmark, same look as before -->
+      <p class="hero-kicker" data-i18n="hero.kicker">Pop-ups &amp; Catering in Düsseldorf</p>
       <h1 class="hero-title"><span class="hero-title-main">TACOS</span><img class="hero-wordmark" src="logo-wordmark-inverse.svg" alt="– Los Chinitos" /></h1>
       <span class="hero-tagline script-tag quoted">tacos sin filtros</span>
       <p data-i18n="hero.text">Wir sind eine Hommage an die Taquerías von Mexiko-Stadt. Ohne Tex-Mex, aber mit einem subtilen „Chinitos“-Twist.</p>
@@ -402,6 +403,11 @@
       <div class="anfragen-left">
         <h2 data-i18n-html="inquiry.h">Catering<br />anfragen</h2>
         <p data-i18n="inquiry.p">Firmenfeier, Hochzeit, Geburtstag: Wir bringen die Tacos zu dir. Erzähl uns kurz von deinem Anlass und wir melden uns innerhalb von 48 Stunden.</p>
+        <ol class="anfragen-steps">
+          <li data-i18n="inquiry.step1">Formular ausfüllen</li>
+          <li data-i18n="inquiry.step2">Angebot innerhalb von 48 Stunden</li>
+          <li data-i18n="inquiry.step3">Termin fix machen</li>
+        </ol>
       </div>
 
       <div class="form-card">
@@ -411,14 +417,14 @@
           <div class="form-grid">
             <div class="form-field">
               <label for="f-name" data-i18n="form.name">Name *</label>
-              <input type="text" id="f-name" name="name" placeholder="Dein Name" data-i18n-placeholder="form.namePh" required />
-              <span class="form-error" data-i18n="form.nameErr">Bitte gib deinen Namen an.</span>
+              <input type="text" id="f-name" name="name" placeholder="Dein Name" data-i18n-placeholder="form.namePh" autocomplete="name" required aria-describedby="f-name-err" />
+              <span class="form-error" id="f-name-err" data-i18n="form.nameErr">Bitte gib deinen Namen an.</span>
             </div>
 
             <div class="form-field">
               <label for="f-email" data-i18n="form.email">E-Mail *</label>
-              <input type="email" id="f-email" name="email" placeholder="deine@email.de" data-i18n-placeholder="form.emailPh" autocomplete="email" required />
-              <span class="form-error" data-i18n="form.emailErr">Bitte gib eine gültige E-Mail-Adresse an.</span>
+              <input type="email" id="f-email" name="email" placeholder="deine@email.de" data-i18n-placeholder="form.emailPh" autocomplete="email" required aria-describedby="f-email-err" />
+              <span class="form-error" id="f-email-err" data-i18n="form.emailErr">Bitte gib eine gültige E-Mail-Adresse an.</span>
             </div>
 
             <div class="form-field">
@@ -439,29 +445,30 @@
 
             <div class="form-field">
               <label for="f-datum" data-i18n="form.date">Datum *</label>
-              <input type="date" id="f-datum" name="datum" required />
-              <span class="form-error" data-i18n="form.dateErr">Bitte wähle ein Datum.</span>
+              <input type="date" id="f-datum" name="datum" required aria-describedby="f-datum-err" />
+              <span class="form-error" id="f-datum-err" data-i18n="form.dateErr">Bitte wähle ein Datum ab heute.</span>
             </div>
 
             <div class="form-field">
               <label for="f-personen" data-i18n="form.guests">Personenzahl *</label>
-              <input type="number" id="f-personen" name="personen" min="1" placeholder="z. B. 60" data-i18n-placeholder="form.guestsPh" required />
-              <span class="form-error" data-i18n="form.guestsErr">Bitte gib die Personenzahl an.</span>
+              <input type="number" id="f-personen" name="personen" min="1" placeholder="z. B. 60" data-i18n-placeholder="form.guestsPh" required aria-describedby="f-personen-err" />
+              <span class="form-error" id="f-personen-err" data-i18n="form.guestsErr">Bitte gib die Personenzahl an.</span>
             </div>
 
             <div class="form-field full">
               <label for="f-nachricht" data-i18n="form.message">Nachricht *</label>
-              <textarea id="f-nachricht" name="nachricht" placeholder="Ort, Uhrzeit, besondere Wünsche …" data-i18n-placeholder="form.messagePh" required></textarea>
-              <span class="form-error" data-i18n="form.messageErr">Bitte schreib uns kurz, worum es geht.</span>
+              <textarea id="f-nachricht" name="nachricht" placeholder="Ort, Uhrzeit, besondere Wünsche …" data-i18n-placeholder="form.messagePh" required aria-describedby="f-nachricht-err"></textarea>
+              <span class="form-error" id="f-nachricht-err" data-i18n="form.messageErr">Bitte schreib uns kurz, worum es geht.</span>
             </div>
           </div>
 
-          <p class="form-summary" data-i18n="form.summary">Bitte fülle die markierten Felder aus.</p>
+          <p class="form-summary" data-i18n="form.summary" role="alert">Bitte fülle die markierten Felder aus.</p>
 
           <div class="form-footer">
             <button type="submit" class="btn btn-yellow" data-i18n="form.submit">Absenden</button>
-            <span class="form-status"></span>
+            <span class="form-status" role="status" tabindex="-1"></span>
           </div>
+          <p class="form-privacy" data-i18n-html="form.privacy">Wir nutzen deine Angaben nur, um deine Anfrage zu beantworten. Mehr dazu in der <a href="/datenschutz.html">Datenschutzerklärung</a>.</p>
         </form>
       </div>
     </div>
@@ -620,6 +627,7 @@
   <div class="social-wall-copy">
     <h2 data-i18n-html="social.h">Aus unseren<br />socials</h2>
     <p data-i18n="social.p">Was sonst noch bei uns passiert, siehst du auf Instagram unter @tacosloschinitos.</p>
+    <a href="https://www.instagram.com/tacosloschinitos/" target="_blank" rel="noopener" class="btn btn-yellow" data-i18n="events.follow">@tacosloschinitos folgen</a>
   </div>
 </section>
 
@@ -680,7 +688,7 @@
 // normal static stacked block instead).
 (function () {
   // phones (portrait <=768px, or held sideways) get the static stacked layout
-  var compactQuery = window.matchMedia('(max-width: 768px), (max-height: 560px) and (orientation: landscape)');
+  var compactQuery = window.matchMedia('(max-width: 900px), (max-height: 560px) and (orientation: landscape), (prefers-reduced-motion: reduce)');
   var container = document.getElementById('story-container');
   var img = document.querySelector('[data-story="img"]');
   var left = document.querySelector('[data-story="left"]');

@@ -72,7 +72,7 @@
       'form.optBirthday': 'Geburtstag',
       'form.optOther': 'Sonstiges',
       'form.date': 'Datum *',
-      'form.dateErr': 'Bitte wähle ein Datum.',
+      'form.dateErr': "Bitte wähle ein Datum ab heute.",
       'form.guests': 'Personenzahl *',
       'form.guestsPh': 'z. B. 60',
       'form.guestsErr': 'Bitte gib die Personenzahl an.',
@@ -139,7 +139,13 @@
       'img.reel': "Reel: Los Chinitos auf Instagram",
       'events.ldName': "Los Chinitos Taco-Pop-up",
       'events.ldAt': " im ",
-      'events.ldDesc': "Tacos, inspiriert von den Taquerías in Mexiko-Stadt: Pastor, Suadero, Ribeye Gaonera. Ohne Tex-Mex."
+      'events.ldDesc': "Tacos, inspiriert von den Taquerías in Mexiko-Stadt: Pastor, Suadero, Ribeye Gaonera. Ohne Tex-Mex.",
+      'hero.kicker': "Pop-ups & Catering in Düsseldorf",
+      'inquiry.step1': "Formular ausfüllen",
+      'inquiry.step2': "Angebot innerhalb von 48 Stunden",
+      'inquiry.step3': "Termin fix machen",
+      'form.privacy': "Wir nutzen deine Angaben nur, um deine Anfrage zu beantworten. Mehr dazu in der <a href=\"/datenschutz.html\">Datenschutzerklärung</a>.",
+      'thanks.ig': "Folg uns auf Instagram"
     },
 
     en: {
@@ -206,7 +212,7 @@
       'form.optBirthday': 'Birthday',
       'form.optOther': 'Other',
       'form.date': 'Date *',
-      'form.dateErr': 'Please choose a date.',
+      'form.dateErr': "Please choose a date from today onwards.",
       'form.guests': 'Number of guests *',
       'form.guestsPh': 'e.g. 60',
       'form.guestsErr': 'Please enter the number of guests.',
@@ -273,7 +279,13 @@
       'img.reel': "Reel: Los Chinitos on Instagram",
       'events.ldName': "Los Chinitos taco pop-up",
       'events.ldAt': " at ",
-      'events.ldDesc': "Tacos inspired by the taquerías of Mexico City: pastor, suadero, ribeye gaonera. No Tex-Mex."
+      'events.ldDesc': "Tacos inspired by the taquerías of Mexico City: pastor, suadero, ribeye gaonera. No Tex-Mex.",
+      'hero.kicker': "Pop-ups & catering in Düsseldorf",
+      'inquiry.step1': "Fill in the form",
+      'inquiry.step2': "Get a quote within 48 hours",
+      'inquiry.step3': "Lock in the date",
+      'form.privacy': "We only use your details to reply to your enquiry. More in our <a href=\"/datenschutz.html\">privacy policy</a>.",
+      'thanks.ig': "Follow us on Instagram"
     },
 
     es: {
@@ -340,7 +352,7 @@
       'form.optBirthday': 'Cumpleaños',
       'form.optOther': 'Otro',
       'form.date': 'Fecha *',
-      'form.dateErr': 'Por favor, elige una fecha.',
+      'form.dateErr': "Por favor, elige una fecha a partir de hoy.",
       'form.guests': "Número de invitados *",
       'form.guestsPh': 'p. ej. 60',
       'form.guestsErr': "Por favor, indica el número de invitados.",
@@ -407,7 +419,13 @@
       'img.reel': "Reel de Los Chinitos en Instagram",
       'events.ldName': "Pop-up de tacos de Los Chinitos",
       'events.ldAt': " en ",
-      'events.ldDesc': "Tacos inspirados en las taquerías de la Ciudad de México: pastor, suadero, ribeye gaonera. Sin Tex-Mex."
+      'events.ldDesc': "Tacos inspirados en las taquerías de la Ciudad de México: pastor, suadero, ribeye gaonera. Sin Tex-Mex.",
+      'hero.kicker': "Pop-ups y taquizas en Düsseldorf",
+      'inquiry.step1': "Llenas el formulario",
+      'inquiry.step2': "Te mandamos cotización en menos de 48 horas",
+      'inquiry.step3': "Apartamos la fecha",
+      'form.privacy': "Solo usamos tus datos para responder a tu solicitud. Más info en el <a href=\"/datenschutz.html\">aviso de privacidad</a>.",
+      'thanks.ig': "Síguenos en Instagram"
     }
   };
 

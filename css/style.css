@@ -103,7 +103,10 @@ section { position: relative; }
 .quoted::before { content: '\201C'; }
 .quoted::after { content: '\201D'; }
 
-:focus-visible { outline: 3px solid var(--red); outline-offset: 3px; }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; box-shadow: 0 0 0 6px #fff; }
+.events-section :focus-visible, .social-wall-section :focus-visible, .site-footer :focus-visible { outline-color: #fff; box-shadow: 0 0 0 6px var(--ink); }
+/* navigation keeps its original focus style (owner's choice) */
+.nav :focus-visible, .nav-mobile-panel :focus-visible { outline: 3px solid var(--red); outline-offset: 3px; box-shadow: none; }
 .on-dark:focus-visible { outline-color: #fff; }
 
 @media (prefers-reduced-motion: reduce) {
@@ -349,9 +352,10 @@ section { position: relative; }
   .nav-links a { padding: 10px 10px; font-size: 10px; }
   .nav-cta .btn { padding: 9px 16px; font-size: 10px; }
 }
-@media (max-width: 640px), (max-height: 560px) and (orientation: landscape) {
+@media (max-width: 900px), (max-height: 560px) and (orientation: landscape) {
+  .nav-inner { grid-template-columns: 1fr auto auto; }
   .nav-links { display: none; }
-  .nav-cta { display: none; }
+  .nav-cta .btn { padding: 9px 14px; font-size: 10px; }
   .nav-toggle { display: flex; }
   .hide-on-mobile { display: none !important; }
   .nav-brand { gap: 8px; }
@@ -366,7 +370,7 @@ section { position: relative; }
   .nav-brand .logo-wordmark { height: 14px; }
   .nav-inner { column-gap: 6px; }
 }
-@media (min-width: 641px) and (min-height: 561px), (min-width: 641px) and (orientation: portrait) {
+@media (min-width: 901px) and (min-height: 561px), (min-width: 901px) and (orientation: portrait) {
   .nav-mobile-panel { display: none !important; }
 }
 
@@ -527,7 +531,7 @@ section { position: relative; }
 @keyframes lc-roll-cw { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 @keyframes lc-roll-ccw { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
 
-#story-container { position: relative; width: 100%; height: 320vh; }
+#story-container { position: relative; width: 100%; height: 230vh; }
 #story-sticky { position: sticky; top: 0; height: 100vh; height: 100dvh; width: 100%; overflow: hidden; display: flex; align-items: center; box-sizing: border-box; }
 .story-inner { max-width: var(--container); margin: 0 auto; width: 100%; padding: 0 var(--gutter); box-sizing: border-box; }
 .story-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.35fr) minmax(0,1fr); gap: 44px; align-items: center; }
@@ -554,7 +558,7 @@ section { position: relative; }
 @media (max-width: 900px), (max-height: 560px) and (orientation: landscape) {
   .story-grid { grid-template-columns: 1fr !important; gap: 28px !important; }
 }
-@media (max-width: 768px), (max-height: 560px) and (orientation: landscape) {
+@media (max-width: 900px), (max-height: 560px) and (orientation: landscape), (prefers-reduced-motion: reduce) {
   #story-container { height: auto !important; }
   #story-sticky { position: static !important; height: auto !important; overflow: visible !important; padding: 56px 0 !important; }
   .story-grid { grid-auto-flow: row !important; }
@@ -798,7 +802,7 @@ a.event-details:hover { text-decoration: underline; }
   background: #fff;
   border-radius: 10px;
   padding: 13px 14px;
-  font-size: 15px;
+  font-size: 16px;
   color: var(--ink);
   transition: border-color .18s ease;
 }
@@ -959,7 +963,7 @@ a.faq-contact { color: var(--ink); }
   background: #F1EEE9; color: var(--ink); transition: background .25s ease, color .25s ease, transform .3s ease;
 }
 .faq-q button:hover .faq-q-text { color: var(--red); }
-.faq-q button:focus-visible { outline: 3px solid var(--red); outline-offset: 4px; border-radius: 6px; }
+.faq-q button:focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; border-radius: 6px; }
 .faq-item.is-open .faq-num { color: var(--red); }
 .faq-item.is-open .faq-toggle { background: var(--red); color: #fff; transform: rotate(180deg); }
 
@@ -1073,3 +1077,40 @@ a.faq-contact { color: var(--ink); }
   .consent-actions .btn { flex: 1 1 100%; }
 }
 @media (prefers-reduced-motion: reduce) { .consent-card { animation: none; } }
+
+/* ---------- hero kicker: what & where, above the headline ---------- */
+.hero-card .hero-kicker {
+  display: inline-block;
+  margin: 0 0 14px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.45);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.3;
+  max-width: none;
+  text-shadow: none;
+}
+@media (max-width: 640px) { .hero-card .hero-kicker { font-size: 11px; margin-bottom: 10px; } }
+@media (max-height: 560px) and (orientation: landscape) { .hero-card .hero-kicker { font-size: 10px; margin-bottom: 8px; padding: 4px 10px; } }
+
+/* ---------- enquiry: 3 steps + privacy note ---------- */
+.anfragen-steps { list-style: none; margin: 26px 0 0; padding: 0; display: grid; gap: 14px; counter-reset: step; }
+.anfragen-steps li { display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: center; font-weight: 700; font-size: 15px; counter-increment: step; }
+.anfragen-steps li::before { content: counter(step); display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--red); color: #fff; font-family: var(--font-display); font-size: 16px; }
+.form-privacy { margin: 14px 0 0; font-size: 13px; line-height: 1.5; color: #555; }
+.form-privacy a { color: inherit; text-decoration: underline; }
+
+/* ---------- Instagram follow button in the social wall ---------- */
+.social-wall-copy .btn { align-self: flex-start; margin-top: 8px; }
+.social-wall-copy a.handle { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---------- thank-you page: second way out ---------- */
+.danke-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 8px; }
+/* form fields have their own focus style; keep the ring tight, no halo */
+.form-field input:focus-visible,
+.form-field select:focus-visible,
+.form-field textarea:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; box-shadow: none; }
