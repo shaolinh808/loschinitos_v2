@@ -134,7 +134,6 @@
       'legal.back': '← Zurück',
       'meta.ogImageAlt': "Los Chinitos: Emblem und Schriftzug auf Rot",
       'meta.orgDescription': "Tacos in Düsseldorf, inspiriert von den Taquerías in Mexiko-Stadt. Los Chinitos macht Taco-Pop-ups an wechselnden Orten in Düsseldorf und Catering für Firmenfeiern, Hochzeiten und Geburtstage. Ohne Tex-Mex, mit einem subtilen „Chinitos“-Twist. Auf der Karte: Tacos al Pastor, Suadero und Ribeye Gaonera.",
-      'meta.cuisine': "Mexikanisch",
       'meta.knowsAbout': "Tacos|Tacos al Pastor|Suadero|Mexikanisches Essen|Mexikanisches Street Food|Taco-Catering|Catering in Düsseldorf",
       'img.reel': "Reel: Los Chinitos auf Instagram",
       'events.ldName': "Los Chinitos Taco-Pop-up",
@@ -145,7 +144,8 @@
       'inquiry.step2': "Angebot innerhalb von 48 Stunden",
       'inquiry.step3': "Termin fix machen",
       'form.privacy': "Wir nutzen deine Angaben nur, um deine Anfrage zu beantworten. Mehr dazu in der <a href=\"/datenschutz.html\">Datenschutzerklärung</a>.",
-      'thanks.ig': "Folg uns auf Instagram"
+      'thanks.ig': "Folg uns auf Instagram",
+      'meta.serviceDesc': "Taco-Catering für Firmenfeiern, Hochzeiten, Geburtstage und private Feiern in Düsseldorf und Umgebung."
     },
 
     en: {
@@ -274,7 +274,6 @@
       'legal.back': '← Back',
       'meta.ogImageAlt': "Los Chinitos emblem and wordmark on red",
       'meta.orgDescription': "Tacos in Düsseldorf inspired by the taquerías of Mexico City. Los Chinitos runs taco pop-ups around Düsseldorf and caters office parties, weddings and birthdays. No Tex-Mex, just a subtle “Chinitos” twist. On the menu: tacos al pastor, suadero and ribeye gaonera.",
-      'meta.cuisine': "Mexican",
       'meta.knowsAbout': "Tacos|Tacos al pastor|Suadero|Mexican food|Mexican street food|Taco catering|Catering in Düsseldorf",
       'img.reel': "Reel: Los Chinitos on Instagram",
       'events.ldName': "Los Chinitos taco pop-up",
@@ -285,7 +284,8 @@
       'inquiry.step2': "Get a quote within 48 hours",
       'inquiry.step3': "Lock in the date",
       'form.privacy': "We only use your details to reply to your enquiry. More in our <a href=\"/datenschutz.html\">privacy policy</a>.",
-      'thanks.ig': "Follow us on Instagram"
+      'thanks.ig': "Follow us on Instagram",
+      'meta.serviceDesc': "Taco catering for office parties, weddings, birthdays and private parties in and around Düsseldorf."
     },
 
     es: {
@@ -414,7 +414,6 @@
       'legal.back': '← Volver',
       'meta.ogImageAlt': "Emblema y logotipo de Los Chinitos sobre fondo rojo",
       'meta.orgDescription': "Tacos en Düsseldorf inspirados en las taquerías de la Ciudad de México. Los Chinitos hace pop-ups de tacos en distintos puntos de Düsseldorf y taquizas para eventos de empresa, bodas y cumpleaños. Nada de Tex-Mex, solo un ligero toque “Chinitos”. En el menú: tacos al pastor, suadero y ribeye gaonera.",
-      'meta.cuisine': "Mexicana",
       'meta.knowsAbout': "Tacos|Tacos al pastor|Suadero|Comida mexicana|Comida callejera mexicana|Taquizas|Catering en Düsseldorf",
       'img.reel': "Reel de Los Chinitos en Instagram",
       'events.ldName': "Pop-up de tacos de Los Chinitos",
@@ -425,7 +424,8 @@
       'inquiry.step2': "Te mandamos cotización en menos de 48 horas",
       'inquiry.step3': "Apartamos la fecha",
       'form.privacy': "Solo usamos tus datos para responder a tu solicitud. Más info en el <a href=\"/datenschutz.html\">aviso de privacidad</a>.",
-      'thanks.ig': "Síguenos en Instagram"
+      'thanks.ig': "Síguenos en Instagram",
+      'meta.serviceDesc': "Taquizas y catering de tacos para eventos de empresa, bodas, cumpleaños y fiestas privadas en Düsseldorf y alrededores."
     }
   };
 

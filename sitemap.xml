@@ -2,6 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://loschinitos.de/</loc>
+    <lastmod>2026-11-13</lastmod>
     <xhtml:link rel="alternate" hreflang="de" href="https://loschinitos.de/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://loschinitos.de/en/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://loschinitos.de/es/" />
@@ -9,6 +10,7 @@
   </url>
   <url>
     <loc>https://loschinitos.de/en/</loc>
+    <lastmod>2026-11-13</lastmod>
     <xhtml:link rel="alternate" hreflang="de" href="https://loschinitos.de/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://loschinitos.de/en/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://loschinitos.de/es/" />
@@ -16,11 +18,14 @@
   </url>
   <url>
     <loc>https://loschinitos.de/es/</loc>
+    <lastmod>2026-11-13</lastmod>
     <xhtml:link rel="alternate" hreflang="de" href="https://loschinitos.de/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://loschinitos.de/en/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://loschinitos.de/es/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://loschinitos.de/" />
   </url>
-  <url><loc>https://loschinitos.de/impressum.html</loc></url>
-  <url><loc>https://loschinitos.de/datenschutz.html</loc></url>
+  <url><loc>https://loschinitos.de/impressum.html</loc>
+    <lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://loschinitos.de/datenschutz.html</loc>
+    <lastmod>2026-11-13</lastmod></url>
 </urlset>

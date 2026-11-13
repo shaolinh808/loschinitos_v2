@@ -89,7 +89,7 @@ function build(lang) {
     if (types.includes('Organization')) {
       data.description = t(lang, 'meta.orgDescription');
       data.knowsAbout = t(lang, 'meta.knowsAbout').split('|');
-      if (Array.isArray(data.servesCuisine)) data.servesCuisine[0] = t(lang, 'meta.cuisine');
+      (data.makesOffer || []).forEach((o) => { if (o.itemOffered) o.itemOffered.description = t(lang, 'meta.serviceDesc'); });
       return '<script type="application/ld+json">\n' + JSON.stringify(data, null, 1) + '\n</script>';
     }
     if (data['@type'] !== 'FAQPage') return m;
@@ -102,9 +102,9 @@ function build(lang) {
   });
 
   // 5) relative paths now live one folder deeper
-  html = html.replace(/\s(src|href|srcset|poster)="([^"]+)"/g, (m, attr, url) => {
+  html = html.replace(/\s(src|href|srcset|imagesrcset|poster)="([^"]+)"/g, (m, attr, url) => {
     if (!isRelative(url)) return m;
-    if (attr === 'srcset') return ` srcset="${url.split(',').map((p) => p.trim()).map((p) => (isRelative(p) ? '../' + p : p)).join(', ')}"`;
+    if (attr === 'srcset' || attr === 'imagesrcset') return ` ${attr}="${url.split(',').map((p) => p.trim()).map((p) => (isRelative(p) ? '../' + p : p)).join(', ')}"`;
     return ` ${attr}="../${url}"`;
   });
 

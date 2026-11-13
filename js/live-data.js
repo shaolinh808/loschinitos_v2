@@ -30,10 +30,10 @@
     { href: 'https://www.instagram.com/reel/DfeRvm9uaGn/', src: '', altKey: 'img.reel' }
   ];
   var FALLBACK = [
-    { src: (window.LC_BASE || '') + 'taco_pastor.webp', altKey: 'img.pastor' },
-    { src: (window.LC_BASE || '') + 'taco_suadero.webp', altKey: 'img.suadero' },
-    { src: (window.LC_BASE || '') + 'taco_ribeye.webp', altKey: 'img.ribeye' },
-    { src: (window.LC_BASE || '') + 'hero-tacos-mobile.webp', altKey: 'img.hero' }
+    { src: (window.LC_BASE || '') + 'taco_pastor-800.webp', altKey: 'img.pastor' },
+    { src: (window.LC_BASE || '') + 'taco_suadero-800.webp', altKey: 'img.suadero' },
+    { src: (window.LC_BASE || '') + 'taco_ribeye-800.webp', altKey: 'img.ribeye' },
+    { src: (window.LC_BASE || '') + 'hero-tacos-mobile-900.webp', altKey: 'img.hero' }
   ];
   var INSTAGRAM_PROFILE = 'https://www.instagram.com/tacosloschinitos/';
 
@@ -50,7 +50,6 @@
     return src.indexOf(IG_IMG_HOST) === 0 ? '/api/ig-img/' + src.slice(IG_IMG_HOST.length) : '';
   }
 
-  var LOCALE = { de: 'de-DE', en: 'en-GB', es: 'es-MX' };
 
   function t(key) {
     return window.LC_I18N ? window.LC_I18N.t(key) : key;
@@ -68,117 +67,26 @@
   /* ---------------- Events ---------------- */
   var events = null; // null = not loaded / failed, [] = none scheduled
 
-  function formatDate(iso) {
-    var parts = String(iso).split('-');
-    var d = new Date(Date.UTC(+parts[0], +parts[1] - 1, +parts[2], 12));
-    try {
-      return new Intl.DateTimeFormat(LOCALE[lang()] || 'de-DE', {
-        weekday: 'short', day: '2-digit', month: '2-digit', timeZone: 'Europe/Berlin'
-      }).format(d);
-    } catch (e) {
-      return parts[2] + '.' + parts[1] + '.';
-    }
-  }
-
-  // "18:00:00" -> per-language label: "18 Uhr" / "6 pm" / "18:00"
-  function fmtTime(t) {
-    var p = String(t).split(':'), h = +p[0], m = +p[1];
-    var l = lang();
-    if (l === 'en') {
-      var h12 = h % 12 || 12;
-      return h12 + (m ? ':' + p[1] : '') + (h < 12 ? ' am' : ' pm');
-    }
-    if (l === 'es') return p[0] + ':' + p[1];
-    return h + (m ? ':' + p[1] : '');
-  }
-  function formatTimes(ev) {
-    if (!ev.start_time) return '';
-    var key = ev.end_time ? 'events.timeRange' : 'events.timeFrom';
-    return t(key).replace('{s}', fmtTime(ev.start_time)).replace('{e}', ev.end_time ? fmtTime(ev.end_time) : '');
-  }
-
+  // markup + schema.org data come from js/events-render.js (shared with the
+  // deploy-time build, see tools/build-events.js)
   function renderEvents() {
     var list = document.getElementById('events-list');
-    if (!list || !events || !events.length) return; // keep the "planning" note
-
-    list.textContent = '';
-    events.slice(0, MAX_EVENTS).forEach(function (ev) {
-      var row = el('div', 'event-row' + (ev.confirmed ? '' : ' event-row--tba'));
-      var info = el('div');
-
-      // Every entry is a pop-up; special formats (Ticket-Menü, Marktstand) are added.
-      var kind = [t('events.popup')];
-      var cat = t('events.cat.' + ev.category);
-      if (cat && cat.indexOf('events.cat.') !== 0) kind.push(cat);
-      info.appendChild(el('div', 'event-kind', kind.join(' · ')));
-
-      if (ev.confirmed) {
-        info.appendChild(el('div', 'event-loc', ev.venue || t('events.tbaPlace')));
-        info.appendChild(el('div', 'event-time',
-          [formatDate(ev.event_date), formatTimes(ev), ev.city].filter(Boolean).join(' · ')));
-      } else {
-        info.appendChild(el('div', 'event-loc', t('events.tbaPlace')));
-        info.appendChild(el('div', 'event-time', t('events.tbaDate')));
-      }
-      row.appendChild(info);
-
-      var place = ev.confirmed ? [ev.venue, ev.address, ev.city].filter(Boolean).join(', ') : '';
-      if (place) {
-        var link = el('a', 'event-details', t('events.route'));
-        link.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(place);
-        link.target = '_blank';
-        link.rel = 'noopener';
-        row.appendChild(link);
-      }
-      list.appendChild(row);
-    });
+    if (!list || !events || !events.length || !window.LC_EVENTS) return; // keep what is there
+    list.innerHTML = window.LC_EVENTS.rowsHtml(events, lang(), t, MAX_EVENTS);
   }
 
-  /* Structured data (schema.org/Event) for confirmed pop-ups, so Google and
-     AI assistants can pick up date, time and venue. Rebuilt from the CRM on
-     every page view, so it is always in sync with "Termin fix". */
-  function berlinOffset(dateIso) {
-    try {
-      var part = new Intl.DateTimeFormat('en-US', { timeZone: 'Europe/Berlin', timeZoneName: 'longOffset' })
-        .formatToParts(new Date(dateIso + 'T12:00:00Z'))
-        .filter(function (x) { return x.type === 'timeZoneName'; })[0].value; // "GMT+01:00"
-      return part === 'GMT' ? '+00:00' : part.replace('GMT', '');
-    } catch (e) { return '+01:00'; }
-  }
   function eventsJsonLd(list) {
-    var old = document.getElementById('lc-events-jsonld');
-    if (old) old.remove();
-    var items = list.filter(function (ev) { return ev.confirmed && ev.event_date; }).map(function (ev) {
-      var start = ev.event_date + (ev.start_time ? 'T' + ev.start_time.slice(0, 5) + ':00' + berlinOffset(ev.event_date) : '');
-      var item = {
-        '@type': 'Event',
-        name: t('events.ldName') + (ev.venue ? t('events.ldAt') + ev.venue : ''),
-        description: t('events.ldDesc'),
-        startDate: start,
-        eventStatus: 'https://schema.org/EventScheduled',
-        eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-        organizer: { '@id': 'https://loschinitos.de/#org' },
-        image: ['https://loschinitos.de/hero-tacos.webp'],
-        location: {
-          '@type': 'Place',
-          name: ev.venue || 'Düsseldorf',
-          address: {
-            '@type': 'PostalAddress',
-            streetAddress: ev.address || undefined,
-            addressLocality: ev.city || 'Düsseldorf',
-            addressCountry: 'DE'
-          }
-        }
-      };
-      if (ev.end_time) item.endDate = ev.event_date + 'T' + ev.end_time.slice(0, 5) + ':00' + berlinOffset(ev.event_date);
-      return item;
-    });
-    if (!items.length) return;
-    var tag = document.createElement('script');
-    tag.type = 'application/ld+json';
-    tag.id = 'lc-events-jsonld';
-    tag.textContent = JSON.stringify({ '@context': 'https://schema.org', '@graph': items });
-    document.head.appendChild(tag);
+    if (!window.LC_EVENTS) return;
+    var data = window.LC_EVENTS.jsonLd(list, lang(), t);
+    if (!data) return;
+    var tag = document.getElementById('lc-events-jsonld');
+    if (!tag) {
+      tag = document.createElement('script');
+      tag.type = 'application/ld+json';
+      tag.id = 'lc-events-jsonld';
+      document.head.appendChild(tag);
+    }
+    tag.textContent = JSON.stringify(data);
   }
 
   function loadEvents() {
@@ -277,7 +185,17 @@
 
   document.addEventListener('lc:lang', renderEvents);
 
-  function init() { loadEvents(); loadInstagram(); }
+  // the Instagram wall sits near the end of the page: fetch it (and its
+  // photos) only when the visitor scrolls towards it, so the hero loads first
+  function loadInstagramWhenNear() {
+    var wall = document.querySelector('.social-wall-section');
+    if (!wall || !('IntersectionObserver' in window)) { loadInstagram(); return; }
+    var io = new IntersectionObserver(function (entries) {
+      if (entries.some(function (e) { return e.isIntersecting; })) { io.disconnect(); loadInstagram(); }
+    }, { rootMargin: '800px 0px' });
+    io.observe(wall);
+  }
+  function init() { loadEvents(); loadInstagramWhenNear(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 })();
